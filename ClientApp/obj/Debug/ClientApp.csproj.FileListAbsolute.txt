@@ -1,0 +1,14 @@
+C:\Users\Gebruiker\Desktop\C#\WebSocketExample\ClientApp\bin\Debug\ClientApp.exe.config
+C:\Users\Gebruiker\Desktop\C#\WebSocketExample\ClientApp\bin\Debug\ClientApp.exe
+C:\Users\Gebruiker\Desktop\C#\WebSocketExample\ClientApp\bin\Debug\ClientApp.pdb
+C:\Users\Gebruiker\Desktop\C#\WebSocketExample\ClientApp\bin\Debug\WebSocketClient.dll
+C:\Users\Gebruiker\Desktop\C#\WebSocketExample\ClientApp\bin\Debug\WebSocketShared.dll
+C:\Users\Gebruiker\Desktop\C#\WebSocketExample\ClientApp\bin\Debug\GameOX.dll
+C:\Users\Gebruiker\Desktop\C#\WebSocketExample\ClientApp\bin\Debug\WebSocketClient.pdb
+C:\Users\Gebruiker\Desktop\C#\WebSocketExample\ClientApp\bin\Debug\WebSocketShared.pdb
+C:\Users\Gebruiker\Desktop\C#\WebSocketExample\ClientApp\bin\Debug\GameOX.pdb
+C:\Users\Gebruiker\Desktop\C#\WebSocketExample\ClientApp\obj\Debug\ClientApp.csprojAssemblyReference.cache
+C:\Users\Gebruiker\Desktop\C#\WebSocketExample\ClientApp\obj\Debug\ClientApp.csproj.CoreCompileInputs.cache
+C:\Users\Gebruiker\Desktop\C#\WebSocketExample\ClientApp\obj\Debug\ClientApp.csproj.CopyComplete
+C:\Users\Gebruiker\Desktop\C#\WebSocketExample\ClientApp\obj\Debug\ClientApp.exe
+C:\Users\Gebruiker\Desktop\C#\WebSocketExample\ClientApp\obj\Debug\ClientApp.pdb
