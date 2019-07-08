@@ -27,6 +27,18 @@
             return String.Format("{0}{1}", CreateEvent(Events.SpelGestart), spelersnamen.ToString());
         }
 
+        static public Events CreateEenEvernt(string events)
+        {
+            Events e;
+            if (Enum.TryParse(events, true, out e))
+            {
+                if (Enum.IsDefined(typeof(Events), events))
+                {
+                    return e;
+                }
+            }
+            return Events.NotDefined;
+        }
 
         /// <summary>
         /// Deze Method Created een Wacht Lijst van die speler die open zijn

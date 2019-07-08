@@ -27,3 +27,14 @@ C:\Users\Gebruiker\Desktop\C#\WebSocketExample\WebSocketServer\bin\Debug\WebSock
 C:\Users\Gebruiker\Desktop\C#\WebSocketExample\WebSocketServer\bin\Debug\GameOX.pdb
 C:\Users\Gebruiker\Desktop\C#\WebSocketExample\WebSocketServer\bin\Debug\WebSocketShared.pdb
 C:\Users\Gebruiker\Desktop\C#\WebSocketExample\WebSocketServer\obj\Debug\WebSocketServer.csproj.CopyComplete
+C:\Users\Abdul\Desktop\Sharp\WebSocketGame\WebSocketServer\bin\Debug\WebSocketServer.dll
+C:\Users\Abdul\Desktop\Sharp\WebSocketGame\WebSocketServer\bin\Debug\WebSocketServer.pdb
+C:\Users\Abdul\Desktop\Sharp\WebSocketGame\WebSocketServer\bin\Debug\GameOX.dll
+C:\Users\Abdul\Desktop\Sharp\WebSocketGame\WebSocketServer\bin\Debug\WebSocketShared.dll
+C:\Users\Abdul\Desktop\Sharp\WebSocketGame\WebSocketServer\bin\Debug\GameOX.pdb
+C:\Users\Abdul\Desktop\Sharp\WebSocketGame\WebSocketServer\bin\Debug\WebSocketShared.pdb
+C:\Users\Abdul\Desktop\Sharp\WebSocketGame\WebSocketServer\obj\Debug\WebSocketServer.csprojAssemblyReference.cache
+C:\Users\Abdul\Desktop\Sharp\WebSocketGame\WebSocketServer\obj\Debug\WebSocketServer.csproj.CoreCompileInputs.cache
+C:\Users\Abdul\Desktop\Sharp\WebSocketGame\WebSocketServer\obj\Debug\WebSocketServer.csproj.CopyComplete
+C:\Users\Abdul\Desktop\Sharp\WebSocketGame\WebSocketServer\obj\Debug\WebSocketServer.dll
+C:\Users\Abdul\Desktop\Sharp\WebSocketGame\WebSocketServer\obj\Debug\WebSocketServer.pdb

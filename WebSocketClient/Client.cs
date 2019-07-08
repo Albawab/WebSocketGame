@@ -1,5 +1,6 @@
 ﻿using HenE.WebSocketExample.Shared.Infrastructure;
 using HenE.WebSocketExample.Shared.Protocol;
+using HenE.WebSocketExample.WebSocketServer.CommandHandlers;
 using System;
 using System.Net.Sockets;
 using System.Text;
@@ -25,6 +26,7 @@ namespace HenE.WebSocketExample.WebSocketClient
         }
 
         public void Stop()
+
         {
             if (this._tcpClient != null)
             {
@@ -34,29 +36,25 @@ namespace HenE.WebSocketExample.WebSocketClient
 
         protected override string ProcessStream(string stream, TcpClient client)
         {
-            // bepaal de opdracht
-            // de opdracht is het gedeelte in de msg voor de #
-            // daarna komen de parameters
-            string commandParams = "";
-            string returnMessage = null;
+
+            string returnMessage = "Je moet wachten !!!";
 
             // ik jkrijg hier een event
 
-            //Commandos commando = CommandoHelper.SplitCommandAndParamsFromMessage(stream, out commandParams);
+
+            Events events = EventHelper.CreateEenEvernt(stream);
+
 
             try
             {
-
-/*                switch (commando)
+              switch (events)
                 {
-                    // Verdeel between de naam van de speler en de dimension van het bord
-                    //wanneer de commandos is equal VerzoekTotDeelnemenSpel
-                    case Commandos.VerzoekTotDeelnemenSpel:
-                        VerzoekTotDeelnemenSpelCommandHandler handler = new VerzoekTotDeelnemenSpelCommandHandler(_spelHandler, client);
-                        returnMessage = handler.HandleFromMessage(commandParams);
+                    //wanneer de Events is equal WachtenOpAndereDeelnemer
+                    case Events.WachtenOpAndereDeelnemer:
+                        returnMessage = stream;
                         break;
                 }
-*/
+
             }
             catch (Exception exp)
             {

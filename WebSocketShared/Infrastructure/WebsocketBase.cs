@@ -17,7 +17,7 @@
 
                 // De stream tussen de client en de server.
                 NetworkStream stream = client.GetStream();
-
+                Console.WriteLine("Ho");
                 // Hier gaat de info lezen.
                 stream.Read(receivedBuffer, 0, receivedBuffer.Length);
 
@@ -37,15 +37,15 @@
                     }
                 }
 
-                string returnMessage = ProcessStream(msg.ToString(), client);
-                                       // enum ==> Commandos.StartSpel spelersnamen
+                string returnMessage = ProcessStream(msg.ToString(), client);               
 
                 // als de returnMessage wat zinvols heeft, dat terugsturen
-                if (String.IsNullOrWhiteSpace(returnMessage))
+
+                if (!String.IsNullOrWhiteSpace(returnMessage))
                 {
                     // naar welke clients moet ik die sturen?
-                    SendMessage(client, returnMessage);
-                }
+                    SendMessage(client, returnMessage);                   
+                }       
             }
         }
 

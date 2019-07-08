@@ -5,6 +5,7 @@
     /// </summary>
     public enum Events
     {
+        NotDefined = 0,
         SpelGestart,
         WachtenOpAndereDeelnemer,
         YourTurn,

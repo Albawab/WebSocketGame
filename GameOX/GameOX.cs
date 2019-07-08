@@ -12,8 +12,7 @@ namespace HenE.Abdul.GameOX
        
        public IList<GameOX> Spelers = new List<GameOX>();
        
-        List<TcpClient> tcpClients = new List<TcpClient>(); 
-        public Teken TeGebruikenTeken { get; private set; }
+        List<TcpClient> tcpClients = new List<TcpClient>();
 
         public GameOX(short dimension)
         {

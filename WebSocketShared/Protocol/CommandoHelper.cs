@@ -118,6 +118,8 @@
             {
                 case Commandos.VerzoekTotDeelnemenSpel:
                     return "VerzoekTotDeelnemenSpel#";
+                case Commandos.WachtenOpAndereDeelnemer:
+                 return "WachtenOpAndereDeelnemer";
                 default:
                     throw new NotImplementedException();
             }

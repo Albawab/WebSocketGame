@@ -61,6 +61,7 @@ namespace HenE.WebSocketExample.WebSocketServer
             // daarna komen de parameters
             string commandParams = "";
             string returnMessage = null;
+
             Commandos commando = CommandoHelper.SplitCommandAndParamsFromMessage(stream, out commandParams);
             
             // Add een client to clientLijst.

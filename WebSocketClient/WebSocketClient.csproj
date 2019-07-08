@@ -45,6 +45,14 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\WebSocketServerApp\WebSocketServerApp.csproj">
+      <Project>{f07fba9f-13ad-4f68-a304-78b303cee4d3}</Project>
+      <Name>WebSocketServerApp</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WebSocketServer\WebSocketServer.csproj">
+      <Project>{2936DA3B-E8A0-46B7-B74F-7EDC5B24F547}</Project>
+      <Name>WebSocketServer</Name>
+    </ProjectReference>
     <ProjectReference Include="..\WebSocketShared\WebSocketShared.csproj">
       <Project>{df27c127-a125-4204-b9f7-b79ae5abad57}</Project>
       <Name>WebSocketShared</Name>
