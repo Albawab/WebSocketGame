@@ -20,10 +20,14 @@
             foreach (var speler in game.Spelers)
             {
                 if (spelersnamen.Length == 0)
+                {
                     spelersnamen.AppendFormat("{0}", speler.Naam);
+                }
                 else
+                {
                     spelersnamen.AppendFormat("&{0}", speler.Naam);
-                   spelersnamen.AppendFormat("&{0}", speler.dimention);
+                    spelersnamen.AppendFormat("&{0}", speler.Dimention);
+                }
             }
 
             return String.Format("{0}{1}", CreateEvent(Events.SpelGestart), spelersnamen.ToString());

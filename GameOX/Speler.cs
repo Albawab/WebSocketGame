@@ -9,9 +9,9 @@ namespace HenE.Abdul.GameOX
 {
     public abstract class Speler
     {
-        public Speler(string naam,short dim)
+        public Speler(string naam,short dimention)
         {
-            this.dimention = dimention;
+            this.Dimention = dimention;
             this.Naam = naam;
         }
 
@@ -20,7 +20,7 @@ namespace HenE.Abdul.GameOX
 
         public TcpClient tcpClient { get; set; }
 
-        public short dimention { get; set; }
+        public short Dimention { get; set; }
         
     }
 }

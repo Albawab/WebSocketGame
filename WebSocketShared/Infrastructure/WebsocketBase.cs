@@ -55,10 +55,8 @@
                 {
                     if (speler.tcpClient != null && bericht)
                     {
-
                             SendMessageAsync(speler.tcpClient, returnMessage);
-
-                       
+                  
                     }
                 }
             }
