@@ -36,22 +36,56 @@ namespace HenE.WebSocketExample.WebSocketClient
 
         protected override string ProcessStream(string stream, TcpClient client)
         {
-
-            string returnMessage = "Je moet wachten !!!";
-
-            // ik jkrijg hier een event
-
-
-            Events events = EventHelper.CreateEenEvernt(stream);
-
-
+            // bepaal het event
+            // het event is het gedeelte in de msg voor de #
+            // daarna komen de parameters
+            string eventParams = "";
+            string returnMessage = null;
+            TcpClient clientStart;
+            Events bericht =Events.NotDefined;
+            Events commando = EventHelper.SplitEventAndParamsFromMessage(stream, out eventParams);
+            string[] opgeknipt = eventParams.Split(new char[] { '&' });
             try
             {
-              switch (events)
+                switch (commando)
                 {
-                    //wanneer de Events is equal WachtenOpAndereDeelnemer
+                    case Events.Error:
+                        Console.WriteLine(eventParams);
+                        break;
+                    case Events.SpelGestart:
+                        Console.WriteLine("We gaan starten " + opgeknipt[0] + " Tegen " + opgeknipt[1] + " De dimenstion is : " + opgeknipt[2]);
+
+                        if (Events.Bericht == bericht)
+                        {
+                            Console.WriteLine("Wil je Starten ? {0} of {1}", opgeknipt[0], opgeknipt[1]);
+
+                            Console.ReadKey();
+                            string wieStarten = Console.ReadLine();
+                            while (wieStarten.ToLower() != opgeknipt[0].ToLower() && wieStarten.ToLower() != opgeknipt[1].ToLower())
+                            {
+                                if (wieStarten.ToLower() == opgeknipt[0].ToLower())
+                                {
+
+                                }
+                                else if (wieStarten.ToLower() == opgeknipt[0].ToLower())
+                                {
+
+                                }
+                                else
+                                {
+                                    Console.WriteLine("Mag een juiste naam geven ?");
+                                    wieStarten = Console.ReadLine();
+                                }
+                            }
+                        }
+                       
+
+                        break;
                     case Events.WachtenOpAndereDeelnemer:
-                        returnMessage = stream;
+                        
+                        Console.WriteLine("wachten op andere speler");
+                        bericht = EventHelper.CreateEenEvent("Bericht");
+                        clientStart = client;
                         break;
                 }
 
@@ -71,47 +105,48 @@ namespace HenE.WebSocketExample.WebSocketClient
         {
             String message = CommandoHelper.CreateVerzoekTotDeelnemenSpelCommando(spelersnaam, dimension);
 
-            SendMessage(this._tcpClient, message);
+            NetworkStream stream = SendMessage(this._tcpClient, message);
+
+            StartListeningAsync(/*stream,*/ this._tcpClient);
         }
+        /*        private void SendMessage(string message)
+                {
+                    Console.WriteLine("versturen bericht " + message);
 
-/*        private void SendMessage(string message)
-        {
-            Console.WriteLine("versturen bericht " + message);
+                    int byteCount = Encoding.ASCII.GetByteCount(message);
+                    byte[] sendData = new byte[byteCount];
+                    sendData = Encoding.ASCII.GetBytes(message);
+                    NetworkStream stream = this._tcpClient.GetStream();
+                    stream.Write(sendData, 0, sendData.Length);
 
-            int byteCount = Encoding.ASCII.GetByteCount(message);
-            byte[] sendData = new byte[byteCount];
-            sendData = Encoding.ASCII.GetBytes(message);
-            NetworkStream stream = this._tcpClient.GetStream();
-            stream.Write(sendData, 0, sendData.Length);
-            
-            GetThenListnaam(_tcpClient, stream);
-        }
+                    GetThenListnaam(_tcpClient, stream);
+                }
 
-        public void GetThenListnaam(TcpClient client, NetworkStream stream)
-        {
-            while (true) {
-                while (stream.DataAvailable) {
-                    byte[] receivedBuffer = new byte[client.Available];
-                    stream = client.GetStream();
-                    stream.Read(receivedBuffer, 0, receivedBuffer.Length);
-                    StringBuilder msg = new StringBuilder();
+                public void GetThenListnaam(TcpClient client, NetworkStream stream)
+                {
+                    while (true) {
+                        while (stream.DataAvailable) {
+                            byte[] receivedBuffer = new byte[client.Available];
+                            stream = client.GetStream();
+                            stream.Read(receivedBuffer, 0, receivedBuffer.Length);
+                            StringBuilder msg = new StringBuilder();
 
-                    foreach (byte b in receivedBuffer)
-                    {
-                        if (b.Equals(00))
-                        {
-                            break;
-                        }
-                        else
-                        {
-                            msg.Append(Convert.ToChar(b).ToString());
+                            foreach (byte b in receivedBuffer)
+                            {
+                                if (b.Equals(00))
+                                {
+                                    break;
+                                }
+                                else
+                                {
+                                    msg.Append(Convert.ToChar(b).ToString());
+                                }
+                            }
+                            Console.WriteLine(" terug naam " + msg.ToString() + msg.Length);
                         }
                     }
-                    Console.WriteLine(" terug naam " + msg.ToString() + msg.Length);
+                    Console.ReadKey();
                 }
-            }
-            Console.ReadKey();
-        }
-*/
+        */
     }
 }

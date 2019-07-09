@@ -10,13 +10,13 @@
             Console.WriteLine("Client Een");
 
             Client client = new Client("localhost", 5000);
-            Console.ReadKey();
 
-
+            Console.WriteLine("Geef je naam op");
+            string naam = Console.ReadLine();
 
             client.Start();
 
-            client.VerzoekOmStartenSpel("Jos", 3);
+            client.VerzoekOmStartenSpel(naam, 3);
 
             Console.WriteLine("I am ready");
             Console.ReadKey();

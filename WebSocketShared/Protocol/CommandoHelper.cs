@@ -40,18 +40,6 @@
         }
        
         /// <summary>
-        /// TODOD abdul
-        /// </summary>
-        /// <returns></returns>
-        static public String CreateWachtenOpEenAndereDeelnemenCommando()
-        {
-            // wat ga ik terug geven?
-            // alleen het commando, rest hoeft niet
-            
-            return CreateCommando(Commandos.WachtenOpAndereDeelnemer);
-        }
-
-        /// <summary>
         /// knip de message op in een command en params
         /// </summary>
         /// <param name="mess">de ontvangen message</param>

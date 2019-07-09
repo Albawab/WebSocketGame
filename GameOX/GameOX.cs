@@ -10,15 +10,16 @@ namespace HenE.Abdul.GameOX
     public class GameOX
     {
        
-       public IList<GameOX> Spelers = new List<GameOX>();
-       
-        List<TcpClient> tcpClients = new List<TcpClient>();
-
+       public IList<Speler> Spelers = new List<Speler>();
+               
         public GameOX(short dimension)
         {
+            this.Dimension = dimension;
             this.Status = GameOXStatussen.NogNietGestart;
         }
+
         public string Naam { get; set; }
+        
         /// <summary>
         /// 
         /// </summary>
@@ -32,9 +33,14 @@ namespace HenE.Abdul.GameOX
             return this.Status == GameOXStatussen.Waiting;
         }
 
-        public void AddPlayer(string stream, TcpClient client) {
-            Naam = stream;
-            tcpClients.Add(client);
+        public void AddPlayer(string naam, TcpClient client,short dimention)
+        {
+            Spelers.Add(new HumanSpeler(naam, dimention) { tcpClient = client });
+        }
+
+        public void WachtOpAndereSpeler()
+        {
+            this.Status = GameOXStatussen.Waiting;
         }
     }
 }

@@ -10,6 +10,7 @@
         WachtenOpAndereDeelnemer,
         YourTurn,
         SpelFinished,
+        Bericht,
         Error = 99
 
     }

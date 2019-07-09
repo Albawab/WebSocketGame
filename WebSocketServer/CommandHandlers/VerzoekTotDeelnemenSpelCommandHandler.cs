@@ -25,7 +25,7 @@
         /// functie die de parameters in string krijgt en die string opknipt in de params die nodig zijn
         /// </summary>
         /// <param name="messageParams">params uit het bericht, gedeelte na de # en gescheiden door &</param>
-        public string HandleFromMessage(string messageParams)
+        public string HandleFromMessage(string messageParams, out GameOX game)
         {
             string[] opgeknipt = messageParams.Split(new char[] { '&' });
 
@@ -56,9 +56,8 @@
             {
                 throw new ArgumentOutOfRangeException("U hebt geen nummer ingevoerd");
             }
-
-
-            return Handle(opgeknipt[0], dimension);
+            
+            return Handle(opgeknipt[0], dimension, out game);
         }
 
 
@@ -68,18 +67,19 @@
         /// <param name="spelersnaam"> naam van de speler</param>
         /// <param name="dimension">dimension van het spel</param>
         /// <return>de message die gereturnd moet worden </return>
-        public string Handle(string spelersnaam, short dimension)
+        public string Handle(string spelersnaam, short dimension, out GameOX game)
         {
             string returnMessage = "";
+            game = null;
             // zoek in de spelHandler of er al een open spel is met die dimension
-            GameOX game = this.spelHandler.GetOpenSpelbyDimension(dimension);
+            game = this.spelHandler.GetOpenSpelbyDimension(dimension);
             // zo ja, voeg speler toe en start spel
             if (game != null)
             {
-                game.AddPlayer(spelersnaam, tcpClient);
+                game.AddPlayer(spelersnaam, tcpClient,dimension);
 
                 // oke het spel kan beginnen
-                returnMessage = CommandoHelper.CreateStartGameCommando(game);
+                returnMessage = EventHelper.CreateSpelgestartEvent(game);
             }
             else
             {
@@ -88,8 +88,10 @@
                 //en zet op de wachtlijst 
                 game = this.spelHandler.CreateGame(dimension, spelersnaam, tcpClient);
 
+                game.WachtOpAndereSpeler();
+
                 // de speler moet wachten op een andere
-                returnMessage = CommandoHelper.CreateWachtenOpEenAndereDeelnemenCommando();
+                returnMessage = EventHelper.CreateWachtenOpEenAndereDeelnemenEvent();
             }
 
             // wat wil ik nu terugsturen?

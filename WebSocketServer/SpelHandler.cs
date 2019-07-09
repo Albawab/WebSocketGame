@@ -51,8 +51,8 @@ namespace HenE.WebSocketExample.WebSocketServer
             GameOX gameOX = new GameOX(dimension);
 
             this.currentSpellen.Add(gameOX);
-            gameOX.AddPlayer(firstPlayer, tcpClient);
-
+            gameOX.AddPlayer(firstPlayer, tcpClient,dimension);
+            
             return gameOX;
         }
 

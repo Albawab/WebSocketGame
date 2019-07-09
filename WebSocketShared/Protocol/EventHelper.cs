@@ -13,6 +13,7 @@
         /// <returns></returns>
         static public String CreateSpelgestartEvent(GameOX game)
         {
+
             // wat ga ik terug geven?
             // het commando en de lijste met spelers die meedoen, & gescheiden
             StringBuilder spelersnamen = new StringBuilder();
@@ -22,12 +23,13 @@
                     spelersnamen.AppendFormat("{0}", speler.Naam);
                 else
                     spelersnamen.AppendFormat("&{0}", speler.Naam);
+                   spelersnamen.AppendFormat("&{0}", speler.dimention);
             }
 
             return String.Format("{0}{1}", CreateEvent(Events.SpelGestart), spelersnamen.ToString());
         }
 
-        static public Events CreateEenEvernt(string events)
+        static public Events CreateEenEvent(string events)
         {
             Events e;
             if (Enum.TryParse(events, true, out e))
@@ -44,7 +46,7 @@
         /// Deze Method Created een Wacht Lijst van die speler die open zijn
         /// </summary>
         /// <returns></returns>
-        static public String CreateWachtenOpEenAndereDeelnemenCommando()
+        static public String CreateWachtenOpEenAndereDeelnemenEvent()
         {
             // wat ga ik terug geven?
             // alleen het commando, rest hoeft niet
@@ -61,7 +63,9 @@
                     return "SpelGestart#";
                 case Events.WachtenOpAndereDeelnemer:
                     return "WachtenOpAndereDeelnemer#";
-            default:
+                case Events.Bericht:
+                    return "WachtenOpAndereDeelnemer#";
+                default:
                     throw new NotImplementedException();
             }
         }
@@ -70,5 +74,48 @@
         {
             return String.Format("{0}{1}", CreateEvent(Events.Error), exp.Message);
         }
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="mess"></param>
+        /// <param name="eventsParams"></param>
+        /// <returns></returns>
+        static public Events SplitEventAndParamsFromMessage(string mess, out string eventsParams)
+        {
+            eventsParams = "";
+
+            //Split de string voor # en na
+            string[] opgeknipt = mess.Split(new char[] { '#' });
+
+            // controleer of er wel een # aanwezig is
+            if (opgeknipt.Length == 0)
+            {
+                throw new ArgumentOutOfRangeException("message bevat geen #.");
+            }
+
+            //wij hebben array met array[0] en array[1] 
+            //als het goorter is dan array[1] dan doe het maar bij array[1]
+            if (opgeknipt.Length > 1)
+            {
+                eventsParams = opgeknipt[1];
+            }
+
+            // probeer dan de eerste om te zetten naar een commandos
+            Events result = Events.NotDefined;
+
+            // Omzetten de string to enum
+            if (Enum.TryParse(opgeknipt[0], true, out result))
+            {
+                if (Enum.IsDefined(typeof(Events), result))
+                {
+                    return result;
+                }
+            }
+            // niet gevonden, dus info was fout
+            throw new NotImplementedException();
+        }
+
     }
 }

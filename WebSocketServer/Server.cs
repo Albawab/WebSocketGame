@@ -1,10 +1,13 @@
-﻿using HenE.WebSocketExample.Shared.Infrastructure;
+﻿using HenE.Abdul.GameOX;
+using HenE.WebSocketExample.Shared.Infrastructure;
 using HenE.WebSocketExample.Shared.Protocol;
 using HenE.WebSocketExample.WebSocketServer.CommandHandlers;
 using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Net.Sockets;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace HenE.WebSocketExample.WebSocketServer
 {
@@ -26,6 +29,8 @@ namespace HenE.WebSocketExample.WebSocketServer
 
         private SpelHandler _spelHandler = new SpelHandler();
 
+        private bool _listening = false;
+
         /// <summary>
         /// Hier staat de constructor van de Server 
         /// </summary>
@@ -36,37 +41,88 @@ namespace HenE.WebSocketExample.WebSocketServer
             IpAddress = ipAddress;
             Port = poort;
 
-            _listener = new TcpListener(/*this.IpAddress,*/ Port); 
+            //_listener = new TcpListener(/*this.IpAddress,*/ Port); 
         }
 
         /// <summary>
         /// Hier gaat de server starten.
         /// </summary>
         public void Start()
-        {
+        {            
             Console.WriteLine("In the server");
-            _listener.Start();
+            StartListener();
+
+            //_listener.Start();
 
 
-            StartListening(_listener.AcceptTcpClient());
 
+            //TcpClient client = _listener.AcceptTcpClient(); //.ConfigureAwait(false);//non blocking waiting;
+            //tcpClients.Add(client);
+
+            /*while (true) // Add your exit flag here
+            {
+                client = _listener.AcceptTcpClient();
+                Task.Run(() => HandleClient(client, this));
+            }
+            */
+
+            //StartListening(/*client.GetStream(),*/ client);
         }
 
+        public void Stop()
+        {
+            Console.WriteLine("Stop de server");
+
+            // check of de server wel is gestart
+            _listening = false;
+            _listener.Stop();
+        }
+
+
+        public async void StartListener() //non blocking listener
+        {
+            TcpListener listener = new TcpListener(/*this.IpAddress,*/ Port);
+            //listener = new TcpListener(ipAddress, port);
+            listener.Start();
+            _listening = true;
+
+            while (_listening)
+            {
+                TcpClient client = await listener.AcceptTcpClientAsync().ConfigureAwait(false);//non blocking waiting                    
+                                                                                                // We are already in the new task to handle this client...   
+                HandleClientAsync(client, this);
+                //StartListening( client);
+
+
+                int u = 0;
+            }
+        }
+
+
+        private async Task HandleClientAsync(TcpClient client, Server server)
+        {
+
+                //var client = (TcpClient)obj;
+                server.StartListeningAsync(/*client.GetStream(),*/ client);
+                //return Task.CompletedTask;
+            
+        }
+
+
+
+
         protected override string ProcessStream(string stream, TcpClient client)
-
-
         {
             // bepaal de opdracht
             // de opdracht is het gedeelte in de msg voor de #
             // daarna komen de parameters
+            GameOX game = null;
             string commandParams = "";
             string returnMessage = null;
 
             Commandos commando = CommandoHelper.SplitCommandAndParamsFromMessage(stream, out commandParams);
             
-            // Add een client to clientLijst.
-            tcpClients.Add(client);
-
+            // Add een client to clientLijst.           
             try
             {
 
@@ -76,7 +132,8 @@ namespace HenE.WebSocketExample.WebSocketServer
                     //wanneer de commandos is equal VerzoekTotDeelnemenSpel
                     case Commandos.VerzoekTotDeelnemenSpel:
                         VerzoekTotDeelnemenSpelCommandHandler handler = new VerzoekTotDeelnemenSpelCommandHandler(_spelHandler, client);
-                        returnMessage = handler.HandleFromMessage(commandParams);
+                        
+                        returnMessage = handler.HandleFromMessage(commandParams, out game);
                         break;
                 }
             }
@@ -85,6 +142,8 @@ namespace HenE.WebSocketExample.WebSocketServer
                 // ok dan krijg ik een foutmelding, stuur die dan terug
                 returnMessage = EventHelper.CreateErrorEvent(exp);
             }
+
+            ProcessReturnMessage(returnMessage, game, client);
 
             return returnMessage;
         }
