@@ -47,7 +47,7 @@
 
         protected void ProcessReturnMessage(string returnMessage,  GameOX game, TcpClient sendingClient)
         {
-            bool bericht = false;
+            bool bericht = true;
             if (!String.IsNullOrWhiteSpace(returnMessage))
             {
                 // naar welke clients moet ik die sturen?
