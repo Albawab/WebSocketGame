@@ -143,7 +143,7 @@ namespace HenE.WebSocketExample.WebSocketServer
                 returnMessage = EventHelper.CreateErrorEvent(exp);
             }
 
-            ProcessReturnMessage(returnMessage, game, client);
+            //ProcessReturnMessage(returnMessage, game, client);
 
             return returnMessage;
         }

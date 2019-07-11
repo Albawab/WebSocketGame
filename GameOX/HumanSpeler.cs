@@ -8,7 +8,7 @@ namespace HenE.Abdul.GameOX
 {
     public class HumanSpeler : Speler
     {
-        public HumanSpeler(string naam,short dimention) :base(naam , dimention)
+        public HumanSpeler(string naam,short dimention) : base(naam , dimention)
         {
         }
     }

@@ -76,10 +76,20 @@
             // zo ja, voeg speler toe en start spel
             if (game != null)
             {
-                game.AddPlayer(spelersnaam, tcpClient,dimension);
+                game.AddPlayer(spelersnaam, tcpClient, dimension);
 
+                game.Start();
                 // oke het spel kan beginnen
-                returnMessage = EventHelper.CreateSpelgestartEvent(game);
+                //returnMessage = EventHelper.CreateSpelgestartEvent(game);
+
+                // return messsage "we gaan starten" naar iedereen  
+
+                // // bepaal wie er gaat beginnen
+                /// voor nu, speler 1 begint
+                ///  stuur naar speler 1 bericht dat hij moet beginnen
+                ///  stuur naar speler 2 bericht dat hij moet wachten
+
+
             }
             else
             {

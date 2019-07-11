@@ -2,24 +2,27 @@
 {
     using HenE.Abdul.GameOX;
     using System;
+    using System.Collections.Generic;
     using System.Net.Sockets;
     using System.Text;
     using System.Threading.Tasks;
 
     public abstract class WebsocketBase
     {
+        bool bericht = true;
         /// <summary>
         /// Hier gaat de server starten.
         /// </summary>
         public async Task StartListeningAsync(/*NetworkStream stream,*/ TcpClient client)
         {
-            while (true)
+            while (bericht)
             {
                 byte[] receivedBuffer = new byte[5000];
 
                 // De stream tussen de client en de server.
                 NetworkStream stream = client.GetStream();
-                // Hier gaat de info lezen.
+
+
                 await stream.ReadAsync(receivedBuffer, 0, receivedBuffer.Length);
 
                 // Opslag de information die uit de client komet 
@@ -45,19 +48,20 @@
             }
         }
 
-        protected void ProcessReturnMessage(string returnMessage,  GameOX game, TcpClient sendingClient)
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="returnMessage"></param>
+        /// <param name="game"></param>
+        /// <param name="sendingClient"></param>
+        protected void ProcessReturnMessage(string returnMessage,  GameOX game, List<TcpClient> receivingClients)
         {
-            bool bericht = true;
             if (!String.IsNullOrWhiteSpace(returnMessage))
             {
-                // naar welke clients moet ik die sturen?
-                foreach(Speler speler in game.Spelers)
+                foreach (TcpClient client in receivingClients)
                 {
-                    if (speler.tcpClient != null && bericht)
-                    {
-                            SendMessageAsync(speler.tcpClient, returnMessage);
-                  
-                    }
+                    SendMessageAsync(client, returnMessage);
                 }
             }
         }

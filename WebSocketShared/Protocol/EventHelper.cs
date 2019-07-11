@@ -68,7 +68,7 @@
                 case Events.WachtenOpAndereDeelnemer:
                     return "WachtenOpAndereDeelnemer#";
                 case Events.Bericht:
-                    return "WachtenOpAndereDeelnemer#";
+                    return "Bericht#";
                 default:
                     throw new NotImplementedException();
             }

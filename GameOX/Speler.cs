@@ -15,12 +15,24 @@ namespace HenE.Abdul.GameOX
             this.Naam = naam;
         }
 
-
         public string Naam { get; private set; }
 
         public TcpClient tcpClient { get; set; }
 
         public short Dimention { get; set; }
-        
+
+
+        public void DoeZet()
+        {
+
+        }
+
+        /// <summary>
+        /// afvangen van het event dat het spel is gestart
+        /// </summary>
+        public virtual void SpelStartedHandler()
+        {
+
+        }
     }
 }

@@ -45,6 +45,7 @@
     <Compile Include="GameOXStatus.cs" />
     <Compile Include="HumanSpeler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RemoteHumanSpeler.cs" />
     <Compile Include="Speler.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

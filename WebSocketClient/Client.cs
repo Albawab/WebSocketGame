@@ -54,32 +54,7 @@ namespace HenE.WebSocketExample.WebSocketClient
                         break;
                     case Events.SpelGestart:
                         Console.WriteLine("We gaan starten " + opgeknipt[0] + " Tegen " + opgeknipt[1] + " De dimenstion is : " + opgeknipt[2]);
-
-                        if (Events.Bericht == bericht)
-                        {
-                            Console.WriteLine("Wil je Starten ? {0} of {1}", opgeknipt[0], opgeknipt[1]);
-
-                            Console.ReadKey();
-                            string wieStarten = Console.ReadLine();
-                            while (wieStarten.ToLower() != opgeknipt[0].ToLower() && wieStarten.ToLower() != opgeknipt[1].ToLower())
-                            {
-                                if (wieStarten.ToLower() == opgeknipt[0].ToLower())
-                                {
-
-                                }
-                                else if (wieStarten.ToLower() == opgeknipt[0].ToLower())
-                                {
-
-                                }
-                                else
-                                {
-                                    Console.WriteLine("Mag een juiste naam geven ?");
-                                    wieStarten = Console.ReadLine();
-                                }
-                            }
-                        }
                        
-
                         break;
                     case Events.WachtenOpAndereDeelnemer:
                         
