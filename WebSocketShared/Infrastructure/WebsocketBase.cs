@@ -9,21 +9,20 @@
 
     public abstract class WebsocketBase
     {
-        bool bericht = true;
         /// <summary>
         /// Hier gaat de server starten.
         /// </summary>
-        public async Task StartListeningAsync(/*NetworkStream stream,*/ TcpClient client)
+        public async Task StartListeningAsync(NetworkStream stream, TcpClient client)
         {
-            while (bericht)
+            while (true)
             {
                 byte[] receivedBuffer = new byte[5000];
 
                 // De stream tussen de client en de server.
-                NetworkStream stream = client.GetStream();
+                stream = client.GetStream();
 
 
-                await stream.ReadAsync(receivedBuffer, 0, receivedBuffer.Length);
+                 await stream.ReadAsync(receivedBuffer, 0, receivedBuffer.Length);
 
                 // Opslag de information die uit de client komet 
                 StringBuilder msg = new StringBuilder();

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HenE.Abdul.Game_OX;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Sockets;
@@ -15,12 +16,13 @@ namespace HenE.Abdul.GameOX
             this.Naam = naam;
         }
 
-        public string Naam { get; private set; }
+        public string Naam { get; set; }
 
-        public TcpClient tcpClient { get; set; }
+        public TcpClient TcpClient { get; set; }
 
         public short Dimention { get; set; }
 
+        public Teken TeGebruikenTeken { get; set; }
 
         public void DoeZet()
         {

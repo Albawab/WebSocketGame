@@ -41,12 +41,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Bord.cs" />
     <Compile Include="GameOX.cs" />
     <Compile Include="GameOXStatus.cs" />
     <Compile Include="HumanSpeler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RemoteHumanSpeler.cs" />
     <Compile Include="Speler.cs" />
+    <Compile Include="Teken.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -35,8 +35,7 @@
 
         static public Events CreateEenEvent(string events)
         {
-            Events e;
-            if (Enum.TryParse(events, true, out e))
+            if (Enum.TryParse(events, true, out Events e))
             {
                 if (Enum.IsDefined(typeof(Events), events))
                 {

@@ -52,12 +52,12 @@ namespace HenE.WebSocketExample.WebSocketClient
                     case Events.Error:
                         Console.WriteLine(eventParams);
                         break;
+
                     case Events.SpelGestart:
-                        Console.WriteLine("We gaan starten " + opgeknipt[0] + " Tegen " + opgeknipt[1] + " De dimenstion is : " + opgeknipt[2]);
-                       
+                        Console.WriteLine("We gaan starten " + opgeknipt[0] + " Tegen " + opgeknipt[1] + " De dimenstion is : " + opgeknipt[2]);                      
                         break;
-                    case Events.WachtenOpAndereDeelnemer:
-                        
+
+                    case Events.WachtenOpAndereDeelnemer:                       
                         Console.WriteLine("wachten op andere speler");
                         bericht = EventHelper.CreateEenEvent("Bericht");
                         clientStart = client;
@@ -82,46 +82,8 @@ namespace HenE.WebSocketExample.WebSocketClient
 
             NetworkStream stream = SendMessage(this._tcpClient, message);
 
-            StartListeningAsync(/*stream,*/ this._tcpClient);
+            StartListeningAsync(stream, this._tcpClient);
         }
-        /*        private void SendMessage(string message)
-                {
-                    Console.WriteLine("versturen bericht " + message);
-
-                    int byteCount = Encoding.ASCII.GetByteCount(message);
-                    byte[] sendData = new byte[byteCount];
-                    sendData = Encoding.ASCII.GetBytes(message);
-                    NetworkStream stream = this._tcpClient.GetStream();
-                    stream.Write(sendData, 0, sendData.Length);
-
-                    GetThenListnaam(_tcpClient, stream);
-                }
-
-                public void GetThenListnaam(TcpClient client, NetworkStream stream)
-                {
-                    while (true) {
-                        while (stream.DataAvailable) {
-                            byte[] receivedBuffer = new byte[client.Available];
-                            stream = client.GetStream();
-                            stream.Read(receivedBuffer, 0, receivedBuffer.Length);
-                            StringBuilder msg = new StringBuilder();
-
-                            foreach (byte b in receivedBuffer)
-                            {
-                                if (b.Equals(00))
-                                {
-                                    break;
-                                }
-                                else
-                                {
-                                    msg.Append(Convert.ToChar(b).ToString());
-                                }
-                            }
-                            Console.WriteLine(" terug naam " + msg.ToString() + msg.Length);
-                        }
-                    }
-                    Console.ReadKey();
-                }
-        */
+       
     }
 }

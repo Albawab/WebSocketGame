@@ -50,6 +50,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\GameOX\GameOX.csproj">
+      <Project>{62677F60-1609-4803-A867-5D9B656C1909}</Project>
+      <Name>GameOX</Name>
+    </ProjectReference>
     <ProjectReference Include="..\WebSocketClient\WebSocketClient.csproj">
       <Project>{20e393e5-a310-4d13-8a0e-fe28fe9b23dd}</Project>
       <Name>WebSocketClient</Name>

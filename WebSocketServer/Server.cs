@@ -15,7 +15,7 @@ namespace HenE.WebSocketExample.WebSocketServer
     {
 
         // de lijst van de cliënten die contact hebben met de server
-        private List<TcpClient> tcpClients = new List<TcpClient>();
+        private readonly List<TcpClient> tcpClients = new List<TcpClient>();
 
         private TcpListener _listener = null;
 
@@ -27,7 +27,7 @@ namespace HenE.WebSocketExample.WebSocketServer
         public IPAddress IpAddress { get; private set; }
 
 
-        private SpelHandler _spelHandler = new SpelHandler();
+        private readonly SpelHandler _spelHandler = new SpelHandler();
 
         private bool _listening = false;
 
@@ -92,8 +92,6 @@ namespace HenE.WebSocketExample.WebSocketServer
                                                                                                 // We are already in the new task to handle this client...   
                 HandleClientAsync(client, this);
                 //StartListening( client);
-
-
                 int u = 0;
             }
         }
@@ -103,7 +101,7 @@ namespace HenE.WebSocketExample.WebSocketServer
         {
 
                 //var client = (TcpClient)obj;
-                server.StartListeningAsync(/*client.GetStream(),*/ client);
+                server.StartListeningAsync(client.GetStream(), client);
                 //return Task.CompletedTask;
             
         }

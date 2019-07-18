@@ -14,7 +14,8 @@ namespace HenE.WebSocketExample.WebSocketServer
     /// </summary>
     public class SpelHandler
     {
-        private List<GameOX> currentSpellen = new List<GameOX>();
+        private readonly List<GameOX> currentSpellen = new List<GameOX>();
+        public IList<Speler> spelers = new List<Speler>();
 
         public SpelHandler()
         {
@@ -55,6 +56,8 @@ namespace HenE.WebSocketExample.WebSocketServer
             
             return gameOX;
         }
+
+
 
 
     }

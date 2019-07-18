@@ -14,7 +14,7 @@ namespace HenE.Abdul.GameOX
             this.Dimention = dimension;
         }
 
-        public TcpClient tcpClient { get; set; }
+        public TcpClient TcpClient { get; set; }
 
     }
 }

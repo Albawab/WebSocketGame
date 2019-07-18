@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Net.Sockets;
 using System;
+using HenE.Abdul.Game_OX;
 
 namespace HenE.Abdul.GameOX
 {
@@ -11,7 +12,8 @@ namespace HenE.Abdul.GameOX
     {
        
        public IList<Speler> Spelers = new List<Speler>();
-               
+
+
         public GameOX(short dimension)
         {
             this.Dimension = dimension;
@@ -35,7 +37,7 @@ namespace HenE.Abdul.GameOX
 
         public void AddPlayer(string naam, TcpClient client,short dimention)
         {
-            Spelers.Add(new HumanSpeler(naam, dimention) { tcpClient = client });
+            Spelers.Add(new HumanSpeler(naam, dimention) { TcpClient = client });
         }
 
         public void WachtOpAndereSpeler()
@@ -47,70 +49,104 @@ namespace HenE.Abdul.GameOX
         /// <summary>
         /// we hebben genoeg spelers en alle informatie die we nodig hebben, we gaan starten
         /// </summary>
-        public void Start()
+        public void Start(string spelersnaam,TcpClient tcpClient, short dimension)
         {
+            
+            
             // maak een bord, met de jusite dimension
+            Bord huidigeBord = new Bord(dimension);
+
+             string bord = huidigeBord.TekenBord(); //==> String . Het bord
+
             // hoe bepaal je wie mag beginnen?
+            foreach (Speler speler in this.Spelers)
+            {
+                if (speler.Naam == FindSpelerByNaam(speler.Naam))
+                {
+                    speler.Naam = speler.Naam + 1;
+                }
+                break;
+            }
 
-            //this._huidigeBord = new Bord(dimension, this);
-            //Teken teken = new Teken();
-
-            //mess: We gaan starten; Naar allemaal  
             foreach (Speler speler in this.Spelers)
             {
                 speler.SpelStartedHandler();
             }
+            //this._huidigeBord = new Bord(dimension, this);
+            //Teken teken = new Teken();
+
+            //mess: We gaan starten; Naar allemaal  
+
             //returnMessage = EventHelper.CreateSpelgestartEvent(game);
 
 
+
+
             // wie begint?
-            //this._huidigeBord.TekenBord();
-            /*Speler huidigeSpeler = this._spelers[this.wieStart];
+            //this._huidigeBord.TekenBord();         
 
-            //mess: U mag beginnen; Naar huidige speler
-            //mess: Wachten op speler 1; naar de andere speler; 
-            while (!this.stopDeSpel)
+        }
+
+        /// <summary>
+        /// Bepaalt wie gaat tegen de huidige speler spelen.
+        /// </summary>
+        /// <param name="huidigeSpeler">huidigeSpeler.</param>
+        /// <param name="spelers">De spelers.</param>
+        /// <returns>De speler.</returns>
+        public Speler TegenSpeler(Speler huidigeSpeler)
+        {
+            foreach (Speler speler in Spelers)
             {
-                List<short> vrijVelden = this._huidigeBord.VrijVelden();
-
-                // teken het bord
-                // vraag aan speler 1 wat hij wil doen
-                huidigeSpeler.Zet(this._huidigeBord);
-                //mess: wat wilt u doen?, dit zijn de keuzes; Naar huidige speler
-
-                //Console.WriteLine();
-
-                //this._huidigeBord.TekenBord();
-                if (this._huidigeBord.HeeftTekenGewonnen(huidigeSpeler.TeGebruikenTeken))
+                if (speler != huidigeSpeler)
                 {
-                  //  Console.WriteLine();
-//                    Console.WriteLine(huidigeSpeler.Naam + " : Hoeraaaa " + huidigeSpeler.Naam + " je bent gewonnen !!!!");
-                    //Console.WriteLine();
-                    huidigeSpeler.BeeindigBord(this._huidigeBord);
-                    //Console.WriteLine(huidigeSpeler.Naam + " Je hebt : " + huidigeSpeler.Punten + " Punt !!");
-                    this.VraagNieuwRondje(huidigeSpeler);
+                    return speler;
                 }
+            }
+            return null;
+        }
 
-                if (this._huidigeBord.IsBordFinished())
-                {
-                    this.stopDeSpel = true;
-                    //Console.WriteLine("Het boord is vol !!!");
-                }
 
-                huidigeSpeler = this.TegenSpeler(huidigeSpeler);
+        /// <summary>
+        /// Deze method geef een nieuwe speler als de speler niet al bestaat.
+        /// </summary>
+        /// <param name="naam">De naam van de human speler.</param>
+        /// <param name="teken">welek teken gaat de spelr gebruiken.</param>
+        /// <returns>Deze method geeft een neuwie speler terug.</returns>
+        public Speler AddHumanSpeler(string naam, Teken teken, short dimension)
+        {
+            // bestaat deze speler al?
+            if (this != null)
+            {
+                throw new ArgumentException("Speler bestaat al");
             }
 
-            if (this.vraagEenRondje)
+            Speler speler = new HumanSpeler(naam, dimension)
             {
-                this.VraagNieuwRondje(huidigeSpeler);
+                TeGebruikenTeken = teken,
+            };
+            this.Spelers.Add(speler);
+
+            return speler;
+        }
+
+        /// <summary>
+        /// Deze method zoekt of de naam van de niuwe speler al bastaat.
+        /// </summary>
+        /// <param name="naam">De naam van de speler.</param>
+        /// <returns>De niuwe speler.</returns>
+        public string FindSpelerByNaam(string naam)
+        {
+            foreach (Speler game in this.Spelers)
+            {
+                string EqualName = string.Empty;
+                if (game.Naam == naam)
+                {
+                    EqualName = game.Naam;
+                    return EqualName;
+                }
             }
 
-            return this._huidigeBord;
-            */
-
-
-
-
+            return null;
         }
 
     }
