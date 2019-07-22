@@ -51,22 +51,6 @@ namespace HenE.WebSocketExample.WebSocketServer
         {            
             Console.WriteLine("In the server");
             StartListener();
-
-            //_listener.Start();
-
-
-
-            //TcpClient client = _listener.AcceptTcpClient(); //.ConfigureAwait(false);//non blocking waiting;
-            //tcpClients.Add(client);
-
-            /*while (true) // Add your exit flag here
-            {
-                client = _listener.AcceptTcpClient();
-                Task.Run(() => HandleClient(client, this));
-            }
-            */
-
-            //StartListening(/*client.GetStream(),*/ client);
         }
 
         public void Stop()
@@ -82,7 +66,6 @@ namespace HenE.WebSocketExample.WebSocketServer
         public async void StartListener() //non blocking listener
         {
             TcpListener listener = new TcpListener(/*this.IpAddress,*/ Port);
-            //listener = new TcpListener(ipAddress, port);
             listener.Start();
             _listening = true;
 
@@ -129,9 +112,28 @@ namespace HenE.WebSocketExample.WebSocketServer
                     // Verdeel between de naam van de speler en de dimension van het bord
                     //wanneer de commandos is equal VerzoekTotDeelnemenSpel
                     case Commandos.VerzoekTotDeelnemenSpel:
-                        VerzoekTotDeelnemenSpelCommandHandler handler = new VerzoekTotDeelnemenSpelCommandHandler(_spelHandler, client);
-                        
+                        VerzoekTotDeelnemenSpelCommandHandler handler = new VerzoekTotDeelnemenSpelCommandHandler(_spelHandler, client);                        
                         returnMessage = handler.HandleFromMessage(commandParams, out game);
+                        tcpClients.Add(client);
+                        ProcessReturnMessage(returnMessage, game, tcpClients);
+                        break;
+                        
+                    case Commandos.StartSpel:
+                        tcpClients.Clear();
+                        tcpClients.Add(client);
+                        returnMessage = EventHelper.CreateSpelerGestartEvent();
+                        ProcessReturnMessage(returnMessage, game, tcpClients);
+                        break;
+                    case Commandos.VerlaatSpel:
+
+                        break;
+
+                    case Commandos.WachtenOpAndereDeelnemer:
+
+                        tcpClients.Add(client);
+                        ProcessReturnMessage(returnMessage, game, tcpClients);
+                        tcpClients.Clear();
+
                         break;
                 }
             }
@@ -140,8 +142,6 @@ namespace HenE.WebSocketExample.WebSocketServer
                 // ok dan krijg ik een foutmelding, stuur die dan terug
                 returnMessage = EventHelper.CreateErrorEvent(exp);
             }
-
-            //ProcessReturnMessage(returnMessage, game, client);
 
             return returnMessage;
         }

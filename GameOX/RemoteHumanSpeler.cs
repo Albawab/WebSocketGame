@@ -11,10 +11,8 @@ namespace HenE.Abdul.GameOX
     {
         public RemoteHumanSpeler(string naam,short dimension, TcpClient tcpClient) : base(naam, dimension)
         {
-            this.Dimention = dimension;
         }
-
-        public TcpClient TcpClient { get; set; }
+        
 
     }
 }

@@ -57,13 +57,24 @@
             return CreateEvent(Events.WachtenOpAndereDeelnemer);
         }
 
-        static private String CreateEvent(Events e)
+        static public string CreateSpelerGestartEvent()
+        {
+            // wat ga ik terug geven?
+            // alleen het commando, rest hoeft niet
+
+            return CreateEvent(Events.SpelerGestart);
+        }
+
+
+        static private string CreateEvent(Events e)
         {
 
             switch (e)
             {
                 case Events.SpelGestart:
                     return "SpelGestart#";
+                case Events.SpelerGestart:
+                    return "SpelerGestart#";
                 case Events.WachtenOpAndereDeelnemer:
                     return "WachtenOpAndereDeelnemer#";
                 case Events.Bericht:
@@ -72,6 +83,7 @@
                     throw new NotImplementedException();
             }
         }
+        
 
         public static string CreateErrorEvent(Exception exp)
         {

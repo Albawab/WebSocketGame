@@ -6,6 +6,7 @@
     public enum Events
     {
         NotDefined = 0,
+        SpelerGestart,
         SpelGestart,
         WachtenOpAndereDeelnemer,
         YourTurn,

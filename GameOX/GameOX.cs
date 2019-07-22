@@ -51,7 +51,15 @@ namespace HenE.Abdul.GameOX
         /// </summary>
         public void Start(string spelersnaam,TcpClient tcpClient, short dimension)
         {
-            
+
+            foreach (Speler speler in this.Spelers)
+            {
+                if (FindSpelerByNaam(speler) == speler.Naam)
+                {
+                    speler.Naam = speler.Naam + 1;
+                }
+                break;
+            }
             
             // maak een bord, met de jusite dimension
             Bord huidigeBord = new Bord(dimension);
@@ -59,14 +67,7 @@ namespace HenE.Abdul.GameOX
              string bord = huidigeBord.TekenBord(); //==> String . Het bord
 
             // hoe bepaal je wie mag beginnen?
-            foreach (Speler speler in this.Spelers)
-            {
-                if (speler.Naam == FindSpelerByNaam(speler.Naam))
-                {
-                    speler.Naam = speler.Naam + 1;
-                }
-                break;
-            }
+
 
             foreach (Speler speler in this.Spelers)
             {
@@ -134,17 +135,12 @@ namespace HenE.Abdul.GameOX
         /// </summary>
         /// <param name="naam">De naam van de speler.</param>
         /// <returns>De niuwe speler.</returns>
-        public string FindSpelerByNaam(string naam)
+        public string FindSpelerByNaam(Speler speler)
         {
-            foreach (Speler game in this.Spelers)
-            {
-                string EqualName = string.Empty;
-                if (game.Naam == naam)
+                if (TegenSpeler(speler).Naam == speler.Naam)
                 {
-                    EqualName = game.Naam;
-                    return EqualName;
+                    return speler.Naam; ;
                 }
-            }
 
             return null;
         }

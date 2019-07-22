@@ -81,9 +81,9 @@
                 game.Start(spelersnaam, tcpClient, dimension);
                 // oke het spel kan beginnen
 
-                //returnMessage = EventHelper.CreateSpelgestartEvent(game);
+                returnMessage = EventHelper.CreateSpelgestartEvent(game);
 
-                return returnMessage = " we gaan starten naar iedereen";  
+                return returnMessage ;  
 
                 // // bepaal wie er gaat beginnen
                 /// voor nu, speler 1 begint

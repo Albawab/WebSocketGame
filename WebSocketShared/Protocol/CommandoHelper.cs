@@ -19,6 +19,10 @@
         {
             return String.Format("{0}{1}&{2}", CreateCommando(Commandos.VerzoekTotDeelnemenSpel), spelersnaam, dimension);
         }
+        static public string WieStart()
+        {
+            return String.Format("{0}", CreateCommando(Commandos.StartSpel));
+        }
 
 
         /// <summary>
@@ -107,7 +111,9 @@
                 case Commandos.VerzoekTotDeelnemenSpel:
                     return "VerzoekTotDeelnemenSpel#";
                 case Commandos.WachtenOpAndereDeelnemer:
-                 return "WachtenOpAndereDeelnemer";
+                 return "WachtenOpAndereDeelnemer#";
+                case Commandos.StartSpel:
+                    return "StartSpel#";
                 default:
                     throw new NotImplementedException();
             }

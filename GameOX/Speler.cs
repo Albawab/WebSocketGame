@@ -28,13 +28,12 @@ namespace HenE.Abdul.GameOX
         {
 
         }
-
+        
         /// <summary>
         /// afvangen van het event dat het spel is gestart
         /// </summary>
         public virtual void SpelStartedHandler()
         {
-
         }
     }
 }
