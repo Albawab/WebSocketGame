@@ -95,7 +95,10 @@
                 }
             }
 
-            this.ProcessReturnMessage(bord, this.TcpClients);
+            foreach (Speler speler in this.Spelers)
+            {
+                this.ProcessStream(bord, speler.TcpClient);
+            }
 
             foreach (Speler speler in this.Spelers)
             {

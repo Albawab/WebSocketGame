@@ -59,7 +59,7 @@
                         break;
 
                     case Events.SpelerGestart:
-                        Console.WriteLine(opgeknipt[0] + " Welke teken wil je gebruiken ?");
+                        Console.WriteLine(opgeknipt[0] + " je mag starten !!");
                         break;
 
                     case Events.WachtenOpAndereDeelnemer:
