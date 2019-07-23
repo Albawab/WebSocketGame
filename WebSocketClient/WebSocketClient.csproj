@@ -45,6 +45,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\GameOX\GameOX.csproj">
+      <Project>{62677f60-1609-4803-a867-5d9b656c1909}</Project>
+      <Name>GameOX</Name>
+    </ProjectReference>
     <ProjectReference Include="..\WebSocketServerApp\WebSocketServerApp.csproj">
       <Project>{f07fba9f-13ad-4f68-a304-78b303cee4d3}</Project>
       <Name>WebSocketServerApp</Name>
@@ -57,6 +61,13 @@
       <Project>{df27c127-a125-4204-b9f7-b79ae5abad57}</Project>
       <Name>WebSocketShared</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Analyzer Include="..\packages\StyleCop.Analyzers.1.1.118\analyzers\dotnet\cs\StyleCop.Analyzers.CodeFixes.dll" />
+    <Analyzer Include="..\packages\StyleCop.Analyzers.1.1.118\analyzers\dotnet\cs\StyleCop.Analyzers.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

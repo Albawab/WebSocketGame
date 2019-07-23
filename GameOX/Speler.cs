@@ -1,16 +1,16 @@
-﻿using HenE.Abdul.Game_OX;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Sockets;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace HenE.Abdul.GameOX
+﻿namespace HenE.Abdul.GameOX
 {
+    using System.Net.Sockets;
+    using HenE.Abdul.Game_OX;
+
     public abstract class Speler
     {
-        public Speler(string naam,short dimention)
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Speler"/> class.
+        /// </summary>
+        /// <param name="naam"></param>
+        /// <param name="dimention"></param>
+        public Speler(string naam, short dimention)
         {
             this.Dimention = dimention;
             this.Naam = naam;
@@ -26,11 +26,10 @@ namespace HenE.Abdul.GameOX
 
         public void DoeZet()
         {
-
         }
-        
+
         /// <summary>
-        /// afvangen van het event dat het spel is gestart
+        /// afvangen van het event dat het spel is gestart.
         /// </summary>
         public virtual void SpelStartedHandler()
         {

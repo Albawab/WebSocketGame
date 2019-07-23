@@ -1,7 +1,7 @@
 ﻿namespace HenE.WebSocketExample.Shared.Protocol
 {
     /// <summary>
-    /// events gaan van de server naar de client
+    /// events gaan van de server naar de client.
     /// </summary>
     public enum Events
     {
@@ -13,6 +13,5 @@
         SpelFinished,
         Bericht,
         Error = 99
-
     }
 }

@@ -1,33 +1,28 @@
-﻿using HenE.Abdul.GameOX;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Sockets;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace HenE.WebSocketExample.WebSocketServer
+﻿namespace HenE.WebSocketExample.WebSocketServer
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Net.Sockets;
+    using System.Text;
+    using System.Threading.Tasks;
+    using HenE.Abdul.GameOX;
 
     /// <summary>
-    ///  class om alle spelhandleingen af te vangen
+    ///  class om alle spelhandleingen af te vangen.
     /// </summary>
     public class SpelHandler
     {
         private readonly List<GameOX> currentSpellen = new List<GameOX>();
-        public IList<Speler> spelers = new List<Speler>();
-
-        public SpelHandler()
-        {
-
-        }
-
+        public IList<Speler> Spelers = new List<Speler>();
 
         /// <summary>
-        /// 
+        /// Initializes a new instance of the <see cref="SpelHandler"/> class.
         /// </summary>
-        /// <param name="dimension"></param>
-        /// <returns></returns>
+        public SpelHandler()
+        {
+        }
+
         public GameOX GetOpenSpelbyDimension(short dimension)
         {
             foreach (GameOX gameOX in this.currentSpellen)
@@ -41,24 +36,14 @@ namespace HenE.WebSocketExample.WebSocketServer
             return null;
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="dimension"></param>
-        /// <param name="firstPlayer"></param>
-        /// <returns></returns>
-        public GameOX CreateGame(short dimension, string firstPlayer, TcpClient tcpClient)
+        public GameOX CreateGame(short dimension, string player, TcpClient tcpClient)
         {
             GameOX gameOX = new GameOX(dimension);
 
             this.currentSpellen.Add(gameOX);
-            gameOX.AddPlayer(firstPlayer, tcpClient,dimension);
-            
+            gameOX.AddPlayer(player, tcpClient, dimension);
+
             return gameOX;
         }
-
-
-
-
     }
 }

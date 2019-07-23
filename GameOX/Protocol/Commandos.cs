@@ -1,7 +1,7 @@
 ﻿namespace HenE.WebSocketExample.Shared.Protocol
 {
     /// <summary>
-    /// met coommandos geet de client de server een opdracht
+    /// met coommandos geet de client de server een opdracht.
     /// </summary>
     public enum Commandos
     {
@@ -12,6 +12,5 @@
         DoeZet,
         ReStartSpel,
         VerlaatSpel,
-
     }
 }

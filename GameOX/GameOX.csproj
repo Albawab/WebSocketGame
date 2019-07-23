@@ -46,9 +46,26 @@
     <Compile Include="GameOXStatus.cs" />
     <Compile Include="HumanSpeler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Protocol\CommandoHelper.cs" />
+    <Compile Include="Protocol\Commandos.cs" />
+    <Compile Include="Protocol\EventHelper.cs" />
+    <Compile Include="Protocol\Events.cs" />
     <Compile Include="RemoteHumanSpeler.cs" />
     <Compile Include="Speler.cs" />
     <Compile Include="Teken.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\WebSocketShared\WebSocketShared.csproj">
+      <Project>{df27c127-a125-4204-b9f7-b79ae5abad57}</Project>
+      <Name>WebSocketShared</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Analyzer Include="..\packages\StyleCop.Analyzers.1.1.118\analyzers\dotnet\cs\StyleCop.Analyzers.CodeFixes.dll" />
+    <Analyzer Include="..\packages\StyleCop.Analyzers.1.1.118\analyzers\dotnet\cs\StyleCop.Analyzers.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

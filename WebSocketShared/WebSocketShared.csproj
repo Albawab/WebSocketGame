@@ -44,16 +44,13 @@
     <Compile Include="Commands\CommandHandler.cs" />
     <Compile Include="Infrastructure\WebsocketBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Protocol\CommandoHelper.cs" />
-    <Compile Include="Protocol\Commandos.cs" />
-    <Compile Include="Protocol\EventHelper.cs" />
-    <Compile Include="Protocol\Events.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\GameOX\GameOX.csproj">
-      <Project>{62677f60-1609-4803-a867-5d9b656c1909}</Project>
-      <Name>GameOX</Name>
-    </ProjectReference>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Analyzer Include="..\packages\StyleCop.Analyzers.1.1.118\analyzers\dotnet\cs\StyleCop.Analyzers.CodeFixes.dll" />
+    <Analyzer Include="..\packages\StyleCop.Analyzers.1.1.118\analyzers\dotnet\cs\StyleCop.Analyzers.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

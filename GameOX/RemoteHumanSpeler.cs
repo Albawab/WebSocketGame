@@ -1,22 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Sockets;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace HenE.Abdul.GameOX
+﻿namespace HenE.Abdul.GameOX
 {
     public class RemoteHumanSpeler : HumanSpeler
     {
-        public RemoteHumanSpeler(string naam,short dimension, TcpClient tcpClient) : base(naam, dimension)
+        /// <summary>
+        /// Initializes a new instance of the <see cref="RemoteHumanSpeler"/> class.
+        /// </summary>
+        /// <param name="naam"></param>
+        /// <param name="dimension"></param>
+        public RemoteHumanSpeler(string naam, short dimension) : base(naam, dimension)
         {
             this.Dimention = dimension;
-            TcpClient = tcpClient;
         }
-
-        public TcpClient TcpClient { get; set; }
-
     }
-    
 }

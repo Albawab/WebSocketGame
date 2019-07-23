@@ -1,29 +1,32 @@
 ﻿namespace HenE.WebSocketExample.WebSocketClientApp
 {
-    using HenE.Abdul.Game_OX;
-    using HenE.Abdul.GameOX;
-    using HenE.WebSocketExample.WebSocketClient;
-    using HenE.WebSocketExample.WebSocketServer;
     using System;
+    using HenE.WebSocketExample.WebSocketClient;
 
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
-            
-            Console.WriteLine("Client Een");
+            Console.WriteLine("Local Client");
 
-            Client client = new Client("localhost", 5000);
-            client.Start();
+            Client server = new Client("localhost", 5000);
+            server.Start();
             Console.WriteLine("Geef je naam op");
-            string naam = Console.ReadLine();
 
+            // RdH: voor nu uit ivm debuggen
+            // string naam = Console.ReadLine();
+            // RdH: onderstaande 2 WEG als het spel een beetje loopt
+            string naam = "A";
+            Console.WriteLine(naam);
+
+            server.VerzoekOmStartenSpel(naam, 3);
+
+            /*
             ConsoleKeyInfo ingegevenTeken;
             Console.WriteLine("Welke teken wil je spelen,  O of X? ");
             ingegevenTeken = Console.ReadKey();
 
-
-            string naamVanDeTweedeSpeler = string.Empty;
+            string naamVanDeSpeler = string.Empty;
             do
             {
                 if (ingegevenTeken.Key == ConsoleKey.O || ingegevenTeken.Key == ConsoleKey.X)
@@ -31,7 +34,7 @@
                     switch (ingegevenTeken.Key)
                     {
                         case ConsoleKey.O:
-                            client.VerzoekOmStartenSpel(naam, 3);;
+                            server.VerzoekOmStartenSpel(naam, 3);
                             break;
                     }
                 }
@@ -43,16 +46,13 @@
             }
             while (ingegevenTeken.Key != ConsoleKey.O && ingegevenTeken.Key != ConsoleKey.X);
 
+            */
 
-
-
-          
-
-            Console.ReadKey();
-            Console.WriteLine("I am ready");
+            // Console.ReadKey();
+            Console.WriteLine("I am done");
             Console.ReadKey();
 
-            //  client.Stop();
+            // client.Stop();
         }
     }
 }

@@ -1,6 +1,5 @@
 ﻿namespace HenE.WebSocketExample.Shared.Infrastructure
 {
-    using HenE.Abdul.GameOX;
     using System;
     using System.Collections.Generic;
     using System.Net.Sockets;
@@ -21,10 +20,9 @@
                 // De stream tussen de client en de server.
                 stream = client.GetStream();
 
+                await stream.ReadAsync(receivedBuffer, 0, receivedBuffer.Length);
 
-                 await stream.ReadAsync(receivedBuffer, 0, receivedBuffer.Length);
-
-                // Opslag de information die uit de client komet 
+                // Opslag de information die uit de client komet
                 StringBuilder msg = new StringBuilder();
 
                 foreach (byte b in receivedBuffer)
@@ -35,45 +33,43 @@
                     }
                     else
                     {
-                        //voeg elk letter toe
+                        // voeg elk letter toe
                         msg.Append(Convert.ToChar(b).ToString());
                     }
                 }
 
-                string returnMessage = ProcessStream(msg.ToString(), client);
+                string returnMessage = this.ProcessStream(msg.ToString(), client);
 
                 // als de returnMessage wat zinvols heeft, dat terugsturen
-
             }
         }
 
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="returnMessage"></param>
-        /// <param name="game"></param>
-        /// <param name="sendingClient"></param>
-        protected void ProcessReturnMessage(string returnMessage,  GameOX game, List<TcpClient> receivingClients)
+        protected void ProcessReturnMessage(string returnMessage, List<TcpClient> receivingClients)
         {
-            if (!String.IsNullOrWhiteSpace(returnMessage))
+            if (!string.IsNullOrWhiteSpace(returnMessage))
             {
                 foreach (TcpClient client in receivingClients)
                 {
-                    SendMessageAsync(client, returnMessage);
+                    this.SendMessageAsync(client, returnMessage);
                 }
             }
         }
 
+        protected void ProcessReturnMessage(string returnMessage, TcpClient receivingClient)
+        {
+            if (!string.IsNullOrWhiteSpace(returnMessage))
+            {
+                this.SendMessageAsync(receivingClient, returnMessage);
+            }
+        }
 
-
-        protected  abstract string ProcessStream(string stream, TcpClient client);
+        protected abstract string ProcessStream(string stream, TcpClient client);
 
         /// <summary>
         /// Die method stuur de info naar de cleinten.
         /// </summary>
         /// <param name="client">Een client.</param>
-        /// <param name="message"> De information</param>
+        /// <param name="message"> De information.</param>
         protected NetworkStream SendMessage(TcpClient client, string message)
         {
             // Get hoeveel letter in de message als nummer.
@@ -83,15 +79,20 @@
             // Convert de message to byts
             sendData = Encoding.ASCII.GetBytes(message);
 
-            //Open een stream tussen de server en de client
+            // Open een stream tussen de server en de client
             NetworkStream stream = client.GetStream();
 
-            //Stuur de info naar de client.
+            // Stuur de info naar de client.
             stream.Write(sendData, 0, sendData.Length);
             return stream;
         }
 
-
+        /// <summary>
+        ///
+        /// </summary>
+        /// <param name="client"></param>
+        /// <param name="message"></param>
+        /// <returns>A <see cref="Task{TResult}"/> representing the result of the asynchronous operation.</returns>
         protected async Task<NetworkStream> SendMessageAsync(TcpClient client, string message)
         {
             // Get hoeveel letter in de message als nummer.
@@ -101,14 +102,13 @@
             // Convert de message to byts
             sendData = Encoding.ASCII.GetBytes(message);
 
-            //Open een stream tussen de server en de client
+            // Open een stream tussen de server en de client
             NetworkStream stream = client.GetStream();
 
-            //Stuur de info naar de client.
+            // Stuur de info naar de client.
             await stream.WriteAsync(sendData, 0, sendData.Length);
 
             return stream;
         }
-
     }
 }

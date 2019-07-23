@@ -1,20 +1,24 @@
-﻿using HenE.WebSocketExample.Shared.Infrastructure;
-using HenE.WebSocketExample.Shared.Protocol;
-using HenE.WebSocketExample.WebSocketServer.CommandHandlers;
-using System;
-using System.Net.Sockets;
-using System.Text;
-
-namespace HenE.WebSocketExample.WebSocketClient
+﻿namespace HenE.WebSocketExample.WebSocketClient
 {
+    using System;
+    using System.Net.Sockets;
+    using HenE.WebSocketExample.Shared.Infrastructure;
+    using HenE.WebSocketExample.Shared.Protocol;
+
     public class Client : WebsocketBase
     {
         private TcpClient _tcpClient = null;
 
         public int ServerPort { get; private set; }
-        public String Hostname { get; private set; }
 
-        public Client(String hostname, int serverPort)
+        public string Hostname { get; private set; }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Client"/> class.
+        /// </summary>
+        /// <param name="hostname"></param>
+        /// <param name="serverPort"></param>
+        public Client(string hostname, int serverPort)
         {
             this.Hostname = hostname;
             this.ServerPort = serverPort;
@@ -26,7 +30,6 @@ namespace HenE.WebSocketExample.WebSocketClient
         }
 
         public void Stop()
-
         {
             if (this._tcpClient != null)
             {
@@ -39,9 +42,8 @@ namespace HenE.WebSocketExample.WebSocketClient
             // bepaal het event
             // het event is het gedeelte in de msg voor de #
             // daarna komen de parameters
-            string eventParams = "";
+            string eventParams = string.Empty;
             string returnMessage = null;
-            Events bericht =Events.NotDefined;
             Events events = EventHelper.SplitEventAndParamsFromMessage(stream, out eventParams);
             string[] opgeknipt = eventParams.Split(new char[] { '&' });
             try
@@ -54,21 +56,16 @@ namespace HenE.WebSocketExample.WebSocketClient
 
                     case Events.SpelGestart:
                         Console.WriteLine("We gaan starten " + opgeknipt[0] + " Tegen " + opgeknipt[1] + " De dimenstion is : " + opgeknipt[2]);
-                        Console.WriteLine(opgeknipt[0]+" gaat starten .");
-                        Console.WriteLine(opgeknipt[1] + " je moet wachten !!");
-                        WieStart();
                         break;
-
 
                     case Events.SpelerGestart:
                         Console.WriteLine(opgeknipt[0] + " Welke teken wil je gebruiken ?");
                         break;
 
-                    case Events.WachtenOpAndereDeelnemer:                       
+                    case Events.WachtenOpAndereDeelnemer:
                         Console.WriteLine("wachten op andere speler");
                         break;
                 }
-
             }
             catch (Exception exp)
             {
@@ -79,17 +76,16 @@ namespace HenE.WebSocketExample.WebSocketClient
             return returnMessage;
         }
 
-
-
-        public void VerzoekOmStartenSpel(String spelersnaam, short dimension)
+        public void VerzoekOmStartenSpel(string spelersnaam, short dimension)
         {
-            String message = CommandoHelper.CreateVerzoekTotDeelnemenSpelCommando(spelersnaam, dimension);
+            string message = CommandoHelper.CreateVerzoekTotDeelnemenSpelCommando(spelersnaam, dimension);
 
-            NetworkStream stream = SendMessage(this._tcpClient, message);
+            NetworkStream stream = this.SendMessage(this._tcpClient, message);
 
-            StartListeningAsync(stream, this._tcpClient);
+            this.StartListeningAsync(stream, this._tcpClient);
         }
 
+        /*
         public void WieStart()
         {
             String message = CommandoHelper.WieStart();
@@ -98,6 +94,6 @@ namespace HenE.WebSocketExample.WebSocketClient
 
             StartListeningAsync(stream, this._tcpClient);
         }
-
+        */
     }
 }

@@ -1,20 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace HenE.Abdul.GameOX
+﻿namespace HenE.Abdul.GameOX
 {
-    class Bord
-    {
+    using System.Text;
 
+    internal class Bord
+    {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Bord"/> class.
+        /// </summary>
+        /// <param name="dimension"></param>
         public Bord(short dimension)
         {
             this.Dimension = dimension;
         }
 
         public short Dimension { get; set; }
+
         public string TekenBord()
         {
             // herschrijven , dat je de 1-- 9 index toont als het veld leeg is.
@@ -39,9 +39,6 @@ namespace HenE.Abdul.GameOX
                     }
 
                     // toon de index in het scherm
-                    
-                
-                    
                     else
                     {
                         // toon het teken in het scherm
@@ -81,6 +78,5 @@ namespace HenE.Abdul.GameOX
             // Actie actie = new Actie();
             // actie.StartDeSpel(speler, this._dimension, teken);
         }
-
     }
 }
