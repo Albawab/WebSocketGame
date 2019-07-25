@@ -29,6 +29,7 @@
         /// functie die de parameters in string krijgt en die string opknipt in de params die nodig zijn.
         /// </summary>
         /// <param name="messageParams">params uit het bericht, gedeelte na de # en gescheiden door &.</param>
+        /// <returns></returns>
         public string HandleFromMessage(string messageParams, out GameOX game)
         {
             string[] opgeknipt = messageParams.Split(new char[] { '&' });
@@ -70,6 +71,7 @@
         /// <param name="spelersnaam"> naam van de speler.</param>
         /// <param name="dimension">dimension van het spel.</param>
         /// <return>de message die gereturnd moet worden. </return>
+        /// <returns></returns>
         public string Handle(string spelersnaam, short dimension, out GameOX game)
         {
             string returnMessage = string.Empty;
@@ -94,8 +96,7 @@
                 }
 
                 // oke het spel kan beginnen
-                game.Start(spelersnaam, this.tcpClient, dimension);
-
+               // game.Start(spelersnaam, this.tcpClient, dimension);
                 returnMessage = EventHelper.CreateSpelgestartEvent(game);
 
                 return returnMessage;

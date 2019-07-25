@@ -52,32 +52,24 @@
        protected override string ProcessStream(string stream, TcpClient client)
         {
             string returnMessage = null;
-
-          // Commandos commando = CommandoHelper.SplitCommandAndParamsFromMessage(stream, out commandParams);
-
-                // switch (commando)
-                // {
-                    // case Commandos.StartSpel:
             this.ProcessReturnMessage(stream, client);
 
-                        // ProcessReturnMessage(returnMessage, tcpClients);
-                      //  break;
-                // }
             return returnMessage;
         }
 
         /// <summary>
         /// we hebben genoeg spelers en alle informatie die we nodig hebben, we gaan starten.
         /// </summary>
-       public void Start(string spelersnaam, TcpClient tcpClient, short dimension)
+       public void Start(TcpClient tcpClient)
         {
+            string bord;
             string msg = string.Empty;
 
             // maak een bord, met de jusite dimension
-            Bord huidigeBord = new Bord(dimension);
+            Bord huidigeBord = new Bord(this.Dimension);
 
             // ==> String . Teken het bord
-            string bord = huidigeBord.TekenBord();
+            bord = huidigeBord.TekenBord();
 
             // hoe bepaal je wie mag beginnen?
             foreach (Speler speler in this.Spelers)
@@ -85,35 +77,24 @@
                 this.TcpClients.Add(speler.TcpClient);
                 if (speler.TcpClient == tcpClient)
                 {
-                    msg = EventHelper.CreateWachtenOpEenAndereDeelnemenEvent();
-                    this.ProcessReturnMessage(msg, speler.TcpClient);
+                    msg = string.Format("{0}&{1}", EventHelper.CreateWachtenOpEenAndereDeelnemenEvent(), bord);
+                    this.ProcessStream(msg, speler.TcpClient);
                 }
                 else
                 {
-                    msg = EventHelper.CreateSpelerGestartEvent();
-                    this.ProcessReturnMessage(msg, speler.TcpClient);
+                    msg = string.Format("{0}&{1}", EventHelper.CreateSpelerGestartEvent(), bord);
+                    this.ProcessStream(msg, speler.TcpClient);
+                    break;
                 }
             }
 
-            foreach (Speler speler in this.Spelers)
+            while (true)
             {
-                this.ProcessStream(bord, speler.TcpClient);
+                foreach (Speler speler in this.Spelers)
+                {
+                    speler.SpelStartedHandler();
+                }
             }
-
-            foreach (Speler speler in this.Spelers)
-            {
-                speler.SpelStartedHandler();
-            }
-
-            // this._huidigeBord = new Bord(dimension, this);
-            // Teken teken = new Teken();
-
-            // mess: We gaan starten; Naar allemaal
-
-            // returnMessage = EventHelper.CreateSpelgestartEvent(game);
-
-            // wie begint?
-            // this._huidigeBord.TekenBord();
         }
 
         /// <summary>
@@ -133,6 +114,7 @@
 
             return null;
         }
+
 
         /// <summary>
         /// Deze method geef een nieuwe speler als de speler niet al bestaat.
@@ -160,7 +142,7 @@
         /// <summary>
         /// Deze method zoekt of de naam van de niuwe speler al bastaat.
         /// </summary>
-        /// <param name="naam">De naam van de speler.</param>
+        /// <param name="speler">de speler.</param>
         /// <returns>De niuwe speler.</returns>
        public string FindSpelerByNaam(Speler speler)
         {

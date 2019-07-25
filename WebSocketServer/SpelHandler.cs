@@ -14,7 +14,6 @@
     public class SpelHandler
     {
         private readonly List<GameOX> currentSpellen = new List<GameOX>();
-        public IList<Speler> Spelers = new List<Speler>();
 
         /// <summary>
         /// Initializes a new instance of the <see cref="SpelHandler"/> class.

@@ -2,8 +2,9 @@
 {
     using System.Net.Sockets;
     using HenE.Abdul.Game_OX;
+    using HenE.WebSocketExample.Shared.Infrastructure;
 
-    public abstract class Speler
+    public abstract class Speler : WebsocketBase
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="Speler"/> class.
@@ -26,6 +27,13 @@
 
         public void DoeZet()
         {
+        }
+
+        protected override string ProcessStream(string stream, TcpClient client)
+        {
+            string returnMessage = null;
+            this.ProcessReturnMessage(stream, client);
+            return returnMessage;
         }
 
         /// <summary>

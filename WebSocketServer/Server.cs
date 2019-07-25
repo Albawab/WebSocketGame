@@ -18,7 +18,6 @@
         private TcpListener _listener = null;
         private readonly SpelHandler _spelHandler = new SpelHandler();
         private bool _listening = false;
-
         /// <summary>
         /// Initializes a new instance of the <see cref="Server"/> class.
         /// Hier staat de constructor van de Server.
@@ -66,7 +65,6 @@
             while (this._listening)
             {
                 TcpClient client = await listener.AcceptTcpClientAsync().ConfigureAwait(false); // non blocking waiting
-
                                                                                                 // We are already in the new task to handle this client...
                 this.HandleClientAsync(client, this);
             }
@@ -103,6 +101,11 @@
                         this.tcpClients.Add(client);
                         returnMessage = handler.HandleFromMessage(commandParams, out game);
                         this.ProcessReturnMessage(returnMessage, this.tcpClients);
+                        if (this.tcpClients.Count == 2)
+                        {
+                            game.Start(client);
+                        }
+
                         break;
 
                     case Commandos.StartSpel:
@@ -110,7 +113,8 @@
                       //  ProcessReturnMessage(returnMessage, tcpClients);
                         break;
 
-                    case Commandos.VerlaatSpel:
+                    case Commandos.DoeZet:
+                        game.Start(client);
                         break;
 
                     case Commandos.WachtenOpAndereDeelnemer:

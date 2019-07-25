@@ -2,7 +2,7 @@
 {
     using System.Text;
 
-    internal class Bord
+    class Bord
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="Bord"/> class.

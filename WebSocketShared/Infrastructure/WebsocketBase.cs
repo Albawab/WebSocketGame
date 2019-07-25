@@ -11,6 +11,7 @@
         /// <summary>
         /// Hier gaat de server starten.
         /// </summary>
+        /// <returns><placeholder>A <see cref="Task"/> representing the asynchronous operation.</placeholder></returns>
         public async Task StartListeningAsync(NetworkStream stream, TcpClient client)
         {
             while (true)
@@ -70,6 +71,7 @@
         /// </summary>
         /// <param name="client">Een client.</param>
         /// <param name="message"> De information.</param>
+        /// <returns>Stream .</returns>
         protected NetworkStream SendMessage(TcpClient client, string message)
         {
             // Get hoeveel letter in de message als nummer.
@@ -84,14 +86,15 @@
 
             // Stuur de info naar de client.
             stream.Write(sendData, 0, sendData.Length);
+
             return stream;
         }
 
         /// <summary>
-        ///
+        /// Die stuur de berecht af.
         /// </summary>
-        /// <param name="client"></param>
-        /// <param name="message"></param>
+        /// <param name="client">client.</param>
+        /// <param name="message">message.</param>
         /// <returns>A <see cref="Task{TResult}"/> representing the result of the asynchronous operation.</returns>
         protected async Task<NetworkStream> SendMessageAsync(TcpClient client, string message)
         {
@@ -107,7 +110,6 @@
 
             // Stuur de info naar de client.
             await stream.WriteAsync(sendData, 0, sendData.Length);
-
             return stream;
         }
     }

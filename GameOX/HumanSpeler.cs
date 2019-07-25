@@ -1,4 +1,7 @@
-﻿namespace HenE.Abdul.GameOX
+﻿using System;
+using System.Threading.Tasks;
+
+namespace HenE.Abdul.GameOX
 {
     /// <summary>
     ///
@@ -16,6 +19,9 @@
 
         public override void SpelStartedHandler()
         {
+            short nummer = 0;
+
+            this.ProcessStream("SpelerGestart#", this.TcpClient);
         }
     }
 }

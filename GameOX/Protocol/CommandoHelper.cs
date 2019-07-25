@@ -20,9 +20,15 @@
             return string.Format("{0}{1}&{2}", CreateCommando(Commandos.VerzoekTotDeelnemenSpel), spelersnaam, dimension);
         }
 
+        public static string CreateDoeZetCommando(short dimension)
+        {
+            return string.Format("{0}{1}", CreateCommando(Commandos.DoeZet), dimension);
+        }
+
         /// <summary>
         ///
         /// </summary>
+        /// <returns></returns>
         public static string CreateStartGameCommando(GameOX game)
         {
             // wat ga ik terug geven?
@@ -115,6 +121,8 @@
                     return "WachtenOpAndereDeelnemer#";
                 case Commandos.StartSpel:
                     return "StartSpel#";
+                case Commandos.DoeZet:
+                    return "DoeZet#";
                 default:
                     throw new NotImplementedException();
             }

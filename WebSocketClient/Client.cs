@@ -38,7 +38,7 @@
         }
 
         protected override string ProcessStream(string stream, TcpClient client)
-        {
+      {
             // bepaal het event
             // het event is het gedeelte in de msg voor de #
             // daarna komen de parameters
@@ -59,7 +59,12 @@
                         break;
 
                     case Events.SpelerGestart:
+                        Console.WriteLine(eventParams);
                         Console.WriteLine(opgeknipt[0] + " je mag starten !!");
+                        Console.WriteLine("Geef een nummer toe !!");
+                        short nummer = short.Parse(Console.ReadLine());
+                        this.DoeZet(nummer);
+
                         break;
 
                     case Events.WachtenOpAndereDeelnemer:
@@ -85,15 +90,14 @@
             this.StartListeningAsync(stream, this._tcpClient);
         }
 
-        /*
-        public void WieStart()
+        public async void DoeZet(short nummer)
         {
-            String message = CommandoHelper.WieStart();
+            String message = CommandoHelper.CreateDoeZetCommando(nummer);
 
-            NetworkStream stream = SendMessage(this._tcpClient, message);
+            NetworkStream stream = this.SendMessage(this._tcpClient, message);
 
-            StartListeningAsync(stream, this._tcpClient);
+            this.StartListeningAsync(stream, this._tcpClient);
         }
-        */
+
     }
 }

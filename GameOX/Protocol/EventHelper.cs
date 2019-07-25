@@ -71,6 +71,11 @@
             return CreateEvent(Events.SpelerGestart);
         }
 
+        public static string CreateTekenHetBord()
+        {
+            return CreateEvent(Events.SpelerGestart);
+        }
+
         private static string CreateEvent(Events e)
         {
             switch (e)
@@ -83,6 +88,8 @@
                     return "WachtenOpAndereDeelnemer#";
                 case Events.Bericht:
                     return "Bericht#";
+                case Events.TekenHetBord:
+                    return "TekenHetBord#";
                 default:
                     throw new NotImplementedException();
             }
