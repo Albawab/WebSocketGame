@@ -50,9 +50,10 @@
     <Compile Include="Protocol\Commandos.cs" />
     <Compile Include="Protocol\EventHelper.cs" />
     <Compile Include="Protocol\Events.cs" />
+    <Compile Include="Protocol\TekenHelper.cs" />
     <Compile Include="RemoteHumanSpeler.cs" />
     <Compile Include="Speler.cs" />
-    <Compile Include="Teken.cs" />
+    <Compile Include="Protocol\Teken.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\WebSocketShared\WebSocketShared.csproj">

@@ -1,4 +1,8 @@
-﻿namespace HenE.WebSocketExample.Shared.Infrastructure
+﻿// <copyright file="WebsocketBase.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
+
+namespace HenE.WebSocketExample.Shared.Infrastructure
 {
     using System;
     using System.Collections.Generic;
@@ -6,12 +10,17 @@
     using System.Text;
     using System.Threading.Tasks;
 
+    /// <summary>
+    /// De class van de web socket.
+    /// </summary>
     public abstract class WebsocketBase
     {
         /// <summary>
         /// Hier gaat de server starten.
         /// </summary>
-        /// <returns><placeholder>A <see cref="Task"/> representing the asynchronous operation.</placeholder></returns>
+        /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
+        /// <param name="stream">De stream.</param>
+        /// <param name="client">De client.</param>
         public async Task StartListeningAsync(NetworkStream stream, TcpClient client)
         {
             while (true)
@@ -45,25 +54,41 @@
             }
         }
 
-        protected void ProcessReturnMessage(string returnMessage, List<TcpClient> receivingClients)
+        /// <summary>
+        /// Resend the message to two cleints.
+        /// </summary>
+        /// <param name="returnMessage">De message.</param>
+        /// <param name="receivingClients">List of the clients.</param>
+        protected async void ProcessReturnMessage(string returnMessage, List<TcpClient> receivingClients)
         {
             if (!string.IsNullOrWhiteSpace(returnMessage))
             {
                 foreach (TcpClient client in receivingClients)
                 {
-                    this.SendMessageAsync(client, returnMessage);
+                  await this.SendMessageAsync(client, returnMessage);
                 }
             }
         }
 
-        protected void ProcessReturnMessage(string returnMessage, TcpClient receivingClient)
+        /// <summary>
+        /// Resend the message to one client.
+        /// </summary>
+        /// <param name="returnMessage">De message.</param>
+        /// <param name="receivingClient">De client die de massage naar hem gaat leveren. </param>
+        protected async void ProcessReturnMessage(string returnMessage, TcpClient receivingClient)
         {
             if (!string.IsNullOrWhiteSpace(returnMessage))
             {
-                this.SendMessageAsync(receivingClient, returnMessage);
+               await this.SendMessageAsync(receivingClient, returnMessage);
             }
         }
 
+        /// <summary>
+        /// De process stream tussen de server en de client.
+        /// </summary>
+        /// <param name="stream">De stream.</param>
+        /// <param name="client">De client.</param>
+        /// <returns>De message.</returns>
         protected abstract string ProcessStream(string stream, TcpClient client);
 
         /// <summary>

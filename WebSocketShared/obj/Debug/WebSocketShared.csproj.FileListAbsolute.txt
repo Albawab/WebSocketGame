@@ -25,3 +25,15 @@ C:\Users\Abdul\Desktop\Sharp\WebSocketGame\WebSocketShared\obj\Debug\WebSocketSh
 C:\Users\Abdul\Desktop\Sharp\WebSocketGame\WebSocketShared\obj\Debug\WebSocketShared.csproj.CoreCompileInputs.cache
 C:\Users\Abdul\Desktop\Sharp\WebSocketGame\WebSocketShared\obj\Debug\WebSocketShared.dll
 C:\Users\Abdul\Desktop\Sharp\WebSocketGame\WebSocketShared\obj\Debug\WebSocketShared.pdb
+C:\Users\Acer\Desktop\WebSocketGame\WebSocketShared\bin\Debug\WebSocketShared.dll
+C:\Users\Acer\Desktop\WebSocketGame\WebSocketShared\bin\Debug\WebSocketShared.pdb
+C:\Users\Acer\Desktop\WebSocketGame\WebSocketShared\obj\Debug\WebSocketShared.csprojAssemblyReference.cache
+C:\Users\Acer\Desktop\WebSocketGame\WebSocketShared\obj\Debug\WebSocketShared.csproj.CoreCompileInputs.cache
+C:\Users\Acer\Desktop\WebSocketGame\WebSocketShared\obj\Debug\WebSocketShared.dll
+C:\Users\Acer\Desktop\WebSocketGame\WebSocketShared\obj\Debug\WebSocketShared.pdb
+C:\Users\Abdul\Desktop\WebSocketGame\WebSocketShared\bin\Debug\WebSocketShared.dll
+C:\Users\Abdul\Desktop\WebSocketGame\WebSocketShared\bin\Debug\WebSocketShared.pdb
+C:\Users\Abdul\Desktop\WebSocketGame\WebSocketShared\obj\Debug\WebSocketShared.csprojAssemblyReference.cache
+C:\Users\Abdul\Desktop\WebSocketGame\WebSocketShared\obj\Debug\WebSocketShared.csproj.CoreCompileInputs.cache
+C:\Users\Abdul\Desktop\WebSocketGame\WebSocketShared\obj\Debug\WebSocketShared.dll
+C:\Users\Abdul\Desktop\WebSocketGame\WebSocketShared\obj\Debug\WebSocketShared.pdb

@@ -1,8 +1,15 @@
-﻿namespace HenE.WebSocketExample.WebSocketClientApp
+﻿// <copyright file="Program.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
+
+namespace HenE.WebSocketExample.WebSocketClientApp
 {
     using System;
     using HenE.WebSocketExample.WebSocketClient;
 
+    /// <summary>
+    /// De progran van de client.
+    /// </summary>
     internal class Program
     {
         private static void Main(string[] args)
@@ -13,43 +20,33 @@
             server.Start();
             Console.WriteLine("Geef je naam op");
 
-            // RdH: voor nu uit ivm debuggen
-            // string naam = Console.ReadLine();
-            // RdH: onderstaande 2 WEG als het spel een beetje loopt
-            string naam = "A";
-            Console.WriteLine(naam);
+            string naam = Console.ReadLine();
 
-            server.VerzoekOmStartenSpel(naam, 3);
+            short dimensionHetBord = 0;
 
-            /*
-            ConsoleKeyInfo ingegevenTeken;
-            Console.WriteLine("Welke teken wil je spelen,  O of X? ");
-            ingegevenTeken = Console.ReadKey();
-
-            string naamVanDeSpeler = string.Empty;
             do
             {
-                if (ingegevenTeken.Key == ConsoleKey.O || ingegevenTeken.Key == ConsoleKey.X)
+                Console.WriteLine("Wat is de dimension van het bord ? \" Geef een nummer tussen 2 en 9 \"");
+                string readDimension = Console.ReadLine();
+                if (short.TryParse(readDimension, out dimensionHetBord))
                 {
-                    switch (ingegevenTeken.Key)
-                    {
-                        case ConsoleKey.O:
-                            server.VerzoekOmStartenSpel(naam, 3);
-                            break;
-                    }
+                    dimensionHetBord = short.Parse(readDimension);
                 }
                 else
                 {
-                    Console.WriteLine("Je keuze is niet correct .Welke teken wil je spelen,  O of X? ");
-                    ingegevenTeken = Console.ReadKey();
+                    Console.WriteLine("U hebt geen nummer ingevoerd");
                 }
             }
-            while (ingegevenTeken.Key != ConsoleKey.O && ingegevenTeken.Key != ConsoleKey.X);
+            while (dimensionHetBord < 2 || dimensionHetBord > 9);
 
-            */
+            server.VerzoekOmStartenSpel(naam, dimensionHetBord);
 
-            // Console.ReadKey();
             Console.WriteLine("I am done");
+            Console.ReadKey();
+            Console.ReadKey();
+            Console.ReadKey();
+            Console.ReadKey();
+            Console.ReadKey();
             Console.ReadKey();
 
             // client.Stop();

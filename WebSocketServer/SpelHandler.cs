@@ -1,12 +1,13 @@
-﻿namespace HenE.WebSocketExample.WebSocketServer
+﻿// <copyright file="SpelHandler.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
+
+namespace HenE.WebSocketExample.WebSocketServer
 {
-    using System;
     using System.Collections.Generic;
-    using System.Linq;
     using System.Net.Sockets;
-    using System.Text;
-    using System.Threading.Tasks;
     using HenE.Abdul.GameOX;
+    using HenE.WebSocketExample.Shared.Protocol;
 
     /// <summary>
     ///  class om alle spelhandleingen af te vangen.
@@ -22,6 +23,11 @@
         {
         }
 
+        /// <summary>
+        /// Vind een speler die het zelfde dimension heeft.
+        /// </summary>
+        /// <param name="dimension">dimension.</param>
+        /// <returns>game.</returns>
         public GameOX GetOpenSpelbyDimension(short dimension)
         {
             foreach (GameOX gameOX in this.currentSpellen)
@@ -35,14 +41,45 @@
             return null;
         }
 
+        /// <summary>
+        /// Create nieuw game.
+        /// </summary>
+        /// <param name="dimension">dimension.</param>
+        /// <param name="player">player.</param>
+        /// <param name="tcpClient">tcpClient.</param>
+        /// <returns>nieuw game.</returns>
         public GameOX CreateGame(short dimension, string player, TcpClient tcpClient)
         {
             GameOX gameOX = new GameOX(dimension);
 
             this.currentSpellen.Add(gameOX);
             gameOX.AddPlayer(player, tcpClient, dimension);
+            gameOX.AddBord(dimension);
 
             return gameOX;
+        }
+
+        /// <summary>
+        /// Tegen de huidige speler.
+        /// </summary>
+        /// <param name="client">deze cleint.</param>
+        /// <param name="tcps">List of clients.</param>
+        /// <param name="tegenTcp">de tegenaar.</param>
+        /// <returns>Event Wachat als string.</returns>
+        public string TegeHuidigeClient(TcpClient client, List<TcpClient> tcps, out TcpClient tegenTcp)
+        {
+            tegenTcp = null;
+            string returnMessage = string.Empty;
+            foreach (TcpClient tcp in tcps)
+            {
+                if (tcp != client)
+                {
+                    tegenTcp = tcp;
+                    returnMessage = EventHelper.CreateWachtenOpEenAndereDeelnemenEvent();
+                }
+            }
+
+            return returnMessage;
         }
     }
 }

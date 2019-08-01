@@ -1,4 +1,8 @@
-﻿namespace HenE.WebSocketExample.WebSocketServer.CommandHandlers
+﻿// <copyright file="VerzoekTotDeelnemenSpelCommandHandler.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
+
+namespace HenE.WebSocketExample.WebSocketServer.CommandHandlers
 {
     using System;
     using System.Net.Sockets;
@@ -7,7 +11,7 @@
     using HenE.WebSocketExample.Shared.Protocol;
 
     /// <summary>
-    ///
+    /// Verzoek tot deelnemen spel Command handler.
     /// </summary>
     public class VerzoekTotDeelnemenSpelCommandHandler : CommandHandler
     {
@@ -17,8 +21,8 @@
         /// <summary>
         /// Initializes a new instance of the <see cref="VerzoekTotDeelnemenSpelCommandHandler"/> class.
         /// </summary>
-        /// <param name="spelHandler"></param>
-        /// <param name="tcpClient"></param>
+        /// <param name="spelHandler">spel  handler.</param>
+        /// <param name="tcpClient">Client.</param>
         public VerzoekTotDeelnemenSpelCommandHandler(SpelHandler spelHandler, TcpClient tcpClient)
         {
             this.spelHandler = spelHandler;
@@ -29,7 +33,8 @@
         /// functie die de parameters in string krijgt en die string opknipt in de params die nodig zijn.
         /// </summary>
         /// <param name="messageParams">params uit het bericht, gedeelte na de # en gescheiden door &.</param>
-        /// <returns></returns>
+        /// <param name="game">Huidig game.</param>
+        /// <returns>Message als twee delen.</returns>
         public string HandleFromMessage(string messageParams, out GameOX game)
         {
             string[] opgeknipt = messageParams.Split(new char[] { '&' });
@@ -50,8 +55,7 @@
             }
 
             // Probeer te omzetten string to nummer
-            short dimension = 0;
-            if (!short.TryParse(opgeknipt[1], out dimension))
+            if (!short.TryParse(opgeknipt[1], out short dimension))
             {
                 throw new ArgumentOutOfRangeException("U hebt geen nummer ingevoerd");
             }
@@ -70,8 +74,9 @@
         /// </summary>
         /// <param name="spelersnaam"> naam van de speler.</param>
         /// <param name="dimension">dimension van het spel.</param>
-        /// <return>de message die gereturnd moet worden. </return>
-        /// <returns></returns>
+        /// <param name="game">Huidig game.</param>
+        /// <return>De message die gereturnd moet worden. </return>
+        /// <returns>De messge.</returns>
         public string Handle(string spelersnaam, short dimension, out GameOX game)
         {
             string returnMessage = string.Empty;
@@ -95,8 +100,8 @@
                     break;
                 }
 
-                // oke het spel kan beginnen
-               // game.Start(spelersnaam, this.tcpClient, dimension);
+                game.IsGestart();
+                game.TcpClients.Add(this.tcpClient);
                 returnMessage = EventHelper.CreateSpelgestartEvent(game);
 
                 return returnMessage;
@@ -114,6 +119,7 @@
                 game = this.spelHandler.CreateGame(dimension, spelersnaam, this.tcpClient);
 
                 game.WachtOpAndereSpeler();
+                game.TcpClients.Add(this.tcpClient);
 
                 // de speler moet wachten op een andere
                 returnMessage = EventHelper.CreateWachtenOpEenAndereDeelnemenEvent();

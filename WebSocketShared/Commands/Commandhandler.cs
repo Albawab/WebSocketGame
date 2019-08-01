@@ -1,4 +1,8 @@
-﻿namespace HenE.WebSocketExample.Shared.Commands
+﻿// <copyright file="CommandHandler.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
+
+namespace HenE.WebSocketExample.Shared.Commands
 {
     /// <summary>
     /// base class voor de commandHandler.

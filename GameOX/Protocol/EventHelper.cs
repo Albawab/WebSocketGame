@@ -1,16 +1,23 @@
-﻿namespace HenE.WebSocketExample.Shared.Protocol
+﻿// <copyright file="EventHelper.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
+
+namespace HenE.WebSocketExample.Shared.Protocol
 {
     using System;
     using System.Text;
     using HenE.Abdul.GameOX;
 
+    /// <summary>
+    /// Helper de events.
+    /// </summary>
     public static class EventHelper
     {
         /// <summary>
-        ///
+        /// terug geven als de spel is gestart.
         /// </summary>
-        /// <param name="game"></param>
-        /// <returns></returns>
+        /// <param name="game">huidige game.</param>
+        /// <returns>De message die naar de client gaat als string. De namen van de spelers en de dimension.</returns>
         public static string CreateSpelgestartEvent(GameOX game)
         {
             // wat ga ik terug geven?
@@ -35,13 +42,19 @@
                 else
                 {
                     spelersnamen.AppendFormat("&{0}", speler.Naam);
-                    spelersnamen.AppendFormat("&{0}", speler.Dimention);
+                    spelersnamen.AppendFormat("&{0}", speler.Dimension);
                 }
             }
 
             return string.Format("{0}{1}", CreateEvent(Events.SpelGestart), spelersnamen.ToString());
         }
 
+        /// <summary>
+        /// De event komt naar hier toe als string .
+        /// Deze method gaat de string omzetten.
+        /// </summary>
+        /// <param name="events">De event als string.</param>
+        /// <returns>De Event.</returns>
         public static Events CreateEenEvent(string events)
         {
             if (Enum.TryParse(events, true, out Events e))
@@ -58,54 +71,39 @@
         /// <summary>
         /// Deze Method Created een Wacht Lijst van die speler die open zijn.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>De Event als string.</returns>
         public static string CreateWachtenOpEenAndereDeelnemenEvent()
         {
-            // wat ga ik terug geven?
-            // alleen het commando, rest hoeft niet
             return CreateEvent(Events.WachtenOpAndereDeelnemer);
         }
 
-        public static string CreateSpelerGestartEvent()
+        /// <summary>
+        /// Omzetten de even tot string.
+        /// </summary>
+        /// <param name="event">De event.</param>
+        /// <returns>Event als string.</returns>
+        public static string CreateEvents(Events @event)
         {
-            return CreateEvent(Events.SpelerGestart);
+            return CreateEvent(@event);
         }
 
-        public static string CreateTekenHetBord()
-        {
-            return CreateEvent(Events.SpelerGestart);
-        }
-
-        private static string CreateEvent(Events e)
-        {
-            switch (e)
-            {
-                case Events.SpelGestart:
-                    return "SpelGestart#";
-                case Events.SpelerGestart:
-                    return "SpelerGestart#";
-                case Events.WachtenOpAndereDeelnemer:
-                    return "WachtenOpAndereDeelnemer#";
-                case Events.Bericht:
-                    return "Bericht#";
-                case Events.TekenHetBord:
-                    return "TekenHetBord#";
-                default:
-                    throw new NotImplementedException();
-            }
-        }
-
+        /// <summary>
+        /// Als er een error is.
+        /// </summary>
+        /// <param name="exp">Exception.</param>
+        /// <returns>Event als string.</returns>
         public static string CreateErrorEvent(Exception exp)
         {
             return string.Format("{0}{1}", CreateEvent(Events.Error), exp.Message);
         }
 
         /// <summary>
-        ///
+        /// Verdeelt de message die vanuit de speler komt .
+        /// De eerste deel is de Protocol als string.
         /// </summary>
-        /// <param name="mess"></param>
-        /// <param name="eventsParams"></param>
-        /// <returns></returns>
+        /// <param name="mess">De message.</param>
+        /// <param name="eventsParams">De rest van de message.</param>
+        /// <returns>Event.</returns>
         public static Events SplitEventAndParamsFromMessage(string mess, out string eventsParams)
         {
             eventsParams = string.Empty;
@@ -140,6 +138,33 @@
 
             // niet gevonden, dus info was fout
             throw new NotImplementedException();
+        }
+
+        private static string CreateEvent(Events e)
+        {
+            switch (e)
+            {
+                case Events.SpelGestart:
+                    return "SpelGestart#";
+                case Events.SpelerGestart:
+                    return "SpelerGestart#";
+                case Events.WachtenOpAndereDeelnemer:
+                    return "WachtenOpAndereDeelnemer#";
+                case Events.YourTurn:
+                    return "YourTurn#";
+                case Events.Winnaar:
+                    return "Winnaar#";
+                case Events.NieuwRondje:
+                    return "NieuwRondje#";
+                case Events.StartNieuwRond:
+                    return "StartNieuwRond#";
+                case Events.IsGewonnen:
+                    return "IsGewonnen#";
+                case Events.HetIsBezit:
+                    return "HetIsBezit#";
+                default:
+                    throw new NotImplementedException();
+            }
         }
     }
 }

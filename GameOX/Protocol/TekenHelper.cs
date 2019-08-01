@@ -2,22 +2,26 @@
 // Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
 
-using HenE.Abdul.Game_OX;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Sockets;
-using System.Text;
-using System.Threading.Tasks;
-
 namespace HenE.Abdul.GameOX.Protocol
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Net.Sockets;
+    using HenE.Abdul.Game_OX;
+
+    /// <summary>
+    /// De class die de class teken helpt.
+    /// </summary>
     public static class TekenHelper
     {
+        /// <summary>
+        /// Omzetten de string tot event.
+        /// </summary>
+        /// <param name="teken">Teken als string.</param>
+        /// <returns>Teken als event.</returns>
         public static Teken CreateTekenEnum(string teken)
         {
-            Teken result;
-            if (Enum.TryParse(teken, true, out result))
+            if (Enum.TryParse(teken, true, out Teken result))
             {
                 return result;
             }
@@ -25,6 +29,12 @@ namespace HenE.Abdul.GameOX.Protocol
             return result;
         }
 
+        /// <summary>
+        /// Geef een teken aan de speler.
+        /// </summary>
+        /// <param name="teken">Teken.</param>
+        /// <param name="oX">De list of de Games.</param>
+        /// <param name="client">Huidige client.</param>
         public static void AddTekenToSpeler(Teken teken, List<GameOX> oX, TcpClient client)
         {
             Teken huidigeTeken = teken;

@@ -1,4 +1,8 @@
-﻿namespace HenE.WebSocketExample.Shared.Protocol
+﻿// <copyright file="CommandoHelper.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
+
+namespace HenE.WebSocketExample.Shared.Protocol
 {
     using System;
     using System.Text;
@@ -20,15 +24,50 @@
             return string.Format("{0}{1}&{2}", CreateCommando(Commandos.VerzoekTotDeelnemenSpel), spelersnaam, dimension);
         }
 
-        public static string CreateDoeZetCommando(short dimension)
+        /// <summary>
+        /// Maak een message voor  Commando spelgestart.
+        /// </summary>
+        /// <param name="teken"> De teken die de speler wil gebruiken.</param>
+        /// <returns> De message.</returns>
+        public static string CreateSpelerGestartCommando(string teken)
         {
-            return string.Format("{0}{1}", CreateCommando(Commandos.DoeZet), dimension);
+            return string.Format("{0}{1}", CreateCommando(Commandos.SpelerGestart), teken);
         }
 
         /// <summary>
-        ///
+        /// Maak een message voor  Commando Doezet.
         /// </summary>
-        /// <returns></returns>
+        /// <param name="nummer">het nummer die de speler wil doen.</param>
+        /// <returns>De message.</returns>
+        public static string DoeZet(short nummer)
+        {
+            return string.Format("{0}{1}", CreateCommando(Commandos.DoeZet), nummer);
+        }
+
+        /// <summary>
+        /// Maak een massage voor commando NieuwRondje.
+        /// </summary>
+        /// <param name="nieuwRondje">Als de speler ja of nee zegt.</param>
+        /// <returns>De message.</returns>
+        public static string NieuwRondje(string nieuwRondje)
+        {
+            return string.Format("{0}{1}", CreateCommando(Commandos.NieuwRondje), nieuwRondje);
+        }
+
+        /// <summary>
+        /// Maak een message voor Commando BeeindigSpel.
+        /// </summary>
+        /// <returns>De message.</returns>
+        public static string BeeindigSpel()
+        {
+            return string.Format("{0}", CreateCommando(Commandos.BeeindigSpel));
+        }
+
+        /// <summary>
+        /// Als het spel is starten , Dan geven hier de naam met de dimension als string en het gaat naar de client.
+        /// </summary>
+        /// <param name="game">De game.</param>
+        /// <returns>De message die naar de client gaat.</returns>
         public static string CreateStartGameCommando(GameOX game)
         {
             // wat ga ik terug geven?
@@ -92,12 +131,12 @@
         }
 
         /// <summary>
-        /// ik krijg binnen jos&3 binnen.
+        /// ik krijg binnen de naam met de dimension binnen.
         /// </summary>
         /// <param name="commandParams">het param gedeelte van de message.</param>
         /// <param name="spelersnaam">naam van de speler.</param>
         /// <param name="dimension">dimension.</param>
-        /// <returns></returns>
+        /// <returns>true.</returns>
         public static bool SplitVerzoektotDeelnemeSpelParameterFromMessage(string commandParams, out string spelersnaam, out short dimension)
         {
             spelersnaam = string.Empty;
@@ -110,7 +149,7 @@
         /// afgesproken is om elk commando te beëindigen met een #.
         /// </summary>
         /// <param name="commando">enumerator van commando.</param>
-        /// <returns></returns>
+        /// <returns>De commandos als string.</returns>
         private static string CreateCommando(Commandos commando)
         {
             switch (commando)
@@ -123,6 +162,13 @@
                     return "StartSpel#";
                 case Commandos.DoeZet:
                     return "DoeZet#";
+                case Commandos.SpelerGestart:
+                    return "SpelerGestart#";
+                case Commandos.NieuwRondje:
+                    return "nieuwRondje#";
+
+                case Commandos.BeeindigSpel:
+                    return "BeeindigSpel#";
                 default:
                     throw new NotImplementedException();
             }

@@ -1,9 +1,16 @@
-﻿namespace HenE.WebSocketExample.WebSocketServerApp
+﻿// <copyright file="Program.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
+
+namespace HenE.WebSocketExample.WebSocketServerApp
 {
     using System;
     using System.Net;
     using HenE.WebSocketExample.WebSocketServer;
 
+    /// <summary>
+    /// De program van de server.
+    /// </summary>
     internal class Program
     {
         private static void Main(string[] args)
