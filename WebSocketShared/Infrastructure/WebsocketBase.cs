@@ -96,7 +96,7 @@ namespace HenE.WebSocketExample.Shared.Infrastructure
         /// </summary>
         /// <param name="client">Een client.</param>
         /// <param name="message"> De information.</param>
-        /// <returns>Stream .</returns>
+        /// <returns>Stream.</returns>
         protected NetworkStream SendMessage(TcpClient client, string message)
         {
             // Get hoeveel letter in de message als nummer.

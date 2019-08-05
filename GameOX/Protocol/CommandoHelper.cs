@@ -25,6 +25,17 @@ namespace HenE.WebSocketExample.Shared.Protocol
         }
 
         /// <summary>
+        /// Create een message met een commando als string.
+        /// </summary>
+        /// <param name="naam">De naam van de speler.</param>
+        /// <param name="dimension">dimension.</param>
+        /// <returns>De message die naar de server stuurt.</returns>
+        public static string CreateSpelTegenComputer(string naam, short dimension)
+        {
+            return string.Format("{0}{1}*{2}&{3}", CreateCommando(Commandos.SpelTegenComputer), "computer", naam, dimension);
+        }
+
+        /// <summary>
         /// Maak een message voor  Commando spelgestart.
         /// </summary>
         /// <param name="teken"> De teken die de speler wil gebruiken.</param>
@@ -156,6 +167,8 @@ namespace HenE.WebSocketExample.Shared.Protocol
             {
                 case Commandos.VerzoekTotDeelnemenSpel:
                     return "VerzoekTotDeelnemenSpel#";
+                case Commandos.SpelTegenComputer:
+                    return "SpelTegenComputer#";
                 case Commandos.WachtenOpAndereDeelnemer:
                     return "WachtenOpAndereDeelnemer#";
                 case Commandos.StartSpel:

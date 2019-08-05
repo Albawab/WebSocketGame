@@ -264,6 +264,16 @@ namespace HenE.Abdul.GameOX
         }
 
         /// <summary>
+        /// reset het veld naar unddefied.
+        /// </summary>
+        /// <param name="index">index van het veld.</param>
+        public void ResetVeld(short index)
+        {
+            this.ConvertIndexToArray(index, out short col, out short row);
+            this.ResetVeld(col, row);
+        }
+
+        /// <summary>
         /// Doet deze method het bord leeg.
         /// </summary>
         /// <param name="column">column.</param>

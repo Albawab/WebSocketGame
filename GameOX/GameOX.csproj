@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Bord.cs" />
+    <Compile Include="ComputerSpeler.cs" />
     <Compile Include="GameOX.cs" />
     <Compile Include="GameOXStatus.cs" />
     <Compile Include="HumanSpeler.cs" />

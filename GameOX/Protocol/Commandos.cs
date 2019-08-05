@@ -55,6 +55,11 @@ namespace HenE.WebSocketExample.Shared.Protocol
         VerlaatSpel,
 
         /// <summary>
+        /// Als de speler tegen de computer wil spelen.
+        /// </summary>
+        SpelTegenComputer,
+
+        /// <summary>
         /// Waneer het spel is klaar.
         /// </summary>
         BeeindigSpel,

@@ -18,7 +18,7 @@ namespace HenE.WebSocketExample.WebSocketClientApp
 
             Client server = new Client("localhost", 5000);
             server.Start();
-            Console.WriteLine("Geef je naam op");
+            Console.WriteLine("Hoi, Leuk dat je komt spelen, wil je me je naam vertellen?");
 
             string naam = Console.ReadLine();
 
@@ -39,7 +39,23 @@ namespace HenE.WebSocketExample.WebSocketClientApp
             }
             while (dimensionHetBord < 2 || dimensionHetBord > 9);
 
-            server.VerzoekOmStartenSpel(naam, dimensionHetBord);
+            Console.WriteLine("Wil je misschien tegen de computer speler , dus je hoeft niet lang te wachte , J of N ?");
+            string vraagTegenComputer = Console.ReadLine().ToLowerInvariant();
+            while ((vraagTegenComputer != "j") && (vraagTegenComputer != "n"))
+            {
+                Console.WriteLine("Je mag alleen J of N invoeren .");
+                Console.WriteLine("J of N ??");
+                vraagTegenComputer = Console.ReadLine().ToLowerInvariant();
+            }
+
+            if (vraagTegenComputer == "j")
+            {
+                server.SpelTegenComputer(naam, dimensionHetBord);
+            }
+            else
+            {
+                server.VerzoekOmStartenSpel(naam, dimensionHetBord);
+            }
 
             Console.WriteLine("I am done");
             Console.ReadKey();

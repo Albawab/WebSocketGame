@@ -141,6 +141,14 @@ namespace HenE.WebSocketExample.WebSocketServer
 
                         break;
 
+                    case Commandos.SpelTegenComputer:
+                        VerzoekTotDeelnemenSpelCommandHandler handlerTegenComputerSpelen = new VerzoekTotDeelnemenSpelCommandHandler(this.spelHandler, client);
+                        returnMessage = handlerTegenComputerSpelen.HandleFromMessage(commandParams, out game);
+                        this.ProcessReturnMessage(returnMessage, client);
+                        this.gameOXen.Add(game);
+                        game.Start(client, game);
+                        break;
+
                     case Commandos.SpelerGestart:
                         Teken teken = TekenHelper.CreateTekenEnum(commandParams);
                         TekenHelper.AddTekenToSpeler(teken, this.gameOXen, client);

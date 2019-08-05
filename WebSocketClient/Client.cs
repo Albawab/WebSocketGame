@@ -70,6 +70,18 @@ namespace HenE.WebSocketExample.WebSocketClient
             await this.StartListeningAsync(stream, this.tcpClient);
         }
 
+        /// <summary>
+        /// Stuur een message naar de server dat de speler tegen de computer wil spelen.
+        /// </summary>
+        /// <param name="naam">De naam van de speler.</param>
+        /// <param name="dimension">dimension.</param>
+        public async void SpelTegenComputer(string naam, short dimension)
+        {
+            string message = CommandoHelper.CreateSpelTegenComputer(naam, dimension);
+            NetworkStream stream = this.SendMessage(this.tcpClient, message);
+            await this.StartListeningAsync(stream, this.tcpClient);
+        }
+
         /// <inheritdoc/>
         protected override string ProcessStream(string stream, TcpClient client)
       {
@@ -92,7 +104,7 @@ namespace HenE.WebSocketExample.WebSocketClient
                         break;
 
                     case Events.SpelGestart:
-                        Console.WriteLine("We gaan starten " + opgeknipt[0] + " Tegen " + opgeknipt[1] + " De dimenstion is : " + opgeknipt[2]);
+                        Console.WriteLine("We gaan starten " + opgeknipt[0] + " Tegen " + opgeknipt[1] + " De dimension is : " + opgeknipt[2]);
                         break;
 
                     case Events.SpelerGestart:
@@ -174,6 +186,7 @@ namespace HenE.WebSocketExample.WebSocketClient
                         break;
 
                     case Events.WachtenOpAndereDeelnemer:
+
                         Console.WriteLine(eventParams);
                         Console.WriteLine("wachten op andere speler");
                         break;
