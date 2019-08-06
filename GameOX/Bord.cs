@@ -284,6 +284,25 @@ namespace HenE.Abdul.GameOX
         }
 
         /// <summary>
+        /// Kijkt of het geldig nummer of niet.
+        /// </summary>
+        /// <param name="nummer">Nummer.</param>
+        /// <returns>True of false.</returns>
+        public bool MagZetten(short nummer)
+        {
+            List<short> vrijVelden = this.VrijVelden();
+            foreach (short item in vrijVelden)
+            {
+                if (item == nummer)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        /// <summary>
         /// converteer de index naar columnen en rows.
         /// </summary>
         /// <param name="index">de te converteren index.</param>

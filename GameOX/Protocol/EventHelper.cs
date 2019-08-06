@@ -162,6 +162,10 @@ namespace HenE.WebSocketExample.Shared.Protocol
                     return "IsGewonnen#";
                 case Events.HetIsBezit:
                     return "HetIsBezit#";
+                case Events.BordIsVol:
+                    return "BordIsVol#";
+                case Events.NieuwSpel:
+                    return "NieuwSpel#";
                 default:
                     throw new NotImplementedException();
             }

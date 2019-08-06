@@ -146,6 +146,10 @@ namespace HenE.WebSocketExample.WebSocketClient
                         Console.WriteLine(opgekniptDerdeDeel[1] + " heeft " + opgekniptDerdeDeel[0] + "Punten !");
                         break;
 
+                    case Events.BordIsVol:
+                        Console.WriteLine("Het bord is vol !!");
+                        break;
+
                     case Events.NieuwRondje:
                         Console.WriteLine("Wil je nog een rondje , J of N?");
                         string nieuwRondjes = Console.ReadLine();
@@ -180,9 +184,31 @@ namespace HenE.WebSocketExample.WebSocketClient
                         break;
 
                     case Events.HetIsBezit:
-                        Console.WriteLine("Het is bezit , je mag andre nummer geven.");
+                        Console.WriteLine("Het is bezit of ongeldig nummer, je mag ander nummer geven.");
                         short num = short.Parse(Console.ReadLine());
                         this.DoeZet(num);
+                        break;
+
+                    case Events.NieuwSpel:
+                        Console.WriteLine("Andere speler heeft het spel verleten. Wil je nog een spel doen , J of N");
+                        string nieuwSpel = Console.ReadLine();
+                        nieuwSpel.ToLower();
+                        while ((nieuwSpel != "j") && (nieuwSpel != "n"))
+                        {
+                            Console.WriteLine("Geef maar J of N !");
+                            nieuwSpel = Console.ReadLine();
+                        }
+
+                        switch (nieuwSpel)
+                        {
+                            case "j":
+                                short a = short.Parse(opgekniptDerdeDeel[1]);
+                                this.VerzoekOmStartenSpel(opgekniptDerdeDeel[0], a);
+                                break;
+                            case "n":
+                                Console.WriteLine("Tot ziens !!");
+                                break;
+                        }
                         break;
 
                     case Events.WachtenOpAndereDeelnemer:

@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>WebSocketClient</name>
+    </assembly>
+    <members>
+        <member name="T:HenE.WebSocketExample.WebSocketClient.Client">
+            <summary>
+            Client.
+            </summary>
+        </member>
+        <member name="M:HenE.WebSocketExample.WebSocketClient.Client.#ctor(System.String,System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:HenE.WebSocketExample.WebSocketClient.Client"/> class.
+            </summary>
+            <param name="hostname">Host naam.</param>
+            <param name="serverPort"> Server Port.</param>
+        </member>
+        <member name="P:HenE.WebSocketExample.WebSocketClient.Client.ServerPort">
+            <summary>
+            Gets server Port.
+            </summary>
+        </member>
+        <member name="P:HenE.WebSocketExample.WebSocketClient.Client.Hostname">
+            <summary>
+            Gets host naam.
+            </summary>
+        </member>
+        <member name="M:HenE.WebSocketExample.WebSocketClient.Client.Start">
+            <summary>
+            Het client start.
+            </summary>
+        </member>
+        <member name="M:HenE.WebSocketExample.WebSocketClient.Client.Stop">
+            <summary>
+            The clinet start.
+            </summary>
+        </member>
+        <member name="M:HenE.WebSocketExample.WebSocketClient.Client.VerzoekOmStartenSpel(System.String,System.Int16)">
+            <summary>
+            Stuur de naam met de dimension naar de server.
+            </summary>
+            <param name="spelersnaam">Speler naam.</param>
+            <param name="dimension">Dimension.</param>
+        </member>
+        <member name="M:HenE.WebSocketExample.WebSocketClient.Client.SpelTegenComputer(System.String,System.Int16)">
+            <summary>
+            Stuur een message naar de server dat de speler tegen de computer wil spelen.
+            </summary>
+            <param name="naam">De naam van de speler.</param>
+            <param name="dimension">dimension.</param>
+        </member>
+        <member name="M:HenE.WebSocketExample.WebSocketClient.Client.ProcessStream(System.String,System.Net.Sockets.TcpClient)">
+            <inheritdoc/>
+        </member>
+    </members>
+</doc>

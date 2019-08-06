@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>WebSocketClientApp</name>
+    </assembly>
+    <members>
+        <member name="T:HenE.WebSocketExample.WebSocketClientApp.Program">
+            <summary>
+            De progran van de client.
+            </summary>
+        </member>
+    </members>
+</doc>

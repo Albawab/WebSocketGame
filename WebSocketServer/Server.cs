@@ -24,7 +24,6 @@ namespace HenE.WebSocketExample.WebSocketServer
         private readonly TcpListener listener = null;
         private readonly SpelHandler spelHandler = new SpelHandler();
         private readonly List<GameOX> gameOXen = new List<GameOX>();
-        private bool listening = false;
         private TcpClient tegeHuidigeCleint = null;
 
         /// <summary>
@@ -37,8 +36,6 @@ namespace HenE.WebSocketExample.WebSocketServer
         {
             this.IpAddress = ipAddress;
             this.Port = poort;
-
-            // _listener = new TcpListener(/*this.IpAddress,*/ Port);
         }
 
         /// <summary>
@@ -50,6 +47,8 @@ namespace HenE.WebSocketExample.WebSocketServer
         /// Gets het IPAdress Van de client.
         /// </summary>
         public IPAddress IpAddress { get; private set; }
+
+        private bool Listening { get; set; } = false;
 
         /// <summary>
         /// Hier gaat de server starten.
@@ -68,7 +67,7 @@ namespace HenE.WebSocketExample.WebSocketServer
             Console.WriteLine("Stop de server");
 
             // check of de server wel is gestart
-            this.listening = false;
+            this.Listening = false;
             this.listener.Stop();
         }
 
@@ -77,11 +76,11 @@ namespace HenE.WebSocketExample.WebSocketServer
         /// </summary>
         public async void StartListener() // non blocking listener
         {
-            TcpListener listener = new TcpListener(/*this.IpAddress,*/ this.Port);
+            TcpListener listener = new TcpListener(IPAddress.Any, this.Port);
             listener.Start();
-            this.listening = true;
+            this.Listening = true;
 
-            while (this.listening)
+            while (this.Listening)
             {
                 TcpClient client = await listener.AcceptTcpClientAsync().ConfigureAwait(false); // non blocking waiting
 
@@ -96,6 +95,7 @@ namespace HenE.WebSocketExample.WebSocketServer
         /// <param name="stream">Stream die uit de client komt.</param>
         /// <param name="client"> Client.</param>
         /// <returns>informatie.</returns>
+        /// <exception cref="System.InvalidOperationException">Wordt gegooid wanneer een commando wordt aangeroepen op een ongeldig moment.</exception>
         protected override string ProcessStream(string stream, TcpClient client)
         {
             // bepaal de opdracht
@@ -161,8 +161,8 @@ namespace HenE.WebSocketExample.WebSocketServer
                         break;
 
                     case Commandos.StartSpel:
-                       // returnMessage = EventHelper.CreateSpelerGestartEvent();
-                      //  ProcessReturnMessage(returnMessage, tcpClients);
+                        // returnMessage = EventHelper.CreateSpelerGestartEvent();
+                        //  ProcessReturnMessage(returnMessage, tcpClients);
                         break;
 
                     case Commandos.DoeZet:
@@ -186,6 +186,11 @@ namespace HenE.WebSocketExample.WebSocketServer
                         break;
 
                     case Commandos.WachtenOpAndereDeelnemer:
+                        if (game == null)
+                        {
+                            throw new InvalidOperationException($"Het commando {nameof(Commandos.WachtenOpAndereDeelnemer)} mag niet worden gebruikt wanneer er nog geen game is gestart.");
+                        }
+
                         this.ProcessReturnMessage(returnMessage, game.TcpClients);
                         break;
 
@@ -197,6 +202,7 @@ namespace HenE.WebSocketExample.WebSocketServer
                                 if (tcp == client)
                                 {
                                     games.StartNieuwRondje(client, games);
+                                    break;
                                 }
                             }
                         }
@@ -204,7 +210,7 @@ namespace HenE.WebSocketExample.WebSocketServer
                         break;
 
                     case Commandos.BeeindigSpel:
-                        game.BeeidigSpel(game);
+                        game?.BeeidigSpel(game, client);
                         break;
                 }
             }
@@ -224,7 +230,15 @@ namespace HenE.WebSocketExample.WebSocketServer
         /// <param name="server">server.</param>
         private async void HandleClient(TcpClient client, Server server)
         {
-            await server.StartListeningAsync(client.GetStream(), client);
+            try
+            {
+                await server.StartListeningAsync(client.GetStream(), client);
+            }
+            catch
+            {
+                Console.WriteLine("h");
+            }
+
         }
     }
 }

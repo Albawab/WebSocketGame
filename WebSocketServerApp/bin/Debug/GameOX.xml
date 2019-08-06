@@ -1,0 +1,698 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>GameOX</name>
+    </assembly>
+    <members>
+        <member name="T:HenE.Abdul.GameOX.Bord">
+            <summary>
+            De class van het bord.
+            </summary>
+        </member>
+        <member name="M:HenE.Abdul.GameOX.Bord.#ctor(System.Int16)">
+            <summary>
+            Initializes a new instance of the <see cref="T:HenE.Abdul.GameOX.Bord"/> class.
+            </summary>
+            <param name="dimension">Dimension.</param>
+        </member>
+        <member name="P:HenE.Abdul.GameOX.Bord.Dimension">
+            <summary>
+            Gets or sets de dimension .
+            </summary>
+        </member>
+        <member name="M:HenE.Abdul.GameOX.Bord.TekenBord">
+            <summary>
+            Deze method teken het bord.
+            </summary>
+            <returns>Het bord als text.</returns>
+        </member>
+        <member name="M:HenE.Abdul.GameOX.Bord.IsBordFinished">
+            <summary>
+            Check of het bord vol is.
+            </summary>
+            <returns>true of false.</returns>
+        </member>
+        <member name="M:HenE.Abdul.GameOX.Bord.DoeZet(HenE.Abdul.GameOX.Speler,System.Int16)">
+            <summary>
+            Zet een teken op het bord.
+            </summary>
+            <param name="speler">Speler.</param>
+            <param name="indexOpHetBord">Index op het bord.</param>
+        </member>
+        <member name="M:HenE.Abdul.GameOX.Bord.IsValidZet(System.Int16)">
+            <summary>
+            bepaal of de gevraagd zet wel kan.
+            </summary>
+            <param name="indexOpHetBord">de gevraagde index van een zet.</param>
+            <returns>true als de zet gedaan mag worden.</returns>
+        </member>
+        <member name="M:HenE.Abdul.GameOX.Bord.VrijVelden">
+            <summary>
+            geeft de mogelijke vrije velden terug op basis van index.
+            </summary>
+            <returns>lijst met de mogelijke indexen.</returns>
+        </member>
+        <member name="M:HenE.Abdul.GameOX.Bord.HeeftTekenGewonnen(HenE.Abdul.Game_OX.Teken)">
+            <summary>
+            functie om uit te vragen of een teken gewonnen heeft.
+            </summary>
+            <param name="teken">het teken waarvan gekeken moet worden of het gewonnen heeft. </param>
+            <returns>true als het teken gewonnen heeft. </returns>
+        </member>
+        <member name="M:HenE.Abdul.GameOX.Bord.ResetBord">
+            <summary>
+            maak het bord leeg door de array met Teken.Undefined te vullen.
+            </summary>
+        </member>
+        <member name="M:HenE.Abdul.GameOX.Bord.HetBordIsVol(System.Net.Sockets.TcpClient,HenE.Abdul.GameOX.GameOX)">
+            <summary>
+            Als dit cel bezit is, dan laat maar de spel dat weten .
+            </summary>
+            <param name="tcp">Huidige client.</param>
+            <param name="game">huidige game.</param>
+        </member>
+        <member name="M:HenE.Abdul.GameOX.Bord.ResetVeld(System.Int16)">
+            <summary>
+            reset het veld naar unddefied.
+            </summary>
+            <param name="index">index van het veld.</param>
+        </member>
+        <member name="M:HenE.Abdul.GameOX.Bord.ResetVeld(System.Int16,System.Int16)">
+            <summary>
+            Doet deze method het bord leeg.
+            </summary>
+            <param name="column">column.</param>
+            <param name="row">row.</param>
+        </member>
+        <member name="M:HenE.Abdul.GameOX.Bord.MagZetten(System.Int16)">
+            <summary>
+            Kijkt of het geldig nummer of niet.
+            </summary>
+            <param name="nummer">Nummer.</param>
+            <returns>True of false.</returns>
+        </member>
+        <member name="M:HenE.Abdul.GameOX.Bord.ConvertIndexToArray(System.Int16,System.Int16@,System.Int16@)">
+            <summary>
+            converteer de index naar columnen en rows.
+            </summary>
+            <param name="index">de te converteren index.</param>
+            <param name="column">de column van de index.</param>
+            <param name="row">de row van de index.</param>
+        </member>
+        <member name="M:HenE.Abdul.GameOX.Bord.ConvertColRowToIndexToArray(System.Int16,System.Int16)">
+            <summary>
+            convert van de col en row naar de index.
+            </summary>
+            <param name="column">column.</param>
+            <param name="row">row. </param>
+            <returns>index van de col en row.</returns>
+        </member>
+        <member name="M:HenE.Abdul.GameOX.Bord.AreAllFieldsInTheRowEqualTo(System.Int16,HenE.Abdul.Game_OX.Teken)">
+            <summary>
+            controleer of de row heeft het zelfde teken.
+            </summary>
+            <param name="rij">rij.</param>
+            <param name="teken">teken.</param>
+            <returns>False of true.</returns>
+        </member>
+        <member name="T:HenE.Abdul.GameOX.ComputerSpeler">
+            <summary>
+            De class van de computer speler.
+            </summary>
+        </member>
+        <member name="M:HenE.Abdul.GameOX.ComputerSpeler.#ctor(System.String,System.Int16)">
+            <summary>
+            Initializes a new instance of the <see cref="T:HenE.Abdul.GameOX.ComputerSpeler"/> class.
+            </summary>
+            <param name="naam">De naam van de computer speler.</param>
+            <param name="dimension">Dimension.</param>
+        </member>
+        <member name="M:HenE.Abdul.GameOX.ComputerSpeler.SpelStartedHandler(System.Int16,HenE.Abdul.GameOX.GameOX,HenE.Abdul.GameOX.Bord)">
+            <inheritdoc/>
+        </member>
+        <member name="T:HenE.Abdul.GameOX.GameOX">
+            <summary>
+            De class van de Game.
+            </summary>
+        </member>
+        <member name="M:HenE.Abdul.GameOX.GameOX.#ctor(System.Int16)">
+            <summary>
+            Initializes a new instance of the <see cref="T:HenE.Abdul.GameOX.GameOX"/> class.
+            </summary>
+            <param name="dimension">Demension van het bord.</param>
+        </member>
+        <member name="P:HenE.Abdul.GameOX.GameOX.Spelers">
+            <summary>
+            Gets de list of de spelers.
+            </summary>
+        </member>
+        <member name="P:HenE.Abdul.GameOX.GameOX.TcpClients">
+            <summary>
+            Gets de list of clients.
+            </summary>
+        </member>
+        <member name="P:HenE.Abdul.GameOX.GameOX.Status">
+            <summary>
+            Gets de status van het spel.
+            </summary>
+        </member>
+        <member name="P:HenE.Abdul.GameOX.GameOX.Dimension">
+            <summary>
+            Gets or sets de dimension van het bord.
+            </summary>
+        </member>
+        <member name="M:HenE.Abdul.GameOX.GameOX.IsWaitingForGamers">
+            <summary>
+            Geeft het spel een status.
+            </summary>
+            <returns>True or false.</returns>
+        </member>
+        <member name="M:HenE.Abdul.GameOX.GameOX.IsGestart">
+            <summary>
+            Geeft het spel een status.
+            </summary>
+        </member>
+        <member name="M:HenE.Abdul.GameOX.GameOX.AddPlayer(System.String,System.Net.Sockets.TcpClient,System.Int16)">
+            <summary>
+            Add een speler to the play.
+            </summary>
+            <param name="naam">De naam van deze speler.</param>
+            <param name="client">De client van deze speler.</param>
+            <param name="dimension">De dimension.</param>
+        </member>
+        <member name="M:HenE.Abdul.GameOX.GameOX.AddCpmputerSpeler(System.String,System.Int16)">
+            <summary>
+            Add de copmuter als de speler.
+            </summary>
+            <param name="computerNaam">Computer naam.</param>
+            <param name="dimension">dimension.</param>
+        </member>
+        <member name="M:HenE.Abdul.GameOX.GameOX.AddBord(System.Int16)">
+            <summary>
+            Add een bord to the play.
+            </summary>
+            <param name="dimension">dimension van het bord.</param>
+        </member>
+        <member name="M:HenE.Abdul.GameOX.GameOX.WachtOpAndereSpeler">
+            <summary>
+            Geeft het spel een status.
+            </summary>
+        </member>
+        <member name="M:HenE.Abdul.GameOX.GameOX.Start(System.Net.Sockets.TcpClient,HenE.Abdul.GameOX.GameOX)">
+            <summary>
+            we hebben genoeg spelers en alle informatie die we nodig hebben, we gaan starten.
+            </summary>
+            <param name="tcpClient">De client.</param>
+            <param name="oX">Het Spel.</param>
+        </member>
+        <member name="M:HenE.Abdul.GameOX.GameOX.StartNieuwRondje(System.Net.Sockets.TcpClient,HenE.Abdul.GameOX.GameOX)">
+            <summary>
+            Als de spelers willen een nieuw rondje doen.
+            </summary>
+            <param name="tcpClient">Deze client.</param>
+            <param name="oX">Het Spel.</param>
+        </member>
+        <member name="M:HenE.Abdul.GameOX.GameOX.SpelGestart(System.Net.Sockets.TcpClient,System.Int16,HenE.Abdul.GameOX.GameOX)">
+            <summary>
+            Hier de spel is gestart.
+            </summary>
+            <param name="tcp">Huidige speler.</param>
+            <param name="nummer">Wat de speler heeft gekozen.</param>
+            <param name="gameOX">Het Spel.</param>
+        </member>
+        <member name="M:HenE.Abdul.GameOX.GameOX.ChekOfHetValidBeZitIs(System.Net.Sockets.TcpClient,System.Int16,HenE.Abdul.GameOX.GameOX)">
+            <summary>
+            Check als het valid plaats is of niet.
+            </summary>
+            <param name="client">De client.</param>
+            <param name="nummer">Het nummer.</param>
+            <param name="gameOX">Het Spel.</param>
+        </member>
+        <member name="M:HenE.Abdul.GameOX.GameOX.HetIsBezit(System.Net.Sockets.TcpClient)">
+            <summary>
+            Als de plaats bezit is.
+            </summary>
+            <param name="client">Clietn.</param>
+        </member>
+        <member name="M:HenE.Abdul.GameOX.GameOX.TegenSpeler(HenE.Abdul.GameOX.Speler)">
+            <summary>
+            Bepaalt wie gaat tegen de huidige speler spelen.
+            </summary>
+            <param name="huidigeSpeler">De spelers.</param>
+            <returns>De speler.</returns>
+        </member>
+        <member name="M:HenE.Abdul.GameOX.GameOX.AddHumanSpeler(System.String,HenE.Abdul.Game_OX.Teken,System.Int16)">
+            <summary>
+            Deze method geef een nieuwe speler als de speler niet al bestaat.
+            </summary>
+            <param name="naam">De naam van de human speler.</param>
+            <param name="teken">welek teken gaat de spelr gebruiken.</param>
+            <param name="dimension">Dimension.</param>
+            <returns>Deze method geeft een neuwie speler terug.</returns>
+        </member>
+        <member name="M:HenE.Abdul.GameOX.GameOX.BeeidigSpel(HenE.Abdul.GameOX.GameOX,System.Net.Sockets.TcpClient)">
+            <summary>
+            Als het spel klaar is .
+            </summary>
+            <param name="oX">Het Spel.</param>
+        </member>
+        <member name="M:HenE.Abdul.GameOX.GameOX.FindSpelerByNaam(HenE.Abdul.GameOX.Speler)">
+            <summary>
+            Deze method zoekt of de naam van de niuwe speler al bastaat.
+            </summary>
+            <param name="speler">de speler.</param>
+            <returns>De niuwe speler.</returns>
+        </member>
+        <member name="M:HenE.Abdul.GameOX.GameOX.ProcessStream(System.String,System.Net.Sockets.TcpClient)">
+            <summary>
+            Process Stream die naar de clinet gaat.
+            </summary>
+            <param name="stream">De stream.</param>
+            <param name="client">Naar deze client.</param>
+            <returns>Message.</returns>
+        </member>
+        <member name="M:HenE.Abdul.GameOX.GameOX.TegenHuidigeSpeler(HenE.Abdul.GameOX.Speler,HenE.Abdul.GameOX.GameOX)">
+            <summary>
+            Met deze method kan in de code inloggen.
+            </summary>
+            <param name="huidigeSpeler">Huidige spelr.</param>
+            <param name="games">huidige game.</param>
+            <returns>Tegen deze speler.</returns>
+        </member>
+        <member name="T:HenE.Abdul.GameOX.GameOXStatussen">
+            <summary>
+            De class van de statussen van het spel.
+            </summary>
+        </member>
+        <member name="F:HenE.Abdul.GameOX.GameOXStatussen.NogNietGestart">
+            <summary>
+            Als het spel nog niet gestart is.
+            </summary>
+        </member>
+        <member name="F:HenE.Abdul.GameOX.GameOXStatussen.Waiting">
+            <summary>
+            Als het spel is wachten.
+            </summary>
+        </member>
+        <member name="F:HenE.Abdul.GameOX.GameOXStatussen.Gestart">
+            <summary>
+            Als het spel is gestart.
+            </summary>
+        </member>
+        <member name="F:HenE.Abdul.GameOX.GameOXStatussen.Finished">
+            <summary>
+            Als het spel klaar is.
+            </summary>
+        </member>
+        <member name="T:HenE.Abdul.GameOX.HumanSpeler">
+            <summary>
+            De class van de human Speler.
+            </summary>
+        </member>
+        <member name="M:HenE.Abdul.GameOX.HumanSpeler.#ctor(System.String,System.Int16)">
+            <summary>
+            Initializes a new instance of the <see cref="T:HenE.Abdul.GameOX.HumanSpeler"/> class.
+            </summary>
+            <param name="naam">De naam van de speler.</param>
+            <param name="dimension"> De dimension.</param>
+        </member>
+        <member name="M:HenE.Abdul.GameOX.HumanSpeler.SpelStartedHandler(System.Int16,HenE.Abdul.GameOX.GameOX,HenE.Abdul.GameOX.Bord)">
+            <summary>
+            De spelr doet een zet.
+            </summary>
+            <param name="nummer">Het nummer die de speler heeft gekozen.</param>
+            <param name="gameOX">Het Spel.</param>
+            <param name="bord">Het bord.</param>
+        </member>
+        <member name="T:HenE.Abdul.GameOX.Protocol.TekenHelper">
+            <summary>
+            De class die de class teken helpt.
+            </summary>
+        </member>
+        <member name="M:HenE.Abdul.GameOX.Protocol.TekenHelper.CreateTekenEnum(System.String)">
+            <summary>
+            Omzetten de string tot event.
+            </summary>
+            <param name="teken">Teken als string.</param>
+            <returns>Teken als event.</returns>
+        </member>
+        <member name="M:HenE.Abdul.GameOX.Protocol.TekenHelper.AddTekenToSpeler(HenE.Abdul.Game_OX.Teken,System.Collections.Generic.List{HenE.Abdul.GameOX.GameOX},System.Net.Sockets.TcpClient)">
+            <summary>
+            Geef een teken aan de speler.
+            </summary>
+            <param name="teken">Teken.</param>
+            <param name="oX">De list of de Games.</param>
+            <param name="client">Huidige client.</param>
+        </member>
+        <member name="T:HenE.Abdul.GameOX.RemoteHumanSpeler">
+            <summary>
+            De calss van de remote human speler.
+            </summary>
+        </member>
+        <member name="M:HenE.Abdul.GameOX.RemoteHumanSpeler.#ctor(System.String,System.Int16)">
+            <summary>
+            Initializes a new instance of the <see cref="T:HenE.Abdul.GameOX.RemoteHumanSpeler"/> class.
+            Remote human speler.
+            </summary>
+            <param name="naam">De naam.</param>
+            <param name="dimension">De dimension.</param>
+        </member>
+        <member name="T:HenE.Abdul.GameOX.Speler">
+            <summary>
+            De class van de speler.
+            </summary>
+        </member>
+        <member name="M:HenE.Abdul.GameOX.Speler.#ctor(System.String,System.Int16)">
+            <summary>
+            Initializes a new instance of the <see cref="T:HenE.Abdul.GameOX.Speler"/> class.
+            </summary>
+            <param name="naam">De naam van de speler.</param>
+            <param name="dimension">De dimenion van het bord.</param>
+        </member>
+        <member name="P:HenE.Abdul.GameOX.Speler.Naam">
+            <summary>
+            Gets or sets de namen van de spelers.
+            </summary>
+        </member>
+        <member name="P:HenE.Abdul.GameOX.Speler.TcpClient">
+            <summary>
+            Gets or sets de clients van de spelrs.
+            </summary>
+        </member>
+        <member name="P:HenE.Abdul.GameOX.Speler.Dimension">
+            <summary>
+            Gets or sets de dimention van het bord.
+            </summary>
+        </member>
+        <member name="P:HenE.Abdul.GameOX.Speler.TeGebruikenTeken">
+            <summary>
+            Gets or sets de teken van de speler.
+            </summary>
+        </member>
+        <member name="P:HenE.Abdul.GameOX.Speler.Punten">
+            <summary>
+            Gets de punten.
+            </summary>
+        </member>
+        <member name="M:HenE.Abdul.GameOX.Speler.Zet(System.Int16,HenE.Abdul.GameOX.Bord,HenE.Abdul.GameOX.GameOX)">
+            <summary>
+            Doe een zet op het bord.
+            </summary>
+            <param name="nummer">Het nummer die de speler heeft gekozen.</param>
+            <param name="huidigBord">Huidig bord.</param>
+            <param name="game">Huidig spel.</param>
+        </member>
+        <member name="M:HenE.Abdul.GameOX.Speler.BeeindigBord">
+            <summary>
+            Dit method geef een punt aan de winnaar.
+            </summary>
+        </member>
+        <member name="M:HenE.Abdul.GameOX.Speler.SpelStartedHandler(System.Int16,HenE.Abdul.GameOX.GameOX,HenE.Abdul.GameOX.Bord)">
+            <summary>
+            afvangen van het event dat het spel is gestart.
+            </summary>
+            <param name="nummer">Het nummer die de speler heeft gekozen.</param>
+            <param name="gameOX">Het spel.</param>
+            <param name="bord">Het bord.</param>
+        </member>
+        <member name="T:HenE.Abdul.Game_OX.Teken">
+            <summary>
+            Het Teken van de spel.
+            </summary>
+        </member>
+        <member name="F:HenE.Abdul.Game_OX.Teken.Undefined">
+            <summary>
+            Undefind
+            </summary>
+        </member>
+        <member name="F:HenE.Abdul.Game_OX.Teken.X">
+            <summary>
+            Hier staat de andre teken van de speler.
+            </summary>
+        </member>
+        <member name="F:HenE.Abdul.Game_OX.Teken.O">
+            <summary>
+            De eerste teken van de speler.
+            </summary>
+        </member>
+        <member name="T:HenE.WebSocketExample.Shared.Protocol.CommandoHelper">
+            <summary>
+            class cvoor de helper functies van commandos.
+            </summary>
+        </member>
+        <member name="M:HenE.WebSocketExample.Shared.Protocol.CommandoHelper.CreateVerzoekTotDeelnemenSpelCommando(System.String,System.Int16)">
+            <summary>
+            maak een message voor het commando VerzoekTotDeelnemenSpel.
+            </summary>
+            <param name="spelersnaam"> naam van de speler.</param>
+            <param name="dimension"> welke dimension wil de speler.</param>
+            <returns>message welke verstuurd kan worden naar de server. </returns>
+        </member>
+        <member name="M:HenE.WebSocketExample.Shared.Protocol.CommandoHelper.CreateSpelTegenComputer(System.String,System.Int16)">
+            <summary>
+            Create een message met een commando als string.
+            </summary>
+            <param name="naam">De naam van de speler.</param>
+            <param name="dimension">dimension.</param>
+            <returns>De message die naar de server stuurt.</returns>
+        </member>
+        <member name="M:HenE.WebSocketExample.Shared.Protocol.CommandoHelper.CreateSpelerGestartCommando(System.String)">
+            <summary>
+            Maak een message voor  Commando spelgestart.
+            </summary>
+            <param name="teken"> De teken die de speler wil gebruiken.</param>
+            <returns> De message.</returns>
+        </member>
+        <member name="M:HenE.WebSocketExample.Shared.Protocol.CommandoHelper.DoeZet(System.Int16)">
+            <summary>
+            Maak een message voor  Commando Doezet.
+            </summary>
+            <param name="nummer">het nummer die de speler wil doen.</param>
+            <returns>De message.</returns>
+        </member>
+        <member name="M:HenE.WebSocketExample.Shared.Protocol.CommandoHelper.NieuwRondje(System.String)">
+            <summary>
+            Maak een massage voor commando NieuwRondje.
+            </summary>
+            <param name="nieuwRondje">Als de speler ja of nee zegt.</param>
+            <returns>De message.</returns>
+        </member>
+        <member name="M:HenE.WebSocketExample.Shared.Protocol.CommandoHelper.BeeindigSpel">
+            <summary>
+            Maak een message voor Commando BeeindigSpel.
+            </summary>
+            <returns>De message.</returns>
+        </member>
+        <member name="M:HenE.WebSocketExample.Shared.Protocol.CommandoHelper.CreateStartGameCommando(HenE.Abdul.GameOX.GameOX)">
+            <summary>
+            Als het spel is starten , Dan geven hier de naam met de dimension als string en het gaat naar de client.
+            </summary>
+            <param name="game">De game.</param>
+            <returns>De message die naar de client gaat.</returns>
+        </member>
+        <member name="M:HenE.WebSocketExample.Shared.Protocol.CommandoHelper.SplitCommandAndParamsFromMessage(System.String,System.String@)">
+            <summary>
+            knip de message op in een command en params.
+            </summary>
+            <param name="mess">de ontvangen message.</param>
+            <param name="commandParams">het gedeelte na de #.</param>
+            <returns>het gevonden commando.</returns>
+        </member>
+        <member name="M:HenE.WebSocketExample.Shared.Protocol.CommandoHelper.SplitVerzoektotDeelnemeSpelParameterFromMessage(System.String,System.String@,System.Int16@)">
+            <summary>
+            ik krijg binnen de naam met de dimension binnen.
+            </summary>
+            <param name="commandParams">het param gedeelte van de message.</param>
+            <param name="spelersnaam">naam van de speler.</param>
+            <param name="dimension">dimension.</param>
+            <returns>true.</returns>
+        </member>
+        <member name="M:HenE.WebSocketExample.Shared.Protocol.CommandoHelper.CreateCommando(HenE.WebSocketExample.Shared.Protocol.Commandos)">
+            <summary>
+            maakt het standaard commandm
+            afgesproken is om elk commando te beëindigen met een #.
+            </summary>
+            <param name="commando">enumerator van commando.</param>
+            <returns>De commandos als string.</returns>
+        </member>
+        <member name="T:HenE.WebSocketExample.Shared.Protocol.Commandos">
+            <summary>
+            met coommandos geet de client de server een opdracht.
+            </summary>
+        </member>
+        <member name="F:HenE.WebSocketExample.Shared.Protocol.Commandos.NotDefined">
+            <summary>
+            Not yet Defind.
+            </summary>
+        </member>
+        <member name="F:HenE.WebSocketExample.Shared.Protocol.Commandos.VerzoekTotDeelnemenSpel">
+            <summary>
+            Zoek voor andre speler.
+            </summary>
+        </member>
+        <member name="F:HenE.WebSocketExample.Shared.Protocol.Commandos.StartSpel">
+            <summary>
+            Het spel gaat starten.
+            </summary>
+        </member>
+        <member name="F:HenE.WebSocketExample.Shared.Protocol.Commandos.SpelerGestart">
+            <summary>
+            De speler is gestart.
+            </summary>
+        </member>
+        <member name="F:HenE.WebSocketExample.Shared.Protocol.Commandos.WachtenOpAndereDeelnemer">
+            <summary>
+            Wacht op de andre speler om reactie te geven.
+            </summary>
+        </member>
+        <member name="F:HenE.WebSocketExample.Shared.Protocol.Commandos.DoeZet">
+            <summary>
+            Zit op het bord.
+            </summary>
+        </member>
+        <member name="F:HenE.WebSocketExample.Shared.Protocol.Commandos.ReStartSpel">
+            <summary>
+            Replay.
+            </summary>
+        </member>
+        <member name="F:HenE.WebSocketExample.Shared.Protocol.Commandos.NieuwRondje">
+            <summary>
+            Als de speler een nieuw rondje wil doen.
+            </summary>
+        </member>
+        <member name="F:HenE.WebSocketExample.Shared.Protocol.Commandos.VerlaatSpel">
+            <summary>
+            Als de speler het spel heeft verlaten.
+            </summary>
+        </member>
+        <member name="F:HenE.WebSocketExample.Shared.Protocol.Commandos.SpelTegenComputer">
+            <summary>
+            Als de speler tegen de computer wil spelen.
+            </summary>
+        </member>
+        <member name="F:HenE.WebSocketExample.Shared.Protocol.Commandos.BeeindigSpel">
+            <summary>
+            Waneer het spel is klaar.
+            </summary>
+        </member>
+        <member name="T:HenE.WebSocketExample.Shared.Protocol.EventHelper">
+            <summary>
+            Helper de events.
+            </summary>
+        </member>
+        <member name="M:HenE.WebSocketExample.Shared.Protocol.EventHelper.CreateSpelgestartEvent(HenE.Abdul.GameOX.GameOX)">
+            <summary>
+            terug geven als de spel is gestart.
+            </summary>
+            <param name="game">huidige game.</param>
+            <returns>De message die naar de client gaat als string. De namen van de spelers en de dimension.</returns>
+        </member>
+        <member name="M:HenE.WebSocketExample.Shared.Protocol.EventHelper.CreateEenEvent(System.String)">
+            <summary>
+            De event komt naar hier toe als string .
+            Deze method gaat de string omzetten.
+            </summary>
+            <param name="events">De event als string.</param>
+            <returns>De Event.</returns>
+        </member>
+        <member name="M:HenE.WebSocketExample.Shared.Protocol.EventHelper.CreateWachtenOpEenAndereDeelnemenEvent">
+            <summary>
+            Deze Method Created een Wacht Lijst van die speler die open zijn.
+            </summary>
+            <returns>De Event als string.</returns>
+        </member>
+        <member name="M:HenE.WebSocketExample.Shared.Protocol.EventHelper.CreateEvents(HenE.WebSocketExample.Shared.Protocol.Events)">
+            <summary>
+            Omzetten de even tot string.
+            </summary>
+            <param name="event">De event.</param>
+            <returns>Event als string.</returns>
+        </member>
+        <member name="M:HenE.WebSocketExample.Shared.Protocol.EventHelper.CreateErrorEvent(System.Exception)">
+            <summary>
+            Als er een error is.
+            </summary>
+            <param name="exp">Exception.</param>
+            <returns>Event als string.</returns>
+        </member>
+        <member name="M:HenE.WebSocketExample.Shared.Protocol.EventHelper.SplitEventAndParamsFromMessage(System.String,System.String@)">
+            <summary>
+            Verdeelt de message die vanuit de speler komt .
+            De eerste deel is de Protocol als string.
+            </summary>
+            <param name="mess">De message.</param>
+            <param name="eventsParams">De rest van de message.</param>
+            <returns>Event.</returns>
+        </member>
+        <member name="T:HenE.WebSocketExample.Shared.Protocol.Events">
+            <summary>
+            events gaan van de server naar de client.
+            </summary>
+        </member>
+        <member name="F:HenE.WebSocketExample.Shared.Protocol.Events.NotDefined">
+            <summary>
+            Not yet defined.
+            </summary>
+        </member>
+        <member name="F:HenE.WebSocketExample.Shared.Protocol.Events.SpelerGestart">
+            <summary>
+            De speler is gestart.
+            </summary>
+        </member>
+        <member name="F:HenE.WebSocketExample.Shared.Protocol.Events.SpelGestart">
+            <summary>
+            Het spel gaat starten.
+            </summary>
+        </member>
+        <member name="F:HenE.WebSocketExample.Shared.Protocol.Events.WachtenOpAndereDeelnemer">
+            <summary>
+            Wacht op de andre speler om reactie te geven.
+            </summary>
+        </member>
+        <member name="F:HenE.WebSocketExample.Shared.Protocol.Events.YourTurn">
+            <summary>
+            Hier start de andre speler.
+            </summary>
+        </member>
+        <member name="F:HenE.WebSocketExample.Shared.Protocol.Events.Winnaar">
+            <summary>
+            Wie is gewonnen.
+            </summary>
+        </member>
+        <member name="F:HenE.WebSocketExample.Shared.Protocol.Events.NieuwRondje">
+            <summary>
+            Als de speler een nieuw rondje wil doen.
+            </summary>
+        </member>
+        <member name="F:HenE.WebSocketExample.Shared.Protocol.Events.StartNieuwRond">
+            <summary>
+            Start een nieuw rond.
+            </summary>
+        </member>
+        <member name="F:HenE.WebSocketExample.Shared.Protocol.Events.IsGewonnen">
+            <summary>
+            Wie is gewonnen.
+            </summary>
+        </member>
+        <member name="F:HenE.WebSocketExample.Shared.Protocol.Events.HetIsBezit">
+            <summary>
+            Als het cel bezit is.
+            </summary>
+        </member>
+        <member name="F:HenE.WebSocketExample.Shared.Protocol.Events.BordIsVol">
+            <summary>
+            Het bord is vol.
+            </summary>
+        </member>
+        <member name="F:HenE.WebSocketExample.Shared.Protocol.Events.NieuwSpel">
+            <summary>
+            Als de speler wil bliven spelen.
+            </summary>
+        </member>
+        <member name="F:HenE.WebSocketExample.Shared.Protocol.Events.Error">
+            <summary>
+            Error.
+            </summary>
+        </member>
+    </members>
+</doc>

@@ -60,3 +60,6 @@ C:\Users\Abdul\Desktop\WebSocketGame\WebSocketServer\obj\Debug\WebSocketServer.c
 C:\Users\Abdul\Desktop\WebSocketGame\WebSocketServer\obj\Debug\WebSocketServer.csproj.CopyComplete
 C:\Users\Abdul\Desktop\WebSocketGame\WebSocketServer\obj\Debug\WebSocketServer.dll
 C:\Users\Abdul\Desktop\WebSocketGame\WebSocketServer\obj\Debug\WebSocketServer.pdb
+C:\Users\Abdul\Desktop\Sharp\WebSocketGame\WebSocketServer\bin\Debug\WebSocketServer.xml
+C:\Users\Abdul\Desktop\Sharp\WebSocketGame\WebSocketServer\bin\Debug\GameOX.xml
+C:\Users\Abdul\Desktop\Sharp\WebSocketGame\WebSocketServer\bin\Debug\WebSocketShared.xml

@@ -6,6 +6,7 @@ namespace HenE.Abdul.GameOX
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
     using System.Net.Sockets;
     using System.Text;
     using HenE.Abdul.Game_OX;
@@ -17,16 +18,6 @@ namespace HenE.Abdul.GameOX
     /// </summary>
     public class GameOX : WebsocketBase
     {
-        /// <summary>
-        /// De list of de spelers.
-        /// </summary>
-        public IList<Speler> Spelers = new List<Speler>();
-
-        /// <summary>
-        /// De list of clients.
-        /// </summary>
-        public List<TcpClient> TcpClients = new List<TcpClient>();
-
         private readonly StringBuilder vrijVeldenText = new StringBuilder();
 
         private List<Bord> bords = new List<Bord>();
@@ -41,6 +32,16 @@ namespace HenE.Abdul.GameOX
             this.Dimension = dimension;
             this.Status = GameOXStatussen.NogNietGestart;
         }
+
+        /// <summary>
+        /// Gets de list of de spelers.
+        /// </summary>
+        public IList<Speler> Spelers { get; private set; } = new List<Speler>();
+
+        /// <summary>
+        /// Gets de list of clients.
+        /// </summary>
+        public List<TcpClient> TcpClients { get; private set; } = new List<TcpClient>();
 
         /// <summary>
         /// Gets de status van het spel.
@@ -155,29 +156,24 @@ namespace HenE.Abdul.GameOX
         {
             string bord;
             string msg = string.Empty;
-            Bord huidigBord = null;
-            foreach (Bord huidigeBord in oX.bords)
-            {
-                huidigBord = huidigeBord;
-            }
+            Bord huidigBord = oX.bords.First();
 
             huidigBord.ResetBord();
             bord = huidigBord.TekenBord();
 
             foreach (Speler speler in this.Spelers)
             {
-                this.TcpClients.Add(speler.TcpClient);
                 if (speler.TcpClient == tcpClient)
                 {
-                    msg = string.Format("{0}&{1}", EventHelper.CreateEvents(Events.NieuwRondje), bord);
+                    msg = string.Format("{0}&{1}", EventHelper.CreateEvents(Events.YourTurn), bord);
 
                     this.ProcessStream(msg, speler.TcpClient);
                 }
-                else
-                {
-                    msg = string.Format("{0}&{1}", EventHelper.CreateWachtenOpEenAndereDeelnemenEvent(), bord);
-                    this.ProcessStream(msg, speler.TcpClient);
-                }
+                //else
+                //{
+                //    msg = string.Format("{0}&{1}", EventHelper.CreateWachtenOpEenAndereDeelnemenEvent(), bord);
+                //    this.ProcessStream(msg, speler.TcpClient);
+                //}
             }
         }
 
@@ -202,12 +198,54 @@ namespace HenE.Abdul.GameOX
                 // Human Speler tegen computer.
                 if (gameOX.TcpClients.Count == 1)
                 {
-                    speler.SpelStartedHandler(nummer, gameOX, hetBord);
-                    if (speler.TcpClient != tcp)
+                    if (hetBord.HeeftTekenGewonnen(speler.TeGebruikenTeken))
                     {
-                        tekenBord = hetBord.TekenBord();
-                        string msg = string.Format("{0}&{1}{2}", EventHelper.CreateEvents(Events.YourTurn), tekenBord, this.vrijVeldenText);
-                        this.ProcessStream(msg, tcp);
+                        if (speler.TcpClient != tcp)
+                        {
+                            tekenBord = hetBord.TekenBord();
+                            speler.BeeindigBord();
+                            string msg = string.Format("{0}&{1},{2}", EventHelper.CreateEvents(Events.Winnaar), speler.Punten.ToString(), speler.Naam);
+                            this.ProcessStream(msg, tcp);
+                            msge = string.Format("{0}&{1}", EventHelper.CreateEvents(Events.NieuwRondje), tekenBord);
+                            this.ProcessStream(msge, tcp);
+                            break;
+                        }
+                    }
+                    else
+                    {
+                        speler.SpelStartedHandler(nummer, gameOX, hetBord);
+                        if (!hetBord.IsBordFinished())
+                        {
+                            if (speler.TcpClient == tcp)
+                            {
+                                if (hetBord.HeeftTekenGewonnen(speler.TeGebruikenTeken))
+                                {
+                                    speler.BeeindigBord();
+                                    string msg = string.Format("{0}&{1},{2}", EventHelper.CreateEvents(Events.Winnaar), speler.Punten.ToString(), speler.Naam);
+                                    this.ProcessStream(msg, tcp);
+
+                                    tekenBord = hetBord.TekenBord();
+                                    msge = string.Format("{0}&{1}", EventHelper.CreateEvents(Events.NieuwRondje), tekenBord);
+                                    this.ProcessStream(msge, tcp);
+                                    break;
+                                }
+                            }
+                            else
+                            {
+                                tekenBord = hetBord.TekenBord();
+                                string msg = string.Format("{0}&{1}{2}", EventHelper.CreateEvents(Events.YourTurn), tekenBord, this.vrijVeldenText);
+                                this.ProcessStream(msg, tcp);
+                            }
+                        }
+                        else
+                        {
+                            tekenBord = hetBord.TekenBord();
+                            msge = string.Format("{0}&{1}", EventHelper.CreateEvents(Events.BordIsVol), tekenBord);
+                            this.ProcessStream(msge, tcp);
+                            msge = string.Format("{0}&{1}", EventHelper.CreateEvents(Events.NieuwRondje), tekenBord);
+                            this.ProcessStream(msge, tcp);
+                            break;
+                        }
                     }
                 }
 
@@ -240,6 +278,7 @@ namespace HenE.Abdul.GameOX
 
                         TcpClient tegenHuidigeSpeler;
                         tegenHuidigeSpeler = this.TegenHuidigeSpeler(speler, gameOX);
+                        vrijVeldenText.Clear();
                         List<short> vrijVelden = hetBord.VrijVelden();
                         foreach (short velder in vrijVelden)
                         {
@@ -265,20 +304,15 @@ namespace HenE.Abdul.GameOX
         /// <param name="gameOX">Het Spel.</param>
         public void ChekOfHetValidBeZitIs(TcpClient client, short nummer, GameOX gameOX)
         {
-            Bord bord = null;
-            foreach (Bord hetBord in gameOX.bords)
+            Bord bord = gameOX.bords.First();
+            if (bord.MagZetten(nummer))
             {
-                bord = hetBord;
-            }
-
-            if (bord.IsValidZet(nummer))
-            {
-                bord.HetBordIsVol(client, gameOX);
-                this.nogNietBezit = false;
+                this.SpelGestart(client, nummer, gameOX);
             }
             else
             {
-               this.SpelGestart(client, nummer, gameOX);
+                bord.HetBordIsVol(client, gameOX);
+                this.nogNietBezit = false;
             }
         }
 
@@ -319,11 +353,6 @@ namespace HenE.Abdul.GameOX
         /// <returns>Deze method geeft een neuwie speler terug.</returns>
         public Speler AddHumanSpeler(string naam, Teken teken, short dimension)
         {
-            // bestaat deze speler al?
-            if (this != null)
-            {
-                throw new ArgumentException("Speler bestaat al");
-            }
 
             Speler speler = new HumanSpeler(naam, dimension)
             {
@@ -338,7 +367,7 @@ namespace HenE.Abdul.GameOX
         /// Als het spel klaar is .
         /// </summary>
         /// <param name="oX">Het Spel.</param>
-        public void BeeidigSpel(GameOX oX)
+        public void BeeidigSpel(GameOX oX, TcpClient tcp)
         {
             string message = string.Empty;
             foreach (Speler spel in oX.Spelers)
@@ -348,6 +377,13 @@ namespace HenE.Abdul.GameOX
                     message = string.Format("{0}&{1}", EventHelper.CreateEvents(Events.IsGewonnen), spel.Naam);
                     this.ProcessReturnMessage(message, oX.TcpClients);
                 }
+
+                if (spel.TcpClient != tcp)
+                {
+                    message = string.Format("{0}&{1},{2}", EventHelper.CreateEvents(Events.NieuwSpel), spel.Naam, oX.Dimension);
+                    this.ProcessReturnMessage(message, spel.TcpClient);
+                }
+                .
             }
         }
 

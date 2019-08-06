@@ -64,6 +64,9 @@ namespace HenE.WebSocketExample.WebSocketClientApp
             Console.ReadKey();
             Console.ReadKey();
             Console.ReadKey();
+            Console.ReadKey();
+            Console.ReadKey();
+            Console.ReadKey();
 
             // client.Stop();
         }

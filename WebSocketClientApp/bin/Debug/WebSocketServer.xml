@@ -1,0 +1,128 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>WebSocketServer</name>
+    </assembly>
+    <members>
+        <member name="T:HenE.WebSocketExample.WebSocketServer.Server">
+            <summary>
+            De server.
+            </summary>
+        </member>
+        <member name="M:HenE.WebSocketExample.WebSocketServer.Server.#ctor(System.Net.IPAddress,System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:HenE.WebSocketExample.WebSocketServer.Server"/> class.
+            Hier staat de constructor van de Server.
+            </summary>
+            <param name="ipAddress">IPAdres.</param>
+            <param name="poort">De poort nummer.</param>
+        </member>
+        <member name="P:HenE.WebSocketExample.WebSocketServer.Server.Port">
+            <summary>
+            Gets de Poort waar kunnen de cliënt en server aansluiten.
+            </summary>
+        </member>
+        <member name="P:HenE.WebSocketExample.WebSocketServer.Server.IpAddress">
+            <summary>
+            Gets het IPAdress Van de client.
+            </summary>
+        </member>
+        <member name="M:HenE.WebSocketExample.WebSocketServer.Server.Start">
+            <summary>
+            Hier gaat de server starten.
+            </summary>
+        </member>
+        <member name="M:HenE.WebSocketExample.WebSocketServer.Server.Stop">
+            <summary>
+            De server stopt hier.
+            </summary>
+        </member>
+        <member name="M:HenE.WebSocketExample.WebSocketServer.Server.StartListener">
+            <summary>
+            De server start hier.
+            </summary>
+        </member>
+        <member name="M:HenE.WebSocketExample.WebSocketServer.Server.ProcessStream(System.String,System.Net.Sockets.TcpClient)">
+            <summary>
+            Process van de server.
+            </summary>
+            <param name="stream">Stream die uit de client komt.</param>
+            <param name="client"> Client.</param>
+            <returns>informatie.</returns>
+            <exception cref="T:System.InvalidOperationException">Wordt gegooid wanneer een commando wordt aangeroepen op een ongeldig moment.</exception>
+        </member>
+        <member name="M:HenE.WebSocketExample.WebSocketServer.Server.HandleClient(System.Net.Sockets.TcpClient,HenE.WebSocketExample.WebSocketServer.Server)">
+            <summary>
+            Handel de client.
+            </summary>
+            <param name="client">client.</param>
+            <param name="server">server.</param>
+        </member>
+        <member name="T:HenE.WebSocketExample.WebSocketServer.SpelHandler">
+            <summary>
+             class om alle spelhandleingen af te vangen.
+            </summary>
+        </member>
+        <member name="M:HenE.WebSocketExample.WebSocketServer.SpelHandler.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:HenE.WebSocketExample.WebSocketServer.SpelHandler"/> class.
+            </summary>
+        </member>
+        <member name="M:HenE.WebSocketExample.WebSocketServer.SpelHandler.GetOpenSpelbyDimension(System.Int16)">
+            <summary>
+            Vind een speler die het zelfde dimension heeft.
+            </summary>
+            <param name="dimension">dimension.</param>
+            <returns>game.</returns>
+        </member>
+        <member name="M:HenE.WebSocketExample.WebSocketServer.SpelHandler.CreateGame(System.Int16,System.String,System.Net.Sockets.TcpClient)">
+            <summary>
+            Create nieuw game.
+            </summary>
+            <param name="dimension">dimension.</param>
+            <param name="player">player.</param>
+            <param name="tcpClient">tcpClient.</param>
+            <returns>nieuw game.</returns>
+        </member>
+        <member name="M:HenE.WebSocketExample.WebSocketServer.SpelHandler.TegeHuidigeClient(System.Net.Sockets.TcpClient,System.Collections.Generic.List{System.Net.Sockets.TcpClient},System.Net.Sockets.TcpClient@)">
+            <summary>
+            Tegen de huidige speler.
+            </summary>
+            <param name="client">deze cleint.</param>
+            <param name="tcps">List of clients.</param>
+            <param name="tegenTcp">de tegenaar.</param>
+            <returns>Event Wachat als string.</returns>
+        </member>
+        <member name="T:HenE.WebSocketExample.WebSocketServer.CommandHandlers.VerzoekTotDeelnemenSpelCommandHandler">
+            <summary>
+            Verzoek tot deelnemen spel Command handler.
+            </summary>
+        </member>
+        <member name="M:HenE.WebSocketExample.WebSocketServer.CommandHandlers.VerzoekTotDeelnemenSpelCommandHandler.#ctor(HenE.WebSocketExample.WebSocketServer.SpelHandler,System.Net.Sockets.TcpClient)">
+            <summary>
+            Initializes a new instance of the <see cref="T:HenE.WebSocketExample.WebSocketServer.CommandHandlers.VerzoekTotDeelnemenSpelCommandHandler"/> class.
+            </summary>
+            <param name="spelHandler">spel  handler.</param>
+            <param name="tcpClient">Client.</param>
+        </member>
+        <member name="M:HenE.WebSocketExample.WebSocketServer.CommandHandlers.VerzoekTotDeelnemenSpelCommandHandler.HandleFromMessage(System.String,HenE.Abdul.GameOX.GameOX@)">
+            <summary>
+            functie die de parameters in string krijgt en die string opknipt in de params die nodig zijn.
+            </summary>
+            <param name="messageParams">params uit het bericht, gedeelte na de # en gescheiden door &amp;.</param>
+            <param name="game">Huidig game.</param>
+            <returns>Message als twee delen.</returns>
+        </member>
+        <member name="M:HenE.WebSocketExample.WebSocketServer.CommandHandlers.VerzoekTotDeelnemenSpelCommandHandler.Handle(System.String,System.Int16,System.String,HenE.Abdul.GameOX.GameOX@)">
+            <summary>
+            handle het command af.
+            </summary>
+            <param name="spelersnaam"> naam van de speler.</param>
+            <param name="dimension">dimension van het spel.</param>
+            <param name="tegenComputer">Tegen de cpmputer spelen.</param>
+            <param name="game">Huidig game.</param>
+            <return>De message die gereturnd moet worden. </return>
+            <returns>De messge.</returns>
+        </member>
+    </members>
+</doc>

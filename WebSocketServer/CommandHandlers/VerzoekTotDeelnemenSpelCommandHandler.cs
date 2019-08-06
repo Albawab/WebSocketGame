@@ -32,7 +32,7 @@ namespace HenE.WebSocketExample.WebSocketServer.CommandHandlers
         /// <summary>
         /// functie die de parameters in string krijgt en die string opknipt in de params die nodig zijn.
         /// </summary>
-        /// <param name="messageParams">params uit het bericht, gedeelte na de # en gescheiden door &.</param>
+        /// <param name="messageParams">params uit het bericht, gedeelte na de # en gescheiden door &amp;.</param>
         /// <param name="game">Huidig game.</param>
         /// <returns>Message als twee delen.</returns>
         public string HandleFromMessage(string messageParams, out GameOX game)

@@ -21,7 +21,6 @@ C:\Users\Gebruiker\Desktop\C#\WebSocketExample\WebSocketShared\obj\Debug\WebSock
 C:\Users\Gebruiker\Desktop\C#\WebSocketExample\WebSocketShared\obj\Debug\WebSocketShared.pdb
 C:\Users\Abdul\Desktop\Sharp\WebSocketGame\WebSocketShared\bin\Debug\WebSocketShared.dll
 C:\Users\Abdul\Desktop\Sharp\WebSocketGame\WebSocketShared\bin\Debug\WebSocketShared.pdb
-C:\Users\Abdul\Desktop\Sharp\WebSocketGame\WebSocketShared\obj\Debug\WebSocketShared.csprojAssemblyReference.cache
 C:\Users\Abdul\Desktop\Sharp\WebSocketGame\WebSocketShared\obj\Debug\WebSocketShared.csproj.CoreCompileInputs.cache
 C:\Users\Abdul\Desktop\Sharp\WebSocketGame\WebSocketShared\obj\Debug\WebSocketShared.dll
 C:\Users\Abdul\Desktop\Sharp\WebSocketGame\WebSocketShared\obj\Debug\WebSocketShared.pdb
@@ -37,3 +36,5 @@ C:\Users\Abdul\Desktop\WebSocketGame\WebSocketShared\obj\Debug\WebSocketShared.c
 C:\Users\Abdul\Desktop\WebSocketGame\WebSocketShared\obj\Debug\WebSocketShared.csproj.CoreCompileInputs.cache
 C:\Users\Abdul\Desktop\WebSocketGame\WebSocketShared\obj\Debug\WebSocketShared.dll
 C:\Users\Abdul\Desktop\WebSocketGame\WebSocketShared\obj\Debug\WebSocketShared.pdb
+C:\Users\Abdul\Desktop\Sharp\WebSocketGame\WebSocketShared\bin\Debug\WebSocketShared.xml
+C:\Users\Abdul\Desktop\Sharp\WebSocketGame\WebSocketShared\obj\Debug\WebSocketShared.csprojAssemblyReference.cache

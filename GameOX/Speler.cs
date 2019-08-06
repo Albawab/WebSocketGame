@@ -17,7 +17,7 @@ namespace HenE.Abdul.GameOX
         /// </summary>
         /// <param name="naam">De naam van de speler.</param>
         /// <param name="dimension">De dimenion van het bord.</param>
-        public Speler(string naam, short dimension)
+        protected Speler(string naam, short dimension)
         {
             this.Dimension = dimension;
             this.Naam = naam;
@@ -67,7 +67,6 @@ namespace HenE.Abdul.GameOX
         /// <summary>
         /// Dit method geef een punt aan de winnaar.
         /// </summary>
-        /// <param name="bord">Het boord.</param>
         public void BeeindigBord()
         {
             this.Punten++;

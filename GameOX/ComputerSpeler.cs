@@ -24,6 +24,7 @@ namespace HenE.Abdul.GameOX
         /// <inheritdoc/>
         public override void SpelStartedHandler(short nummer, GameOX gameOX, Bord bord)
         {
+            bool magZet = true;
             List<short> vrijeVelden = bord.VrijVelden();
 
             foreach (short index in vrijeVelden)
@@ -36,6 +37,8 @@ namespace HenE.Abdul.GameOX
                 {
                     bord.ResetVeld(index);
                     this.Zet(index, bord, gameOX);
+                    magZet = false;
+                    break;
                 }
                 else
                 {
@@ -47,11 +50,20 @@ namespace HenE.Abdul.GameOX
                         // tegenstander heeft gewonnen
                         bord.ResetVeld(index);
                         this.Zet(index, bord, gameOX);
+                        magZet = false;
+                        break;
+                    }
+                    else
+                    {
+                        bord.ResetVeld(index);
                     }
                 }
             }
 
-            this.Zet(vrijeVelden[0], bord, gameOX);
+            if (magZet)
+            {
+                this.Zet(vrijeVelden[0], bord, gameOX);
+            }
         }
     }
 }

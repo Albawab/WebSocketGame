@@ -36,3 +36,5 @@ C:\Users\Abdul\Desktop\WebSocketGame\GameOX\bin\Debug\GameOX.pdb
 C:\Users\Abdul\Desktop\WebSocketGame\GameOX\bin\Debug\WebSocketShared.dll
 C:\Users\Abdul\Desktop\WebSocketGame\GameOX\bin\Debug\WebSocketShared.pdb
 C:\Users\Abdul\Desktop\WebSocketGame\GameOX\obj\Debug\GameOX.csproj.CopyComplete
+C:\Users\Abdul\Desktop\Sharp\WebSocketGame\GameOX\bin\Debug\GameOX.xml
+C:\Users\Abdul\Desktop\Sharp\WebSocketGame\GameOX\bin\Debug\WebSocketShared.xml

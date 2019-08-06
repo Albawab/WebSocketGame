@@ -60,6 +60,16 @@ namespace HenE.WebSocketExample.Shared.Protocol
         HetIsBezit,
 
         /// <summary>
+        /// Het bord is vol.
+        /// </summary>
+        BordIsVol,
+
+        /// <summary>
+        /// Als de speler wil bliven spelen.
+        /// </summary>
+        NieuwSpel,
+
+        /// <summary>
         /// Error.
         /// </summary>
         Error = 99,

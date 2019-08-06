@@ -75,7 +75,8 @@ namespace HenE.WebSocketExample.Shared.Infrastructure
         /// </summary>
         /// <param name="returnMessage">De message.</param>
         /// <param name="receivingClient">De client die de massage naar hem gaat leveren. </param>
-        protected async void ProcessReturnMessage(string returnMessage, TcpClient receivingClient)
+        /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
+        protected async Task ProcessReturnMessage(string returnMessage, TcpClient receivingClient)
         {
             if (!string.IsNullOrWhiteSpace(returnMessage))
             {

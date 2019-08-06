@@ -76,3 +76,7 @@ C:\Users\Abdul\Desktop\WebSocketGame\WebSocketServerApp\obj\Debug\WebSocketServe
 C:\Users\Abdul\Desktop\WebSocketGame\WebSocketServerApp\obj\Debug\WebSocketServerApp.csproj.CopyComplete
 C:\Users\Abdul\Desktop\WebSocketGame\WebSocketServerApp\obj\Debug\WebSocketServerApp.exe
 C:\Users\Abdul\Desktop\WebSocketGame\WebSocketServerApp\obj\Debug\WebSocketServerApp.pdb
+C:\Users\Abdul\Desktop\Sharp\WebSocketGame\WebSocketServerApp\bin\Debug\WebSocketServerApp.xml
+C:\Users\Abdul\Desktop\Sharp\WebSocketGame\WebSocketServerApp\bin\Debug\WebSocketServer.xml
+C:\Users\Abdul\Desktop\Sharp\WebSocketGame\WebSocketServerApp\bin\Debug\WebSocketShared.xml
+C:\Users\Abdul\Desktop\Sharp\WebSocketGame\WebSocketServerApp\bin\Debug\GameOX.xml
