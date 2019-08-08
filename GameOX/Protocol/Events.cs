@@ -70,6 +70,15 @@ namespace HenE.WebSocketExample.Shared.Protocol
         NieuwSpel,
 
         /// <summary>
+        /// Als niemand heeft gewonnen.
+        /// </summary>
+        NiemandGewonnen,
+
+
+        SpelGeannuleerd,
+
+
+        /// <summary>
         /// Error.
         /// </summary>
         Error = 99,

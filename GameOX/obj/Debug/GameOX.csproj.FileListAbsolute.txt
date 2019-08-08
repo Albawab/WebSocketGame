@@ -38,3 +38,16 @@ C:\Users\Abdul\Desktop\WebSocketGame\GameOX\bin\Debug\WebSocketShared.pdb
 C:\Users\Abdul\Desktop\WebSocketGame\GameOX\obj\Debug\GameOX.csproj.CopyComplete
 C:\Users\Abdul\Desktop\Sharp\WebSocketGame\GameOX\bin\Debug\GameOX.xml
 C:\Users\Abdul\Desktop\Sharp\WebSocketGame\GameOX\bin\Debug\WebSocketShared.xml
+E:\Probeersels\WebSocketGame\GameOX\bin\Debug\GameOX.xml
+E:\Probeersels\WebSocketGame\GameOX\bin\Debug\GameOX.dll
+E:\Probeersels\WebSocketGame\GameOX\bin\Debug\GameOX.pdb
+E:\Probeersels\WebSocketGame\GameOX\bin\Debug\WebSocketShared.dll
+E:\Probeersels\WebSocketGame\GameOX\bin\Debug\WebSocketShared.pdb
+E:\Probeersels\WebSocketGame\GameOX\bin\Debug\WebSocketShared.xml
+E:\Probeersels\WebSocketGame\GameOX\obj\Debug\GameOX.csprojAssemblyReference.cache
+E:\Probeersels\WebSocketGame\GameOX\obj\Debug\GameOX.csproj.CoreCompileInputs.cache
+E:\Probeersels\WebSocketGame\GameOX\obj\Debug\GameOX.csproj.CopyComplete
+E:\Probeersels\WebSocketGame\GameOX\obj\Debug\GameOX.dll
+E:\Probeersels\WebSocketGame\GameOX\obj\Debug\GameOX.pdb
+C:\Users\Abdul\Desktop\WebSocketGame\GameOX\bin\Debug\GameOX.xml
+C:\Users\Abdul\Desktop\WebSocketGame\GameOX\bin\Debug\WebSocketShared.xml

@@ -6,11 +6,12 @@ namespace HenE.WebSocketExample.WebSocketServer
 {
     using System.Collections.Generic;
     using System.Net.Sockets;
+    using System.Linq;
     using HenE.Abdul.GameOX;
     using HenE.WebSocketExample.Shared.Protocol;
 
     /// <summary>
-    ///  class om alle spelhandleingen af te vangen.
+    ///  class om alle spelhandelingen af te vangen.
     /// </summary>
     public class SpelHandler
     {
@@ -81,5 +82,20 @@ namespace HenE.WebSocketExample.WebSocketServer
 
             return returnMessage;
         }
+
+        public void CheckSpellen()
+        {
+            this.currentSpellen.RemoveAll(a => a.Status == GameOXStatussen.Finished);
+        }
+
+        public GameOX GetGameFromTcpClient(TcpClient tcpClient)
+        {
+        }
+
+
+        public GameOX GetGameFromSpeler(Speler speler)
+        {
+        }
+
     }
 }

@@ -6,10 +6,10 @@
     <members>
         <member name="T:HenE.WebSocketExample.WebSocketClient.Client">
             <summary>
-            Client.
+            De class van de client.
             </summary>
         </member>
-        <member name="M:HenE.WebSocketExample.WebSocketClient.Client.#ctor(System.String,System.Int32)">
+        <member name="M:HenE.WebSocketExample.WebSocketClient.Client.#ctor(System.Net.IPAddress,System.Int32)">
             <summary>
             Initializes a new instance of the <see cref="T:HenE.WebSocketExample.WebSocketClient.Client"/> class.
             </summary>

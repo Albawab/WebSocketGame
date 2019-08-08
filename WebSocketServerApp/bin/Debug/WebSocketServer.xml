@@ -51,7 +51,7 @@
             <returns>informatie.</returns>
             <exception cref="T:System.InvalidOperationException">Wordt gegooid wanneer een commando wordt aangeroepen op een ongeldig moment.</exception>
         </member>
-        <member name="M:HenE.WebSocketExample.WebSocketServer.Server.HandleClient(System.Net.Sockets.TcpClient,HenE.WebSocketExample.WebSocketServer.Server)">
+        <member name="M:HenE.WebSocketExample.WebSocketServer.Server.HandleClientAsync(System.Net.Sockets.TcpClient,HenE.WebSocketExample.WebSocketServer.Server)">
             <summary>
             Handel de client.
             </summary>

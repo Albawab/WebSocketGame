@@ -71,6 +71,14 @@ namespace HenE.Abdul.GameOX
         }
 
         /// <summary>
+        /// Geef het spel Finish status.
+        /// </summary>
+        public void EindSpel()
+        {
+            this.Status = GameOXStatussen.Finished;
+        }
+
+        /// <summary>
         /// Add een speler to the play.
         /// </summary>
         /// <param name="naam">De naam van deze speler.</param>
@@ -169,11 +177,6 @@ namespace HenE.Abdul.GameOX
 
                     this.ProcessStream(msg, speler.TcpClient);
                 }
-                //else
-                //{
-                //    msg = string.Format("{0}&{1}", EventHelper.CreateWachtenOpEenAndereDeelnemenEvent(), bord);
-                //    this.ProcessStream(msg, speler.TcpClient);
-                //}
             }
         }
 
@@ -278,7 +281,7 @@ namespace HenE.Abdul.GameOX
 
                         TcpClient tegenHuidigeSpeler;
                         tegenHuidigeSpeler = this.TegenHuidigeSpeler(speler, gameOX);
-                        vrijVeldenText.Clear();
+                        this.vrijVeldenText.Clear();
                         List<short> vrijVelden = hetBord.VrijVelden();
                         foreach (short velder in vrijVelden)
                         {
@@ -353,7 +356,6 @@ namespace HenE.Abdul.GameOX
         /// <returns>Deze method geeft een neuwie speler terug.</returns>
         public Speler AddHumanSpeler(string naam, Teken teken, short dimension)
         {
-
             Speler speler = new HumanSpeler(naam, dimension)
             {
                 TeGebruikenTeken = teken,
@@ -363,28 +365,72 @@ namespace HenE.Abdul.GameOX
             return speler;
         }
 
+        public void Annuleer(Speler doorWie)
+        {
+            List<TcpClient> tcpClients = new List<TcpClient>();
+            foreach (Speler speler in this.Spelers)
+            {
+                // stuur een bericht naar de overige spelers
+                if (speler != doorWie)
+                {
+                    tcpClients.Add(speler.TcpClient);
+                }
+            }
+
+            if (tcpClients.Count>0)
+            {
+                this.ProcessReturnMessage($"{EventHelper.CreateEvents(Events.SpelGeannuleerd)}&{doorWie.Naam}", tcpClients);
+            }
+
+            // verwijder de speler
+            this.VerwijderSpeler(doorWie);
+
+        }
+
+        
+        private void VerwijderSpeler(Speler wie)
+        {
+            this.Spelers.Remove(wie);
+            if (this.Spelers.Count > 0)
+            {
+                // zet de status op wachten
+                this.Status = GameOXStatussen.Waiting;
+            }
+            else
+            {
+                this.Status = GameOXStatussen.Finished;
+            }
+        }
+
+
         /// <summary>
         /// Als het spel klaar is .
         /// </summary>
         /// <param name="oX">Het Spel.</param>
-        public void BeeidigSpel(GameOX oX, TcpClient tcp)
+        /// <param name="tcp">De client tcp handler.</param>
+        public void BeeidigSpel(TcpClient tcpClient)
         {
             string message = string.Empty;
-            foreach (Speler spel in oX.Spelers)
+            foreach (Speler speler in this.Spelers)
             {
-                if (spel.Punten > this.TegenSpeler(spel).Punten)
-                {
-                    message = string.Format("{0}&{1}", EventHelper.CreateEvents(Events.IsGewonnen), spel.Naam);
-                    this.ProcessReturnMessage(message, oX.TcpClients);
-                }
+                //speler.HetSpelIsBeeindigd(tcpClient);
 
-                if (spel.TcpClient != tcp)
+                if (TegenSpeler(speler).TcpClient.Connected && tcpClient.Connected)
                 {
-                    message = string.Format("{0}&{1},{2}", EventHelper.CreateEvents(Events.NieuwSpel), spel.Naam, oX.Dimension);
-                    this.ProcessReturnMessage(message, spel.TcpClient);
+                    if (speler.Punten > this.TegenSpeler(speler).Punten)
+                    {
+                        message = string.Format("{0}&{1}", EventHelper.CreateEvents(Events.IsGewonnen), speler.Naam);
+                        this.ProcessReturnMessage(message, this.TcpClients);
+                    }
+                    else if (speler.Punten == this.TegenSpeler(speler).Punten)
+                    {
+                        message = string.Format("{0}&{1}", EventHelper.CreateEvents(Events.NiemandGewonnen), speler.Naam);
+                        ProcessReturnMessage(message, this.TcpClients);
+                    }
                 }
-                .
             }
+
+            this.EindSpel();
         }
 
         /// <summary>

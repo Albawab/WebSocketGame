@@ -172,6 +172,11 @@
             Geeft het spel een status.
             </summary>
         </member>
+        <member name="M:HenE.Abdul.GameOX.GameOX.EindSpel">
+            <summary>
+            Geef het spel Finish status.
+            </summary>
+        </member>
         <member name="M:HenE.Abdul.GameOX.GameOX.AddPlayer(System.String,System.Net.Sockets.TcpClient,System.Int16)">
             <summary>
             Add een speler to the play.
@@ -255,6 +260,7 @@
             Als het spel klaar is .
             </summary>
             <param name="oX">Het Spel.</param>
+            <param name="tcp">De client tcp handler.</param>
         </member>
         <member name="M:HenE.Abdul.GameOX.GameOX.FindSpelerByNaam(HenE.Abdul.GameOX.Speler)">
             <summary>
@@ -687,6 +693,11 @@
         <member name="F:HenE.WebSocketExample.Shared.Protocol.Events.NieuwSpel">
             <summary>
             Als de speler wil bliven spelen.
+            </summary>
+        </member>
+        <member name="F:HenE.WebSocketExample.Shared.Protocol.Events.NiemandGewonnen">
+            <summary>
+            Als niemand heeft gewonnen.
             </summary>
         </member>
         <member name="F:HenE.WebSocketExample.Shared.Protocol.Events.Error">

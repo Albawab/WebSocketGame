@@ -61,10 +61,6 @@
       <Project>{20e393e5-a310-4d13-8a0e-fe28fe9b23dd}</Project>
       <Name>WebSocketClient</Name>
     </ProjectReference>
-    <ProjectReference Include="..\WebSocketServer\WebSocketServer.csproj">
-      <Project>{2936DA3B-E8A0-46B7-B74F-7EDC5B24F547}</Project>
-      <Name>WebSocketServer</Name>
-    </ProjectReference>
     <ProjectReference Include="..\WebSocketShared\WebSocketShared.csproj">
       <Project>{DF27C127-A125-4204-B9F7-B79AE5ABAD57}</Project>
       <Name>WebSocketShared</Name>

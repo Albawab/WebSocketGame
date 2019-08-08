@@ -5,12 +5,14 @@
 namespace HenE.WebSocketExample.WebSocketClient
 {
     using System;
+    using System.Net;
     using System.Net.Sockets;
+    using System.Threading.Tasks;
     using HenE.WebSocketExample.Shared.Infrastructure;
     using HenE.WebSocketExample.Shared.Protocol;
 
     /// <summary>
-    /// Client.
+    /// De class van de client.
     /// </summary>
     public class Client : WebsocketBase
     {
@@ -21,7 +23,7 @@ namespace HenE.WebSocketExample.WebSocketClient
         /// </summary>
         /// <param name="hostname">Host naam.</param>
         /// <param name="serverPort"> Server Port.</param>
-        public Client(string hostname, int serverPort)
+        public Client(IPAddress hostname, int serverPort)
         {
             this.Hostname = hostname;
             this.ServerPort = serverPort;
@@ -35,14 +37,14 @@ namespace HenE.WebSocketExample.WebSocketClient
         /// <summary>
         /// Gets host naam.
         /// </summary>
-        public string Hostname { get; private set; }
+        public IPAddress Hostname { get; private set; }
 
         /// <summary>
         /// Het client start.
         /// </summary>
         public void Start()
         {
-            this.tcpClient = new TcpClient(this.Hostname, this.ServerPort);
+            this.tcpClient = new TcpClient(this.Hostname.ToString(), this.ServerPort);
         }
 
         /// <summary>
@@ -61,13 +63,13 @@ namespace HenE.WebSocketExample.WebSocketClient
         /// </summary>
         /// <param name="spelersnaam">Speler naam.</param>
         /// <param name="dimension">Dimension.</param>
-        public async void VerzoekOmStartenSpel(string spelersnaam, short dimension)
+        public void VerzoekOmStartenSpel(string spelersnaam, short dimension)
         {
             string message = CommandoHelper.CreateVerzoekTotDeelnemenSpelCommando(spelersnaam, dimension);
 
             NetworkStream stream = this.SendMessage(this.tcpClient, message);
 
-            await this.StartListeningAsync(stream, this.tcpClient);
+            this.StartListening(stream, this.tcpClient);
         }
 
         /// <summary>
@@ -75,11 +77,12 @@ namespace HenE.WebSocketExample.WebSocketClient
         /// </summary>
         /// <param name="naam">De naam van de speler.</param>
         /// <param name="dimension">dimension.</param>
-        public async void SpelTegenComputer(string naam, short dimension)
+        public void SpelTegenComputer(string naam, short dimension)
         {
             string message = CommandoHelper.CreateSpelTegenComputer(naam, dimension);
             NetworkStream stream = this.SendMessage(this.tcpClient, message);
-            await this.StartListeningAsync(stream, this.tcpClient);
+
+            this.StartListening(stream, this.tcpClient);
         }
 
         /// <inheritdoc/>
@@ -142,8 +145,9 @@ namespace HenE.WebSocketExample.WebSocketClient
                         break;
 
                     case Events.Winnaar:
+                        string[] opgekniptDerdeDeelDrie = opgekniptDerdeDeel[0].Split(new char[] { '&' });
                         Console.WriteLine(opgekniptDerdeDeel[1] + " Is gewonnen !!!!");
-                        Console.WriteLine(opgekniptDerdeDeel[1] + " heeft " + opgekniptDerdeDeel[0] + "Punten !");
+                        Console.WriteLine(opgekniptDerdeDeel[1] + " heeft : " + opgekniptDerdeDeelDrie[1] + " Punt / Punten !");
                         break;
 
                     case Events.BordIsVol:
@@ -173,9 +177,16 @@ namespace HenE.WebSocketExample.WebSocketClient
                         break;
 
                     case Events.StartNieuwRond:
-                        Console.WriteLine(eventParams);
+                        Console.WriteLine(opgekniptDerdeDeel[0]);
                         Console.WriteLine("Geef een nummer toe !!");
-                        short nNnummer = short.Parse(Console.ReadLine());
+                        string nummerString2 = Console.ReadLine();
+                        short nNnummer;
+                        while (!short.TryParse(nummerString2, out nNnummer))
+                        {
+                            Console.WriteLine("Geef maar een nummer toe !!!");
+                            nummerString = Console.ReadLine();
+                        }
+
                         this.DoeZet(nNnummer);
                         break;
 
@@ -183,13 +194,25 @@ namespace HenE.WebSocketExample.WebSocketClient
                         Console.WriteLine("Hoeraaaaa " + opgeknipt[1] + " is Gewonnen ");
                         break;
 
+                    case Events.NiemandGewonnen:
+                        Console.WriteLine("Niemand heeft gewonnen ...");
+                        break;
+
                     case Events.HetIsBezit:
                         Console.WriteLine("Het is bezit of ongeldig nummer, je mag ander nummer geven.");
-                        short num = short.Parse(Console.ReadLine());
+                        string nummerString3 = Console.ReadLine();
+                        short num;
+                        while (!short.TryParse(nummerString3, out num))
+                        {
+                            Console.WriteLine("Geef maar een nummer toe !!!");
+                            nummerString = Console.ReadLine();
+                        }
+
                         this.DoeZet(num);
                         break;
 
                     case Events.NieuwSpel:
+                        string[] opgekniptNieuwe = opgeknipt[1].Split(new char[] { ',' });
                         Console.WriteLine("Andere speler heeft het spel verleten. Wil je nog een spel doen , J of N");
                         string nieuwSpel = Console.ReadLine();
                         nieuwSpel.ToLower();
@@ -203,17 +226,21 @@ namespace HenE.WebSocketExample.WebSocketClient
                         {
                             case "j":
                                 short a = short.Parse(opgekniptDerdeDeel[1]);
-                                this.VerzoekOmStartenSpel(opgekniptDerdeDeel[0], a);
+                                this.VerzoekOmStartenSpel(opgekniptNieuwe[0], a);
                                 break;
                             case "n":
                                 Console.WriteLine("Tot ziens !!");
                                 break;
                         }
+
                         break;
 
                     case Events.WachtenOpAndereDeelnemer:
+                        if (opgeknipt.Length > 1)
+                        {
+                            Console.WriteLine(opgeknipt[1]);
+                        }
 
-                        Console.WriteLine(eventParams);
                         Console.WriteLine("wachten op andere speler");
                         break;
                 }
@@ -227,40 +254,40 @@ namespace HenE.WebSocketExample.WebSocketClient
             return returnMessage;
         }
 
-        private async void SpelerGestart(string teken)
+        private void SpelerGestart(string teken)
         {
             string message = CommandoHelper.CreateSpelerGestartCommando(teken);
 
             NetworkStream stream = this.SendMessage(this.tcpClient, message);
 
-            await this.StartListeningAsync(stream, this.tcpClient);
+            this.StartListening(stream, this.tcpClient);
         }
 
-        private async void DoeZet(short nummer)
+        private void DoeZet(short nummer)
         {
             string message = CommandoHelper.DoeZet(nummer);
 
-            NetworkStream stream = await this.SendMessageAsync(this.tcpClient, message);
+            NetworkStream stream = this.SendMessage(this.tcpClient, message);
 
-            await this.StartListeningAsync(stream, this.tcpClient);
+            this.StartListening(stream, this.tcpClient);
         }
 
-        private async void NieuwRondje(string nieuwRondje)
+        private void NieuwRondje(string nieuwRondje)
         {
             string message = CommandoHelper.NieuwRondje(nieuwRondje);
 
             NetworkStream stream = this.SendMessage(this.tcpClient, message);
 
-            await this.StartListeningAsync(stream, this.tcpClient);
+            this.StartListening(stream, this.tcpClient);
         }
 
-        private async void BeeindigSpel()
+        private void BeeindigSpel()
         {
             string message = CommandoHelper.BeeindigSpel();
 
             NetworkStream stream = this.SendMessage(this.tcpClient, message);
 
-            await this.StartListeningAsync(stream, this.tcpClient);
+            this.StartListening(stream, this.tcpClient);
         }
     }
 }

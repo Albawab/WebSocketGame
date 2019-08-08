@@ -54,18 +54,51 @@ namespace HenE.WebSocketExample.Shared.Infrastructure
             }
         }
 
+        public void StartListening(NetworkStream stream, TcpClient client)
+        {
+            while (true)
+            {
+                byte[] receivedBuffer = new byte[5000];
+
+                // De stream tussen de client en de server.
+                stream = client.GetStream();
+
+                stream.Read(receivedBuffer, 0, receivedBuffer.Length);
+
+                // Opslag de information die uit de client komet
+                StringBuilder msg = new StringBuilder();
+
+                foreach (byte b in receivedBuffer)
+                {
+                    if (b.Equals(00))
+                    {
+                        break;
+                    }
+                    else
+                    {
+                        // voeg elk letter toe
+                        msg.Append(Convert.ToChar(b).ToString());
+                    }
+                }
+
+                string returnMessage = this.ProcessStream(msg.ToString(), client);
+
+                // als de returnMessage wat zinvols heeft, dat terugsturen
+            }
+        }
+
         /// <summary>
         /// Resend the message to two cleints.
         /// </summary>
         /// <param name="returnMessage">De message.</param>
         /// <param name="receivingClients">List of the clients.</param>
-        protected async void ProcessReturnMessage(string returnMessage, List<TcpClient> receivingClients)
+        protected void ProcessReturnMessage(string returnMessage, List<TcpClient> receivingClients)
         {
             if (!string.IsNullOrWhiteSpace(returnMessage))
             {
                 foreach (TcpClient client in receivingClients)
                 {
-                  await this.SendMessageAsync(client, returnMessage);
+                  this.SendMessage(client, returnMessage);
                 }
             }
         }
@@ -75,12 +108,11 @@ namespace HenE.WebSocketExample.Shared.Infrastructure
         /// </summary>
         /// <param name="returnMessage">De message.</param>
         /// <param name="receivingClient">De client die de massage naar hem gaat leveren. </param>
-        /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
-        protected async Task ProcessReturnMessage(string returnMessage, TcpClient receivingClient)
+        protected void ProcessReturnMessage(string returnMessage, TcpClient receivingClient)
         {
             if (!string.IsNullOrWhiteSpace(returnMessage))
             {
-               await this.SendMessageAsync(receivingClient, returnMessage);
+               this.SendMessage(receivingClient, returnMessage);
             }
         }
 
