@@ -88,14 +88,48 @@ namespace HenE.WebSocketExample.WebSocketServer
             this.currentSpellen.RemoveAll(a => a.Status == GameOXStatussen.Finished);
         }
 
+        /// <summary>
+        /// /Get de speler from het spel.
+        /// </summary>
+        /// <param name="client">Huidig client.</param>
+        /// <returns></returns>
+
+        public Speler GetSpelerFromTcpClient(TcpClient client)
+        {
+            foreach (GameOX game in this.currentSpellen)
+            {
+                foreach (Speler spelr in game.Spelers)
+                {
+                    if (spelr.TcpClient == client)
+                    {
+                        return spelr;
+                    }
+                }
+            }
+            return null;
+        }
+
+        public void Remove(GameOX game)
+        {
+            this.currentSpellen.Remove(game);
+        }
         public GameOX GetGameFromTcpClient(TcpClient tcpClient)
         {
+            foreach (GameOX game in this.currentSpellen)
+            {
+                foreach (TcpClient tcp in game.TcpClients)
+                {
+                    if (tcp == tcpClient)
+                    {
+                        return game;
+                    }
+                }
+
+            }
+            return null;
+
         }
 
-
-        public GameOX GetGameFromSpeler(Speler speler)
-        {
-        }
 
     }
 }

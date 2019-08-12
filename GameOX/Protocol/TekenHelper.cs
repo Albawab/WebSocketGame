@@ -5,7 +5,6 @@
 namespace HenE.Abdul.GameOX.Protocol
 {
     using System;
-    using System.Collections.Generic;
     using System.Net.Sockets;
     using HenE.Abdul.Game_OX;
 
@@ -35,23 +34,21 @@ namespace HenE.Abdul.GameOX.Protocol
         /// <param name="teken">Teken.</param>
         /// <param name="oX">De list of de Games.</param>
         /// <param name="client">Huidige client.</param>
-        public static void AddTekenToSpeler(Teken teken, List<GameOX> oX, TcpClient client)
+        public static void AddTekenToSpeler(Teken teken, GameOX game, TcpClient client)
         {
             Teken huidigeTeken = teken;
-            foreach (GameOX ox in oX)
+            foreach (Speler speler in game.Spelers)
             {
-                foreach (Speler speler in ox.Spelers)
+                if (speler.TcpClient == client)
                 {
-                    if (speler.TcpClient == client)
-                    {
-                        speler.TeGebruikenTeken = teken;
-                    }
-                    else
-                    {
-                       speler.TeGebruikenTeken = TegenHuidigeTeken(huidigeTeken);
-                    }
+                    speler.TeGebruikenTeken = teken;
+                }
+                else
+                {
+                    speler.TeGebruikenTeken = TegenHuidigeTeken(huidigeTeken);
                 }
             }
+
         }
 
         private static Teken TegenHuidigeTeken(Teken huidigeteken)

@@ -255,7 +255,7 @@
             <param name="dimension">Dimension.</param>
             <returns>Deze method geeft een neuwie speler terug.</returns>
         </member>
-        <member name="M:HenE.Abdul.GameOX.GameOX.BeeidigSpel(HenE.Abdul.GameOX.GameOX,System.Net.Sockets.TcpClient)">
+        <member name="M:HenE.Abdul.GameOX.GameOX.BeeidigSpel(System.Net.Sockets.TcpClient)">
             <summary>
             Als het spel klaar is .
             </summary>
@@ -342,7 +342,7 @@
             <param name="teken">Teken als string.</param>
             <returns>Teken als event.</returns>
         </member>
-        <member name="M:HenE.Abdul.GameOX.Protocol.TekenHelper.AddTekenToSpeler(HenE.Abdul.Game_OX.Teken,System.Collections.Generic.List{HenE.Abdul.GameOX.GameOX},System.Net.Sockets.TcpClient)">
+        <member name="M:HenE.Abdul.GameOX.Protocol.TekenHelper.AddTekenToSpeler(HenE.Abdul.Game_OX.Teken,HenE.Abdul.GameOX.GameOX,System.Net.Sockets.TcpClient)">
             <summary>
             Geef een teken aan de speler.
             </summary>

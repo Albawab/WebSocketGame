@@ -138,7 +138,6 @@ namespace HenE.WebSocketExample.WebSocketServer
                         returnMessage = handler.HandleFromMessage(commandParams, out game);
                         if (game.Status == GameOXStatussen.Gestart)
                         {
-                            this.gameOXen.Add(game);
                             this.ProcessReturnMessage(returnMessage, game.TcpClients);
                             game.Start(client, game);
                         }
@@ -153,13 +152,15 @@ namespace HenE.WebSocketExample.WebSocketServer
                         VerzoekTotDeelnemenSpelCommandHandler handlerTegenComputerSpelen = new VerzoekTotDeelnemenSpelCommandHandler(this.spelHandler, client);
                         returnMessage = handlerTegenComputerSpelen.HandleFromMessage(commandParams, out game);
                         this.ProcessReturnMessage(returnMessage, client);
-                        this.gameOXen.Add(game);
+
+                        game = this.spelHandler.GetGameFromTcpClient(client);
                         game.Start(client, game);
                         break;
 
                     case Commandos.SpelerGestart:
+                        game = this.spelHandler.GetGameFromTcpClient(client);
                         Teken teken = TekenHelper.CreateTekenEnum(commandParams);
-                        TekenHelper.AddTekenToSpeler(teken, this.gameOXen, client);
+                        TekenHelper.AddTekenToSpeler(teken, game, client);
                         returnMessage = EventHelper.CreateEvents(Events.YourTurn);
                         this.ProcessReturnMessage(returnMessage, client);
 
@@ -180,17 +181,9 @@ namespace HenE.WebSocketExample.WebSocketServer
                         short nummer = short.Parse(commandParams);
 
                         // Handel de info van de speler
-                        foreach (GameOX games in this.gameOXen)
-                        {
-                            foreach (Speler speler in games.Spelers)
-                            {
-                                if (speler.TcpClient == client)
-                                {
-                                    games.ChekOfHetValidBeZitIs(client, nummer, games);
-                                }
-                            }
-                        }
-
+                        this.spelHandler.GetGameFromTcpClient(client);
+                        game = this.spelHandler.GetGameFromTcpClient(client);
+                        game.ChekOfHetValidBeZitIs(client, nummer, game);
                         break;
 
                     case Commandos.WachtenOpAndereDeelnemer:
@@ -203,23 +196,18 @@ namespace HenE.WebSocketExample.WebSocketServer
                         break;
 
                     case Commandos.NieuwRondje:
-                        foreach (GameOX games in this.gameOXen)
+                        if (game == null)
                         {
-                            foreach (TcpClient tcp in games.TcpClients)
-                            {
-                                if (tcp == client)
-                                {
-                                    games.StartNieuwRondje(client, games);
-                                    break;
-                                }
-                            }
+                            throw new InvalidOperationException($"Het commando {nameof(Commandos.WachtenOpAndereDeelnemer)} mag niet worden gebruikt wanneer er nog geen game is gestart.");
                         }
 
+                        this.ProcessReturnMessage(returnMessage, game.TcpClients);
                         break;
 
                     case Commandos.BeeindigSpel:
-                        game?.BeeidigSpel(client);
-                        this.gameOXen.Remove(game);
+                        game = this.spelHandler.GetGameFromTcpClient(client);
+                        game.StartNieuwRondje(client, game);
+
                         break;
                 }
             }
@@ -247,29 +235,20 @@ namespace HenE.WebSocketExample.WebSocketServer
             catch
             {
                 GameOX gameToDelete = null;
-
-                foreach (GameOX game in this.gameOXen)
+                Speler speler = this.spelHandler.GetSpelerFromTcpClient(tcpClient);
+                GameOX game = this.spelHandler.GetGameFromTcpClient(tcpClient);
+                game.Annuleer(speler);
+                if (game.Status == GameOXStatussen.Finished)
                 {
-                    foreach (Speler speler in game.Spelers)
-                    {
-                        if (tcpClient == speler.TcpClient)
-                        {
-                            game.Annuleer(speler);
-                            if (game.Status == GameOXStatussen.Finished)
-                            {
-                                // dan heb ik geen spelers meer bij deze game
-                                // game mag verwijderd worden
-                                // maar ik mag niet verwijderen in een foreach
-                                gameToDelete = game;
-                            }
-                            break;
-                        }
-                    }
+                    // dan heb ik geen spelers meer bij deze game
+                    // game mag verwijderd worden
+                    // maar ik mag niet verwijderen in een foreach
+                    gameToDelete = game;
                 }
 
                 if (gameToDelete != null)
                 {
-                    this.gameOXen.Remove(gameToDelete);
+                    this.spelHandler.Remove(gameToDelete);
                 }
             }
         }

@@ -44,3 +44,4 @@ E:\Probeersels\WebSocketGame\WebSocketShared\obj\Debug\WebSocketShared.csprojAss
 E:\Probeersels\WebSocketGame\WebSocketShared\obj\Debug\WebSocketShared.csproj.CoreCompileInputs.cache
 E:\Probeersels\WebSocketGame\WebSocketShared\obj\Debug\WebSocketShared.dll
 E:\Probeersels\WebSocketGame\WebSocketShared\obj\Debug\WebSocketShared.pdb
+C:\Users\Abdul\Desktop\WebSocketGame\WebSocketShared\bin\Debug\WebSocketShared.xml
