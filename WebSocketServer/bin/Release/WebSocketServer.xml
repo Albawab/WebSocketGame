@@ -60,7 +60,7 @@
         </member>
         <member name="T:HenE.WebSocketExample.WebSocketServer.SpelHandler">
             <summary>
-             class om alle spelhandleingen af te vangen.
+             class om alle spelhandelingen af te vangen.
             </summary>
         </member>
         <member name="M:HenE.WebSocketExample.WebSocketServer.SpelHandler.#ctor">
@@ -92,6 +92,13 @@
             <param name="tcps">List of clients.</param>
             <param name="tegenTcp">de tegenaar.</param>
             <returns>Event Wachat als string.</returns>
+        </member>
+        <member name="M:HenE.WebSocketExample.WebSocketServer.SpelHandler.GetSpelerFromTcpClient(System.Net.Sockets.TcpClient)">
+            <summary>
+            /Get de speler from het spel.
+            </summary>
+            <param name="client">Huidig client.</param>
+            <returns></returns>
         </member>
         <member name="T:HenE.WebSocketExample.WebSocketServer.CommandHandlers.VerzoekTotDeelnemenSpelCommandHandler">
             <summary>

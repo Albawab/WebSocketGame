@@ -87,7 +87,7 @@ namespace HenE.WebSocketExample.WebSocketClient
 
         /// <inheritdoc/>
         protected override string ProcessStream(string stream, TcpClient client)
-      {
+        {
             // bepaal het event
             // het event is het gedeelte in de msg voor de #
             // daarna komen de parameters

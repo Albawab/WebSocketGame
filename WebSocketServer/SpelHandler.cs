@@ -93,7 +93,6 @@ namespace HenE.WebSocketExample.WebSocketServer
         /// </summary>
         /// <param name="client">Huidig client.</param>
         /// <returns></returns>
-
         public Speler GetSpelerFromTcpClient(TcpClient client)
         {
             foreach (GameOX game in this.currentSpellen)
@@ -106,6 +105,7 @@ namespace HenE.WebSocketExample.WebSocketServer
                     }
                 }
             }
+
             return null;
         }
 
@@ -113,6 +113,7 @@ namespace HenE.WebSocketExample.WebSocketServer
         {
             this.currentSpellen.Remove(game);
         }
+
         public GameOX GetGameFromTcpClient(TcpClient tcpClient)
         {
             foreach (GameOX game in this.currentSpellen)
@@ -124,12 +125,9 @@ namespace HenE.WebSocketExample.WebSocketServer
                         return game;
                     }
                 }
-
             }
+
             return null;
-
         }
-
-
     }
 }

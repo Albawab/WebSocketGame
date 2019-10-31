@@ -74,9 +74,7 @@ namespace HenE.WebSocketExample.Shared.Protocol
         /// </summary>
         NiemandGewonnen,
 
-
         SpelGeannuleerd,
-
 
         /// <summary>
         /// Error.

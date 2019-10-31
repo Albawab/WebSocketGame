@@ -255,11 +255,10 @@
             <param name="dimension">Dimension.</param>
             <returns>Deze method geeft een neuwie speler terug.</returns>
         </member>
-        <member name="M:HenE.Abdul.GameOX.GameOX.BeeidigSpel(HenE.Abdul.GameOX.GameOX,System.Net.Sockets.TcpClient)">
+        <member name="M:HenE.Abdul.GameOX.GameOX.BeeidigSpel(System.Net.Sockets.TcpClient)">
             <summary>
             Als het spel klaar is .
             </summary>
-            <param name="oX">Het Spel.</param>
             <param name="tcp">De client tcp handler.</param>
         </member>
         <member name="M:HenE.Abdul.GameOX.GameOX.FindSpelerByNaam(HenE.Abdul.GameOX.Speler)">
@@ -342,12 +341,12 @@
             <param name="teken">Teken als string.</param>
             <returns>Teken als event.</returns>
         </member>
-        <member name="M:HenE.Abdul.GameOX.Protocol.TekenHelper.AddTekenToSpeler(HenE.Abdul.Game_OX.Teken,System.Collections.Generic.List{HenE.Abdul.GameOX.GameOX},System.Net.Sockets.TcpClient)">
+        <member name="M:HenE.Abdul.GameOX.Protocol.TekenHelper.AddTekenToSpeler(HenE.Abdul.Game_OX.Teken,HenE.Abdul.GameOX.GameOX,System.Net.Sockets.TcpClient)">
             <summary>
             Geef een teken aan de speler.
             </summary>
             <param name="teken">Teken.</param>
-            <param name="oX">De list of de Games.</param>
+            <param name="game">game.</param>
             <param name="client">Huidige client.</param>
         </member>
         <member name="T:HenE.Abdul.GameOX.RemoteHumanSpeler">
@@ -693,6 +692,11 @@
         <member name="F:HenE.WebSocketExample.Shared.Protocol.Events.NieuwSpel">
             <summary>
             Als de speler wil bliven spelen.
+            </summary>
+        </member>
+        <member name="F:HenE.WebSocketExample.Shared.Protocol.Events.NiemandGewonnen">
+            <summary>
+            Als niemand heeft gewonnen.
             </summary>
         </member>
         <member name="F:HenE.WebSocketExample.Shared.Protocol.Events.Error">

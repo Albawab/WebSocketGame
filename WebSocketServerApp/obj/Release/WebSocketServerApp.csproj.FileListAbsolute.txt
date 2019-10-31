@@ -12,7 +12,6 @@ C:\Users\Abdul\Desktop\Sharp\WebSocketGame\WebSocketServerApp\bin\Release\WebSoc
 C:\Users\Abdul\Desktop\Sharp\WebSocketGame\WebSocketServerApp\bin\Release\GameOX.pdb
 C:\Users\Abdul\Desktop\Sharp\WebSocketGame\WebSocketServerApp\bin\Release\GameOX.xml
 C:\Users\Abdul\Desktop\Sharp\WebSocketGame\WebSocketServerApp\obj\Release\WebSocketServerApp.csprojAssemblyReference.cache
-C:\Users\Abdul\Desktop\Sharp\WebSocketGame\WebSocketServerApp\obj\Release\WebSocketServerApp.csproj.CoreCompileInputs.cache
 C:\Users\Abdul\Desktop\Sharp\WebSocketGame\WebSocketServerApp\obj\Release\WebSocketServerApp.csproj.CopyComplete
 C:\Users\Abdul\Desktop\Sharp\WebSocketGame\WebSocketServerApp\obj\Release\WebSocketServerApp.exe
 C:\Users\Abdul\Desktop\Sharp\WebSocketGame\WebSocketServerApp\obj\Release\WebSocketServerApp.pdb

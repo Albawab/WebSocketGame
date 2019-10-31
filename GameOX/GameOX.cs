@@ -377,17 +377,15 @@ namespace HenE.Abdul.GameOX
                 }
             }
 
-            if (tcpClients.Count>0)
+            if (tcpClients.Count > 0)
             {
                 this.ProcessReturnMessage($"{EventHelper.CreateEvents(Events.SpelGeannuleerd)}&{doorWie.Naam}", tcpClients);
             }
 
             // verwijder de speler
             this.VerwijderSpeler(doorWie);
-
         }
 
-        
         private void VerwijderSpeler(Speler wie)
         {
             this.Spelers.Remove(wie);
@@ -402,20 +400,17 @@ namespace HenE.Abdul.GameOX
             }
         }
 
-
         /// <summary>
         /// Als het spel klaar is .
         /// </summary>
-        /// <param name="oX">Het Spel.</param>
         /// <param name="tcp">De client tcp handler.</param>
         public void BeeidigSpel(TcpClient tcpClient)
         {
             string message = string.Empty;
             foreach (Speler speler in this.Spelers)
             {
-                //speler.HetSpelIsBeeindigd(tcpClient);
-
-                if (TegenSpeler(speler).TcpClient.Connected && tcpClient.Connected)
+                // speler.HetSpelIsBeeindigd(tcpClient);
+                if (this.TegenSpeler(speler).TcpClient.Connected && tcpClient.Connected)
                 {
                     if (speler.Punten > this.TegenSpeler(speler).Punten)
                     {
@@ -425,7 +420,7 @@ namespace HenE.Abdul.GameOX
                     else if (speler.Punten == this.TegenSpeler(speler).Punten)
                     {
                         message = string.Format("{0}&{1}", EventHelper.CreateEvents(Events.NiemandGewonnen), speler.Naam);
-                        ProcessReturnMessage(message, this.TcpClients);
+                        this.ProcessReturnMessage(message, this.TcpClients);
                     }
                 }
             }
@@ -440,12 +435,12 @@ namespace HenE.Abdul.GameOX
         /// <returns>De niuwe speler.</returns>
         public string FindSpelerByNaam(Speler speler)
         {
-                if (this.TegenSpeler(speler).Naam == speler.Naam)
-                {
-                    return speler.Naam;
-                }
+            if (this.TegenSpeler(speler).Naam == speler.Naam)
+            {
+                return speler.Naam;
+            }
 
-                return null;
+            return null;
         }
 
         /// <summary>

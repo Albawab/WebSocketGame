@@ -27,7 +27,7 @@ namespace HenE.Abdul.GameOX
         /// <param name="bord">Het bord.</param>
         public override void SpelStartedHandler(short nummer, GameOX gameOX, Bord bord)
         {
-              this.Zet(nummer, bord, gameOX);
+            this.Zet(nummer, bord, gameOX);
         }
     }
 }

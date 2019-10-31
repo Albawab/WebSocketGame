@@ -1,0 +1,7 @@
+C:\Users\Abdul\Desktop\Sharp\VierOpEenRij\VierOPEenRij\bin\Debug\netcoreapp2.1\VierOPEenRij.deps.json
+C:\Users\Abdul\Desktop\Sharp\VierOpEenRij\VierOPEenRij\bin\Debug\netcoreapp2.1\VierOPEenRij.runtimeconfig.json
+C:\Users\Abdul\Desktop\Sharp\VierOpEenRij\VierOPEenRij\bin\Debug\netcoreapp2.1\VierOPEenRij.runtimeconfig.dev.json
+C:\Users\Abdul\Desktop\Sharp\VierOpEenRij\VierOPEenRij\bin\Debug\netcoreapp2.1\VierOPEenRij.dll
+C:\Users\Abdul\Desktop\Sharp\VierOpEenRij\VierOPEenRij\obj\Debug\netcoreapp2.1\VierOPEenRij.csproj.CoreCompileInputs.cache
+C:\Users\Abdul\Desktop\Sharp\VierOpEenRij\VierOPEenRij\obj\Debug\netcoreapp2.1\VierOPEenRij.AssemblyInfoInputs.cache
+C:\Users\Abdul\Desktop\Sharp\VierOpEenRij\VierOPEenRij\obj\Debug\netcoreapp2.1\VierOPEenRij.AssemblyInfo.cs

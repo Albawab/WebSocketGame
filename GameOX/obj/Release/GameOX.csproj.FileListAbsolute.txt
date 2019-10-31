@@ -5,7 +5,6 @@ C:\Users\Abdul\Desktop\Sharp\WebSocketGame\GameOX\bin\Release\WebSocketShared.dl
 C:\Users\Abdul\Desktop\Sharp\WebSocketGame\GameOX\bin\Release\WebSocketShared.pdb
 C:\Users\Abdul\Desktop\Sharp\WebSocketGame\GameOX\bin\Release\WebSocketShared.xml
 C:\Users\Abdul\Desktop\Sharp\WebSocketGame\GameOX\obj\Release\GameOX.csprojAssemblyReference.cache
-C:\Users\Abdul\Desktop\Sharp\WebSocketGame\GameOX\obj\Release\GameOX.csproj.CoreCompileInputs.cache
 C:\Users\Abdul\Desktop\Sharp\WebSocketGame\GameOX\obj\Release\GameOX.csproj.CopyComplete
 C:\Users\Abdul\Desktop\Sharp\WebSocketGame\GameOX\obj\Release\GameOX.dll
 C:\Users\Abdul\Desktop\Sharp\WebSocketGame\GameOX\obj\Release\GameOX.pdb

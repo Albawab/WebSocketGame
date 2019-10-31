@@ -1,7 +1,6 @@
 C:\Users\Abdul\Desktop\Sharp\WebSocketGame\WebSocketShared\bin\Release\WebSocketShared.xml
 C:\Users\Abdul\Desktop\Sharp\WebSocketGame\WebSocketShared\bin\Release\WebSocketShared.dll
 C:\Users\Abdul\Desktop\Sharp\WebSocketGame\WebSocketShared\bin\Release\WebSocketShared.pdb
-C:\Users\Abdul\Desktop\Sharp\WebSocketGame\WebSocketShared\obj\Release\WebSocketShared.csproj.CoreCompileInputs.cache
 C:\Users\Abdul\Desktop\Sharp\WebSocketGame\WebSocketShared\obj\Release\WebSocketShared.dll
 C:\Users\Abdul\Desktop\Sharp\WebSocketGame\WebSocketShared\obj\Release\WebSocketShared.pdb
 E:\Probeersels\WebSocketGame\WebSocketShared\bin\Release\WebSocketShared.xml
@@ -11,3 +10,4 @@ E:\Probeersels\WebSocketGame\WebSocketShared\obj\Release\WebSocketShared.csprojA
 E:\Probeersels\WebSocketGame\WebSocketShared\obj\Release\WebSocketShared.csproj.CoreCompileInputs.cache
 E:\Probeersels\WebSocketGame\WebSocketShared\obj\Release\WebSocketShared.dll
 E:\Probeersels\WebSocketGame\WebSocketShared\obj\Release\WebSocketShared.pdb
+C:\Users\Abdul\Desktop\Sharp\WebSocketGame\WebSocketShared\obj\Release\WebSocketShared.csprojAssemblyReference.cache

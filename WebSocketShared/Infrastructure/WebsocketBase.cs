@@ -98,7 +98,7 @@ namespace HenE.WebSocketExample.Shared.Infrastructure
             {
                 foreach (TcpClient client in receivingClients)
                 {
-                  this.SendMessage(client, returnMessage);
+                    this.SendMessage(client, returnMessage);
                 }
             }
         }
@@ -112,7 +112,7 @@ namespace HenE.WebSocketExample.Shared.Infrastructure
         {
             if (!string.IsNullOrWhiteSpace(returnMessage))
             {
-               this.SendMessage(receivingClient, returnMessage);
+                this.SendMessage(receivingClient, returnMessage);
             }
         }
 

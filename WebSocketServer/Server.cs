@@ -24,7 +24,8 @@ namespace HenE.WebSocketExample.WebSocketServer
         // de lijst van de cliënten die contact hebben met de server
         private readonly TcpListener listener = null;
         private readonly SpelHandler spelHandler = new SpelHandler();
-        //private readonly List<GameOX> gameOXen = new List<GameOX>();
+
+        // private readonly List<GameOX> gameOXen = new List<GameOX>();
         private TcpClient tegenHuidigeClient = null;
 
         /// <summary>
@@ -230,6 +231,7 @@ namespace HenE.WebSocketExample.WebSocketServer
             try
             {
                 await server.StartListeningAsync(tcpClient.GetStream(), tcpClient);
+
                 // server.StartListening(client.GetStream(), client);
             }
             catch

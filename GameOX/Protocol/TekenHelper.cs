@@ -32,7 +32,7 @@ namespace HenE.Abdul.GameOX.Protocol
         /// Geef een teken aan de speler.
         /// </summary>
         /// <param name="teken">Teken.</param>
-        /// <param name="oX">De list of de Games.</param>
+        /// <param name="game">game.</param>
         /// <param name="client">Huidige client.</param>
         public static void AddTekenToSpeler(Teken teken, GameOX game, TcpClient client)
         {
@@ -48,7 +48,6 @@ namespace HenE.Abdul.GameOX.Protocol
                     speler.TeGebruikenTeken = TegenHuidigeTeken(huidigeTeken);
                 }
             }
-
         }
 
         private static Teken TegenHuidigeTeken(Teken huidigeteken)
